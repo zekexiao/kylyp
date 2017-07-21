@@ -6,18 +6,17 @@ use model::user::{User,NewUser};
 use model::container::{List,NewList,NewReply};
 use model::pg::get_conn;
 
-#[derive(Debug)]
-struct Ulist {
-    id: i32,
-    uid: i32,
-    title: String,
-    content: String,
-    createtime: String,
-    username: String,
+#[derive(Debug,Serialize)]
+pub struct Ulist {
+    pub id: i32,
+    pub uid: i32,
+    pub title: String,
+    pub content: String,
+    pub createtime: String,
+    pub username: String,
 }
 
-
-pub fn index_list() {
+pub fn date_list() -> Vec<Ulist> {
     use utils::schema::users::dsl::{users,id};
     use utils::schema::list::dsl::{list,uid};
     use utils::schema::reply::dsl::{reply,pid};
@@ -33,8 +32,8 @@ pub fn index_list() {
             createtime: row.get(4),
             username: row.get(5),
         };
-            println!("===========list_resultn {:?}=============", result.title);
             list_result.push(result);
 
     }
+    list_result
 }

@@ -1,16 +1,22 @@
 use rocket_contrib::Template;
-use handler::content::index_list;
+use controller::user::UserOr;
+use std::collections::HashMap;
+use std::fmt::Debug;
+use handler::content::Ulist;
+use handler::content::date_list;
+
 
 #[derive(Serialize)]
 struct TemplateContext {
     title: String,
+    datas: Vec<Ulist>,
+    username: String,
 }
 
-#[get("/info")]
+
+#[get("/info", rank = 2)]
 pub fn info() -> Template {
-    let context = TemplateContext {
-        title: String::from("Forum"),
-    };
-    index_list();
-    Template::render("list", &context)
+    let mut context = HashMap::new();
+    context.insert("title", "Forum".to_string());
+    Template::render("login", &context)
 }
