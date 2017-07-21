@@ -2,6 +2,7 @@ use diesel::prelude::*;
 use diesel::pg::PgConnection;
 use dotenv::dotenv;
 use std::env;
+use postgres::{Connection, TlsMode};
 
 pub fn establish_connection() -> PgConnection {
     dotenv().ok();
@@ -12,8 +13,6 @@ pub fn establish_connection() -> PgConnection {
 }
 
 
-pub fn pg_conn() -> PgConnection {
-    let database_url = "postgres://dbuser:password@localhost/forum";
-    PgConnection::establish(&database_url)
-        .expect(&format!("Error connecting to {}", database_url))
+pub fn conn() -> Connection {
+    Connection::connect("postgresql://postgres@localhost", TlsMode::None).unwrap()
 }

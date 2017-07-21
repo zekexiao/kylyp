@@ -6,6 +6,7 @@
 #[macro_use] extern crate serde_derive;
 #[macro_use] extern crate diesel;
 #[macro_use] extern crate diesel_codegen; 
+extern crate postgres;
 extern crate rocket;
 extern crate rocket_contrib;
 extern crate serde_json;
