@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../css/mdc.min.css">
+    <script src="../js/mdc.min.js"></script>
+    <script>window.mdc.autoInit();</script>
+    <style type="text/css">
+      .container {
+        padding:90px 50px;
+        font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+       #title {
+        color: white;
+      }
+      a {
+        color: #00B7FF;
+        text-decoration:none; 
+      }
+    </style>
+  </head>
+  <body>
+     <header class="mdc-toolbar mdc-toolbar--fixed" id="header">
+        <div class="mdc-toolbar__row">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+              <a href="/" id="title" class="mdc-toolbar__title"><strong>Forum</strong></a>
+            </section>
+            <div class="user">
+              {% if username %}
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                欢迎您:{{ username }}&emsp;
+              </section>
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                <a href="/user/logout">注销</a>&emsp;&emsp;
+              </section>
+              {% else %}
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                <a href="/user/register" title="我要注册" class="mdc-toolbar__title">注册</a>
+              </section>
+              <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                <a href="/user/login" title="去登录" class="mdc-toolbar__title">登录</a> &emsp;&emsp;
+              </section>
+              {% endif %}
+            </div>
+        </div>
+     </header>
+  <div class="container">
+  	<form action="/user/login" method="post" accept-charset="utf-8">
+      {% if errmsg %} <p class="tip">*{{ errmsg }}</p> {% endif %}
+      <div>	用户名：<div class="mdc-textfield">
+				<input name="username" required="required" type="text" id="tf-box" class="mdc-textfield__input">
+				<div class="mdc-textfield__bottom-line"></div>
+			</div>
+      </div><br>
+      <div> 密&emsp;码：<div class="mdc-textfield">
+				<input name="password" required="required" type="password" id="pw" class="mdc-textfield__input" minlength=3>
+        <div class="mdc-textfield__bottom-line"></div>
+      </div>
+      <div><br>
+			<button type="submit"  class="mdc-button" style="background-color:aqua"> 登录 </button>
+  	</form>
+  	<p>还没帐号<a href="/user/register">注册</a></p>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="../css/mdc.min.css">
+    <script src="../js/mdc.min.js"></script>
+    <script>window.mdc.autoInit();</script>
+    <style type="text/css">
+       #container {
+        padding:70px 50px;
+        font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+      #title {
+        color: white;
+      }
+      a {
+        color: #00B7FF;
+        text-decoration:none; 
+      }
+      .add{
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px dashed #333;
+      }
+    </style>
+  </head>
+  <body>
+   <header class="mdc-toolbar mdc-toolbar--fixed" id="header">
+        <div class="mdc-toolbar__row">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+              <a href="/" id="title" class="mdc-toolbar__title"><strong>Forum</strong></a>
+            </section>
+            <div class="user">
+              {% if username %}
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                欢迎您:{{ username }}&emsp;
+              </section>
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                <a href="/user/logout">注销</a>&emsp;&emsp;
+              </section>
+              {% else %}
+              <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit">
+                <a href="/user/register" title="我要注册" class="mdc-toolbar__title">注册</a>
+              </section>
+              <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                <a href="/user/login" title="去登录" class="mdc-toolbar__title">登录</a> &emsp;&emsp;
+              </section>
+              {% endif %}
+            </div>
+        </div>
+   </header>
+  <div id="container">
+    <table >
+      <tr>
+        <td>标题</td>
+        <td>作者</td>
+        <td>创建时间</td>
+      </tr>
+     
+    </table>
+    
+  </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+[development]
+address = "localhost"
+port = 8000
+workers = 2
+log = "normal"
+template_dir = "view"
+
+
+[staging]
+address = "0.0.0.0"
+port = 80
+workers = 2
+log = "normal"
+template_dir = "view"
+secret_key = "itlYmFR2vYKrOmFhupMIn/hyB6lYCCTXz4yaQX89XVg="
+
+
+[production]
+address = "0.0.0.0"
+port = 80
+workers = 2
+log = "critical"
+template_dir = "view"
+secret_key = "itlYmFR2vYKrOmFhupMIn/hyB6lYCCTXz4yaQX89XVg="
