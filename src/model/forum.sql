@@ -44,6 +44,6 @@ CREATE TABLE users (
 
 
 INSERT INTO users (id, username, password,regtime) VALUES
-(1, 'admin', 'b4f6fab95ca6f0dee45fc0da5cd05c8cdf2ca110'),
-(2, 'wenzi', '59bb8e88c24f43aabeb505e92f5d1b244bffd04e');
+(1, 'admin', 'b4f6fab95ca6f0dee45fc0da5cd05c8cdf2ca110','2017-07-23 23:41:45.672805609 +08:00'),
+(2, 'wenzi', '59bb8e88c24f43aabeb505e92f5d1b244bffd04e','2017-07-23 23:41:45.672805609 +08:00');
 
