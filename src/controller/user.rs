@@ -21,28 +21,28 @@ pub struct Uid {
 #[derive(Debug)]
 pub struct UserOr(pub String);
 
-// impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
-//     type Error = ();
-
-//     fn from_request(request: &'a Request<'r>) -> request::Outcome<UserOr, ()> {
-//         request.cookies()
-//             .get_private("username")
-//             .and_then(|cookie| cookie.value().parse().ok())
-//             .map(|id| UserOr(id))
-//             .or_forward(())
-//     }
-// }
 impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
     type Error = ();
 
     fn from_request(request: &'a Request<'r>) -> request::Outcome<UserOr, ()> {
         request.cookies()
-            .get_private("user_id")
+            .get_private("username")
             .and_then(|cookie| cookie.value().parse().ok())
             .map(|id| UserOr(id))
             .or_forward(())
     }
 }
+// impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
+//     type Error = ();
+
+//     fn from_request(request: &'a Request<'r>) -> request::Outcome<UserOr, ()> {
+//         request.cookies()
+//             .get_private("user_id")
+//             .and_then(|cookie| cookie.value().parse().ok())
+//             .map(|id| UserOr(id))
+//             .or_forward(())
+//     }
+// }
 
 #[derive(FromForm)]
 struct UserRegister {
