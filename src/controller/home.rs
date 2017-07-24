@@ -1,24 +1,31 @@
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use rocket::Request;
+use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
+use rocket::http::RawStr;
+use rocket::http::Cookies;
 use rocket::response::NamedFile;
 use rocket_contrib::Template;
 use controller::user::UserOr;
-use handler::content::date_list;
-use handler::content::Ulist;
+use handler::content::{Ulist,date_index,get_add_topic};
+use chrono::prelude::*;
+
 
 #[derive(Serialize)]
 struct TemplateContext {
-    title: String,
     datas: Vec<Ulist>,
     username: String,
 }
 
+#[derive(FromForm,Debug)]
+pub struct DataList {
+    pub title: String,
+    pub content: String,
+}
+
 #[get("/",rank = 2)]
 pub fn index() -> Template {
-    let datas = date_list();
+    let datas = date_index();
     let context = TemplateContext {
-        title: "Forum".to_string(),
         datas: datas,
         username: "".to_string(),
     };
@@ -28,14 +35,31 @@ pub fn index() -> Template {
 
 #[get("/")]
 pub fn index_user(user: UserOr) -> Template {
-    let datas = date_list();
+    let datas = date_index();
     let context = TemplateContext {
-        title: "Forum".to_string(),
         datas: datas,
         username: user.0,
     };
     Template::render("index", &context)
 }
+
+#[post("/addtoptic", data = "<data_list>")]
+fn add_topic<'a>(user: UserOr, data_list: Form<DataList>)  -> Template {
+    {
+    let data = data_list.get();
+    let uid = &user.0;
+    let title = &data.title;
+    let content = &data.content;
+    get_add_topic(&uid, &title,&content);
+    }
+    let datas = date_index();
+    let context = TemplateContext {
+        datas: datas,
+        username: user.0,
+    };
+    Template::render("index", &context)
+}
+
 
 #[get("/<file..>",rank = 9)]
 pub fn public(file: PathBuf) -> Option<NamedFile> {

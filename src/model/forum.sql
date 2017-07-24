@@ -37,12 +37,13 @@ INSERT INTO reply (id, pid, uid, content, createtime) VALUES
 CREATE TABLE users (
   id SERIAL NOT NULL PRIMARY KEY,
   username varchar NOT NULL,
-  password varchar NOT NULL
+  password varchar NOT NULL,
+  regtime varchar NOT NULL
 );
 
 
 
-INSERT INTO users (id, username, password) VALUES
+INSERT INTO users (id, username, password,regtime) VALUES
 (1, 'admin', 'b4f6fab95ca6f0dee45fc0da5cd05c8cdf2ca110'),
 (2, 'wenzi', '59bb8e88c24f43aabeb505e92f5d1b244bffd04e');
 

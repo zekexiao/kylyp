@@ -7,6 +7,7 @@ pub struct User {
     pub id: i32,
     pub username: String,
     pub password: String,
+    pub regtime: String,
 }
 
 #[derive(Insertable)]
@@ -14,4 +15,5 @@ pub struct User {
 pub struct NewUser<'a> {
     pub username: &'a str,
     pub password: &'a str,
+    pub regtime: &'a str,
 }
