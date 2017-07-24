@@ -7,6 +7,7 @@ The project use postgresql, rust ,rocket also material design to build a new For
 ### Start
 
 1, 将src/model/forum.sql导入你的数据库
+
 2, cargo run
  
 
