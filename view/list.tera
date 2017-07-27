@@ -54,7 +54,31 @@
    </header>
    <div id="container">
     <h2>详情</h2>
-    <p>标题： {{ data.title }}</p> 
-    <div>{{ data.content }}</div>
+    <p>标题： {{ toptic.title }}</p> 
+    <div>{{ toptic.content }}</div>
+    <div class="reply">
+    <h2>评论</h2>
+    <div class="reply_con">
+      <table>
+        {% for reply in replys %}
+          <tr>
+            <td>{{ reply.id }}.</td>
+            <td>{{ reply.content }}</td>
+            <td>{{ reply.createtime }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+  <div class="answer">
+  {% if username %}
+    <form action="/list/{{ toptic.id }}/addreply" method="post" accept-charset="utf-8">
+    <textarea name="content" cols="100" rows="10"></textarea><br>
+    <button type="submit" class="mdc-button" style="background-color:aqua"> 回复 </button>
+   </form>
+  {% else %}
+    <span style="background-color:aqua">请登录后回复.<a href="/user/login">去登录</a></span>
+  {% endif %}
+  </div>
 </body>
 </html>

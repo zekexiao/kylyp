@@ -2,11 +2,12 @@ use diesel;
 use diesel::prelude::*;
 use std::fmt::Debug;
 use model::user::{User,NewUser};
-use model::container::{List,NewList,NewReply};
+use model::container::{List,Reply,NewList,NewReply};
 use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserOr;
 use chrono::prelude::*;
+use std::str::FromStr;
 
 
 #[derive(Debug,Serialize)]
@@ -39,7 +40,7 @@ pub fn date_index() -> Vec<Ulist> {
 }
 
 
-pub fn get_add_topic<'a>(uid: i32, title: &'a str, content: &'a str) {
+pub fn add_topic<'a>(uid: i32, title: &'a str, content: &'a str) {
     use utils::schema::list;
     let connection = establish_connection();
     let createtime = &Local::now().to_string();
@@ -71,37 +72,36 @@ pub fn get_list_by_id(pid: i32) -> List {
         };
     }
     result
-    
-    // let mut list_result: Vec<Ulist> = vec![];
-    // let connection = establish_connection();
-    // let result =  list.filter(&pid.eq(&pid.id)).load::<List>(&connection);
-    // let data_result = match result {
-    //     Ok(result_first) => match result_first.first() {
-    //         Some(data) => Some(data.clone()),
-    //         None => None
-    //     },
-    //     Err(_) => None
-    // };
-    // for row in &conn.query("select * from list where id = &pid.id",&[]).unwrap() {
-    //      let result = Ulist {
-    //         id: row.get(0),
-    //         uid: row.get(1),
-    //         title: row.get(2),
-    //         content: row.get(3),
-    //         createtime: row.get(4),
-    //         username: row.get(5),
-    //     };
-    //         list_result.push(result);
-    // }
-    // data_result
 }
 
-// pub fn get_reply(id: &str) {
-//     let conn = get_conn();
-//     let a_list = conn.query("select * from list where id = $1",&[id]).unwrap();
+pub fn get_reply_by_pid(pid: i32) -> Vec<Reply> {
+    let conn = get_conn();
+    let mut result: Vec<Reply> = vec![];
+    for row in &conn.query("select * from reply where pid = $1 ",&[&pid]).unwrap() {
+        let reply_result = Reply {
+            id: row.get(0),
+            pid: row.get(1),
+            uid: row.get(2),
+            content: row.get(3),
+            createtime: row.get(4),
+        };
+        result.push(reply_result);
+    }
+    result
     
-// }
+}
 
-pub fn add_reply_by_id() {
-
+pub fn add_reply<'a>(pid: i32, uid: i32, content: &'a str) {
+    use utils::schema::reply;
+    let connection = establish_connection();
+    println!("=====================" );
+    let createtime = &Local::now().to_string();
+    println!("==========={:?}==========",&createtime );
+    let new_reply = NewReply {
+        pid: pid,
+        uid : uid,
+        content : content,
+        createtime : createtime,
+    };
+    diesel::insert(&new_reply).into(reply::table).execute(&connection).expect("Error saving new reply");
 }

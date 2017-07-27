@@ -35,6 +35,8 @@ pub struct Reply {
 #[derive(Insertable)]
 #[table_name="reply"]
 pub struct NewReply<'a> {
+    pub pid: i32,
+    pub uid: i32,
     pub content: &'a str,
     pub createtime: &'a str,
 }

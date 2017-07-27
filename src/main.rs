@@ -27,7 +27,7 @@ fn main() {
         .mount("/", routes![home::public,home::index_user,home::index,home::add_toptic])
         .mount("/user",routes![user::register,user::login_register,user::register_post,
                                user::login_user,user::login,user::login_post,user::user_page,user::user_page_login,user::logout])
-        .mount("/list",routes![list::info,list::toptic])
+        .mount("/list",routes![list::toptic,list::reply])
         .attach(Template::fairing())
         .catch(errors![home::not_found])
         .launch();
