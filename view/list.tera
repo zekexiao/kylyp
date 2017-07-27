@@ -52,6 +52,10 @@
             </div>
         </div>
    </header>
-  
+   <div id="container">
+    <h2>详情</h2>
+    <p>标题： {{ data.title }}</p> &emsp; {{ data.username }}
+    <div>{{ data.content }}</div>
+    
 </body>
 </html>

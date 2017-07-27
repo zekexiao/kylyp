@@ -15,6 +15,7 @@ pub struct List {
 #[derive(Insertable)]
 #[table_name="list"]
 pub struct NewList<'a> {
+    pub uid: i32,
     pub title: &'a str,
     pub content: &'a str,
     pub createtime: &'a str,

@@ -8,7 +8,6 @@ use model::pg::get_conn;
 use model::user::{User, NewUser};
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
-// use std::fmt::Debug;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
@@ -20,6 +19,8 @@ pub struct Uid {
 
 #[derive(Debug)]
 pub struct UserOr(pub String);
+#[derive(Debug)]
+pub struct UserId(pub i32);
 
 impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
     type Error = ();
@@ -32,17 +33,17 @@ impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
             .or_forward(())
     }
 }
-// impl<'a, 'r> FromRequest<'a, 'r> for UserOr {
-//     type Error = ();
+impl<'a, 'r> FromRequest<'a, 'r> for UserId {
+    type Error = ();
 
-//     fn from_request(request: &'a Request<'r>) -> request::Outcome<UserOr, ()> {
-//         request.cookies()
-//             .get_private("user_id")
-//             .and_then(|cookie| cookie.value().parse().ok())
-//             .map(|id| UserOr(id))
-//             .or_forward(())
-//     }
-// }
+    fn from_request(request: &'a Request<'r>) -> request::Outcome<UserId, ()> {
+        request.cookies()
+            .get_private("user_id")
+            .and_then(|cookie| cookie.value().parse().ok())
+            .map(|id| UserId(id))
+            .or_forward(())
+    }
+}
 
 #[derive(FromForm)]
 struct UserRegister {
@@ -139,6 +140,26 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
     }
 }
 
+#[post("/login", data = "<user_form>")]
+fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
+    let post_user = user_form.get();
+    let conn = get_conn();
+    let mut uid = Uid {id : 0};
+    for row in &conn.query("SELECT id FROM users WHERE username =$1  AND password = $2", &[&post_user.username,&post_user.password]).unwrap() {
+       
+        uid = Uid {
+            id : row.get(0),
+        };
+    }
+    if true {
+            cookies.add_private(Cookie::new("user_id",uid.id.to_string() ));
+            cookies.add_private(Cookie::new("username",post_user.username.to_string() ));
+            Flash::success(Redirect::to("/"), "Successfully logged in")
+    }else {
+            Flash::error(Redirect::to("/user/login"), "Incorrect")
+    } 
+}
+
 // #[post("/login", data = "<user_form>")]
 // fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
 //     use utils::schema::users::dsl::*;
@@ -172,22 +193,3 @@ pub fn logout(mut cookies: Cookies) -> Flash<Redirect> {
     Flash::success(Redirect::to("/user/login"), "Successfully logged out.")
 }
 
-#[post("/login", data = "<user_form>")]
-fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
-    let post_user = user_form.get();
-    let conn = get_conn();
-    let mut uid = Uid {id : 0};
-    for row in &conn.query("SELECT id FROM users WHERE username =$1  AND password = $2", &[&post_user.username,&post_user.password]).unwrap() {
-       
-        uid = Uid {
-            id : row.get(0),
-        };
-    }
-    if true {
-            cookies.add_private(Cookie::new("user_id", uid.id.to_string()));
-            cookies.add_private(Cookie::new("username",post_user.username.to_string() ));
-            Flash::success(Redirect::to("/"), "Successfully logged in")
-    }else {
-            Flash::error(Redirect::to("/user/login"), "Incorrect")
-    } 
-}

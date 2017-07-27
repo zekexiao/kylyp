@@ -5,10 +5,10 @@ use rocket::http::RawStr;
 use rocket::http::Cookies;
 use rocket::response::NamedFile;
 use rocket_contrib::Template;
-use controller::user::UserOr;
+use controller::user::{UserId,UserOr};
 use handler::content::{Ulist,date_index,get_add_topic};
 use chrono::prelude::*;
-
+use std::str::FromStr;
 
 #[derive(Serialize)]
 struct TemplateContext {
@@ -44,13 +44,13 @@ pub fn index_user(user: UserOr) -> Template {
 }
 
 #[post("/addtoptic", data = "<data_list>")]
-fn add_topic<'a>(user: UserOr, data_list: Form<DataList>)  -> Template {
+fn add_toptic<'a>(user: UserOr, user_id: UserId, data_list: Form<DataList>)  -> Template {
     {
     let data = data_list.get();
-    let uid = &user.0;
+    let uid = user_id.0;
     let title = &data.title;
     let content = &data.content;
-    get_add_topic(&uid, &title,&content);
+    get_add_topic(uid, &title,&content);
     }
     let datas = date_index();
     let context = TemplateContext {
