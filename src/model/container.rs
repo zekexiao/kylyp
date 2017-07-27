@@ -1,6 +1,6 @@
 use utils::schema::{list,reply};
 
-#[derive(Clone,Debug)]
+#[derive(Clone,Debug,Serialize)]
 #[derive(Queryable, Associations)]
 #[belongs_to(User)]
 pub struct List {
@@ -21,7 +21,7 @@ pub struct NewList<'a> {
     pub createtime: &'a str,
 }
 
-#[derive(Clone,Debug)]
+#[derive(Clone,Debug,Serialize)]
 #[derive(Queryable,  Associations)]
 #[belongs_to(User)]
 pub struct Reply {

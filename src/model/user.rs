@@ -1,6 +1,6 @@
 use utils::schema::users;
 
-#[derive(Clone,Debug)]
+#[derive(Clone,Debug,Serialize)]
 #[derive(Queryable)]
 #[has_many(list,reply)]
 pub struct User {

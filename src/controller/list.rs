@@ -1,15 +1,14 @@
 use rocket_contrib::Template;
 use controller::user::UserOr;
 use std::collections::HashMap;
+use model::container::{List,NewList,NewReply};
 use std::fmt::Debug;
-use handler::content::Ulist;
-// use handler::content::get_list_by_id;
+use handler::content::{Ulist,date_index, get_list_by_id};
 
 
-#[derive(Serialize)]
+#[derive(Debug,Serialize)]
 struct TemplateContext {
-    datas: Vec<Ulist>,
-    username: String,
+    data: List,
 }
 
 
@@ -21,12 +20,11 @@ pub fn info() -> Template {
 }
 
 
-// #[get("/<pid>")]
-// pub fn toptic(user: UserOr) {
-//     let data = get_list_by_id();
-//     let context = TemplateContext {
-//         data: data,
-//         username: user.0,
-//     };
-//     Template::render("list", &context)
-// }
+#[get("/<pid>")]
+pub fn toptic(user: UserOr, pid: i32) -> Template {
+    let data = get_list_by_id(pid );
+    let context = TemplateContext {
+        data: data,
+    };
+    Template::render("list", &context)
+}

@@ -61,7 +61,7 @@
       </tr>
       {% for data in datas %}
         <tr>
-          <td><a href="/list/{{ data.id }}.html" title="{{ data.title }}"> {{ data.title }} </a></td>
+          <td><a href="/list/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></td>
           <td>{{ data.username }} </td>
           <td>{{ data.createtime }} </td>
         </tr>
