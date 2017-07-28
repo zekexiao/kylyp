@@ -6,7 +6,7 @@ use rocket::http::Cookies;
 use rocket::response::NamedFile;
 use rocket_contrib::Template;
 use controller::user::{UserId,UserOr};
-use handler::content::{Ulist,date_index,add_topic};
+use handler::content::{Ulist,date_index,add_topic_uid};
 use chrono::prelude::*;
 use std::str::FromStr;
 
@@ -45,13 +45,11 @@ pub fn index_user(user: UserOr) -> Template {
 
 #[post("/addtoptic", data = "<data_list>")]
 fn add_toptic(user: UserOr, user_id: UserId, data_list: Form<DataList>)  -> Template {
-    {
     let data = data_list.get();
     let uid = user_id.0;
     let title = &data.title;
     let content = &data.content;
-    add_topic(uid, &title,&content);
-    }
+    add_topic_uid(uid, &title,&content);
     let datas = date_index();
     let context = TemplateContext {
         datas: datas,

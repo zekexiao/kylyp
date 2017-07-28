@@ -72,10 +72,38 @@
   </div>
   <div class="answer">
   {% if username %}
-    <form action="/list/{{ toptic.id }}/addreply" method="post" accept-charset="utf-8">
-    <textarea name="content" cols="100" rows="10"></textarea><br>
-    <button type="submit" class="mdc-button" style="background-color:aqua"> 回复 </button>
-   </form>
+    <textarea class="ans_con" cols="100" rows="10"></textarea><br>
+    <button type="submit" id="submit" data-pid="{{ toptic.id }}" class="mdc-button" style="background-color:aqua"><span class="tip"> 回复 </span></button>
+    <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript" >
+      var running = false;
+      $('#submit').on('click', function(){
+        if(running) return;
+        running = true;
+        $('.tip').text('');
+
+        var ans_con = $('.ans_con').val();
+        if(!ans_con){
+          $('.tip').text('*输入不能为空');
+          return;
+        }
+        $('.tip').text('数据正在提交中...');
+        
+        var pid = $(this).data('pid');
+
+        $.ajax({
+          async: false,
+          url : '/list/addreply',
+          data : {pid:pid, content:ans_con},
+          dataType : 'json',
+          type : 'get'
+        }).done(function(){
+          
+          running = false;
+        })
+        window.location.reload ( true );  
+      })
+    </script>
   {% else %}
     <span style="background-color:aqua">请登录后回复.<a href="/user/login">去登录</a></span>
   {% endif %}

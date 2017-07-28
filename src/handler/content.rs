@@ -7,7 +7,6 @@ use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserOr;
 use chrono::prelude::*;
-use std::str::FromStr;
 
 
 #[derive(Debug,Serialize)]
@@ -40,7 +39,7 @@ pub fn date_index() -> Vec<Ulist> {
 }
 
 
-pub fn add_topic<'a>(uid: i32, title: &'a str, content: &'a str) {
+pub fn add_topic_uid<'a>(uid: i32, title: &'a str, content: &'a str) {
     use utils::schema::list;
     let connection = establish_connection();
     let createtime = &Local::now().to_string();
@@ -91,12 +90,10 @@ pub fn get_reply_by_pid(pid: i32) -> Vec<Reply> {
     
 }
 
-pub fn add_reply<'a>(pid: i32, uid: i32, content: &'a str) {
+pub fn add_reply_pid<'a>(pid: i32, uid: i32, content: &'a str) {
     use utils::schema::reply;
     let connection = establish_connection();
-    println!("=====================" );
     let createtime = &Local::now().to_string();
-    println!("==========={:?}==========",&createtime );
     let new_reply = NewReply {
         pid: pid,
         uid : uid,
