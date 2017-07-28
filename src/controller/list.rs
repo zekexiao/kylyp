@@ -20,6 +20,18 @@ pub struct DataReply {
     pub content: String,
 }
 
+#[get("/<pid>", rank = 2)]
+pub fn toptic_no( pid: i32) -> Template {
+    let toptic_data = get_list_by_id(pid );
+    let reply_data = get_reply_by_pid(pid);
+    let context = TemplateContext {
+        toptic: toptic_data,
+        replys: reply_data,
+        username: "".to_string(),
+    };
+    Template::render("list", &context)
+}
+
 #[get("/<pid>")]
 pub fn toptic(user: UserOr, pid: i32) -> Template {
     let toptic_data = get_list_by_id(pid );
@@ -38,7 +50,7 @@ pub fn reply(user: UserOr,  user_id: UserId, data_reply: DataReply)  {
     if let Some(pid) = data_reply.pid {
         let use_pid = pid;
         let use_content = data_reply.content;
-        add_reply_pid(uid, use_pid, &use_content);
+        add_reply_pid(use_pid, uid, &use_content);
     } else {
         "Something Wrong!".to_string();
     }

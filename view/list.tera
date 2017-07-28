@@ -62,7 +62,7 @@
       <table>
         {% for reply in replys %}
           <tr>
-            <td>{{ reply.id }}.</td>
+            <td>{{loop.index}}.</td>
             <td>{{ reply.content }}</td>
             <td>{{ reply.createtime }}</td>
           </tr>
