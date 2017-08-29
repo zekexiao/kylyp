@@ -5,10 +5,13 @@ A new Forum !
 The project use postgresql, rust ,rocket also material design to build a new Forum.
 
 ### Start
-- 1  cargo install diesel_cli
-- 2 diesel setup
-- 3  diesel migration run
-- 4  cargo run
+
+```bash
+$ cargo install diesel_cli
+$ diesel setup
+$ diesel migration run
+$ cargo run
+```
  
 
 ### Contribute

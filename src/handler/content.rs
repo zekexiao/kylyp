@@ -39,26 +39,6 @@ pub fn date_index() -> Vec<Ulist> {
     list_result
 }
 
-// pub fn date_index() -> Vec<Ulist> {
-//     use utils::schema::list;
-//     use utils::schema::users;
-//     let connection = establish_connection();
-//     let mut list_result: Vec<Ulist> = vec![];
-//     let data = list::table.inner_join(users::table).load(&connection);
-//     println!("================{:?}===========",data );
-//     // for row in data {
-//     //     let result = Ulist {
-//     //         id: row.0,
-//     //         uid: row.1,
-//     //         title: row.2,
-//     //         content: row.3,
-//     //         createtime: row.4,
-//     //         username: row.6,
-//     //     };
-//     //     list_result.push(result);
-//     // }
-//     list_result
-// }
 
 pub fn add_topic_uid<'a>(uid: i32, title: &'a str, content: &'a str) {
     use utils::schema::list;
