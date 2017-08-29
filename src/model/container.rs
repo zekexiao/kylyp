@@ -1,7 +1,7 @@
+use model::user::User;
 use utils::schema::{list,reply};
 
-#[derive(Clone,Debug,Serialize)]
-#[derive(Queryable, Associations)]
+#[derive(Clone,Debug,Serialize,Queryable, Associations)]
 #[belongs_to(User)]
 pub struct List {
     pub id: i32,
@@ -21,8 +21,7 @@ pub struct NewList<'a> {
     pub createtime: &'a str,
 }
 
-#[derive(Clone,Debug,Serialize)]
-#[derive(Queryable,  Associations)]
+#[derive(Clone,Debug,Serialize,Queryable,  Associations)]
 #[belongs_to(User)]
 pub struct Reply {
     pub id: i32,

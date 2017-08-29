@@ -1,5 +1,6 @@
 use diesel;
 use diesel::prelude::*;
+use diesel::prelude::JoinDsl;
 use std::fmt::Debug;
 use model::user::{User,NewUser};
 use model::container::{List,Reply,NewList,NewReply};
@@ -22,7 +23,7 @@ pub struct Ulist {
 pub fn date_index() -> Vec<Ulist> {
     let conn = get_conn();
     let mut list_result: Vec<Ulist> = vec![];
-    for row in &conn.query("select list.*, username from list, users where list.uid = users.id", &[]).unwrap()
+    for row in &conn.query("select * from list inner join users on list.uid = users.id", &[]).unwrap()
     {
         let result = Ulist {
             id: row.get(0),
@@ -30,7 +31,7 @@ pub fn date_index() -> Vec<Ulist> {
             title: row.get(2),
             content: row.get(3),
             createtime: row.get(4),
-            username: row.get(5),
+            username: row.get(6),
         };
             list_result.push(result);
 
@@ -38,6 +39,26 @@ pub fn date_index() -> Vec<Ulist> {
     list_result
 }
 
+// pub fn date_index() -> Vec<Ulist> {
+//     use utils::schema::list;
+//     use utils::schema::users;
+//     let connection = establish_connection();
+//     let mut list_result: Vec<Ulist> = vec![];
+//     let data = list::table.inner_join(users::table).load(&connection);
+//     println!("================{:?}===========",data );
+//     // for row in data {
+//     //     let result = Ulist {
+//     //         id: row.0,
+//     //         uid: row.1,
+//     //         title: row.2,
+//     //         content: row.3,
+//     //         createtime: row.4,
+//     //         username: row.6,
+//     //     };
+//     //     list_result.push(result);
+//     // }
+//     list_result
+// }
 
 pub fn add_topic_uid<'a>(uid: i32, title: &'a str, content: &'a str) {
     use utils::schema::list;

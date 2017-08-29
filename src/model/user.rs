@@ -1,7 +1,8 @@
+use utils::schema::{list,reply};
 use utils::schema::users;
 
 #[derive(Clone,Debug,Serialize)]
-#[derive(Queryable)]
+#[derive(Identifiable,Queryable)]
 #[has_many(list,reply)]
 pub struct User {
     pub id: i32,
