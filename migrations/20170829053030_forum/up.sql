@@ -9,8 +9,11 @@ CREATE TABLE  list (
 INSERT INTO list (id, uid, title, content, createtime) VALUES
 (1, 1, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-23 23:41:45.672805609 +08:00'),
 (2, 2, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00'),
-(3, 2, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00');
-SELECT setval('list_id_seq', 3, true);
+(3, 2, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00'),
+(4, 1, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-23 23:41:45.672805609 +08:00'),
+(5, 2, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00'),
+(6, 2, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00');
+SELECT setval('list_id_seq', 6, true);
 
 
 CREATE TABLE  reply (

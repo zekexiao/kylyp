@@ -1,12 +1,8 @@
 use diesel;
 use diesel::prelude::*;
-use diesel::prelude::JoinDsl;
-use std::fmt::Debug;
-use model::user::{User,NewUser};
 use model::container::{List,Reply,NewList,NewReply};
 use model::pg::get_conn;
 use model::db::establish_connection;
-use controller::user::UserOr;
 use chrono::prelude::*;
 
 

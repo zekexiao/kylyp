@@ -1,14 +1,10 @@
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
-use rocket::http::RawStr;
-use rocket::http::Cookies;
+use rocket::request::{Form, Request};
 use rocket::response::NamedFile;
 use rocket_contrib::Template;
 use controller::user::{UserId,UserOr};
 use handler::content::{Ulist,date_index,add_topic_uid};
-use chrono::prelude::*;
-use std::str::FromStr;
 
 #[derive(Serialize)]
 struct TemplateContext {
@@ -31,7 +27,6 @@ pub fn index() -> Template {
     };
     Template::render("index", &context)
 }
-
 
 #[get("/")]
 pub fn index_user(user: UserOr) -> Template {

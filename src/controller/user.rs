@@ -5,7 +5,7 @@ use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
 use rocket::response::{Redirect,Flash};
 use model::db::establish_connection;
 use model::pg::get_conn;
-use model::user::{User, NewUser};
+use model::user::{NewUser};
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
 use std::collections::HashMap;
@@ -146,15 +146,15 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
     let conn = get_conn();
     let mut uid = Uid {id : 0};
     for row in &conn.query("SELECT id FROM users WHERE username =$1  AND password = $2", &[&post_user.username,&post_user.password]).unwrap() {
-       
         uid = Uid {
             id : row.get(0),
         };
     }
-    if true {
+    if uid.id != 0 {
             cookies.add_private(Cookie::new("user_id",uid.id.to_string() ));
             cookies.add_private(Cookie::new("username",post_user.username.to_string() ));
             Flash::success(Redirect::to("/"), "Successfully logged in")
+            
     }else {
             Flash::error(Redirect::to("/user/login"), "Incorrect")
     } 

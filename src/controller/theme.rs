@@ -1,11 +1,8 @@
 use rocket_contrib::Template;
-use controller::user::{UserId,UserOr};
-use rocket::response::{Redirect,Flash};
 use std::collections::HashMap;
+use controller::user::{UserId,UserOr};
 use model::container::{List,Reply,NewList,NewReply};
-use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
-use std::fmt::Debug;
-use handler::content::{Ulist,date_index, get_list_by_id,get_reply_by_pid,add_reply_pid};
+use handler::content::{ get_list_by_id,get_reply_by_pid,add_reply_pid};
 
 #[derive(Debug,Serialize)]
 struct TemplateContext {
@@ -29,7 +26,7 @@ pub fn toptic_no( pid: i32) -> Template {
         replys: reply_data,
         username: "".to_string(),
     };
-    Template::render("list", &context)
+    Template::render("theme", &context)
 }
 
 #[get("/<pid>")]
@@ -41,7 +38,7 @@ pub fn toptic(user: UserOr, pid: i32) -> Template {
         replys: reply_data,
         username: user.0,
     };
-    Template::render("list", &context)
+    Template::render("theme", &context)
 }
 
 #[get("/addreply?<data_reply>")]
@@ -54,4 +51,11 @@ pub fn reply(user: UserOr,  user_id: UserId, data_reply: DataReply)  {
     } else {
         "Something Wrong!".to_string();
     }
+}
+
+#[get("/new")]
+pub fn new(user: UserOr) -> Template {
+    let mut context = HashMap::new();
+    context.insert("username", user.0);
+    Template::render("new", &context)
 }

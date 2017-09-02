@@ -1,0 +1,391 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    font: inherit;
+    text-decoration: none;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+html,body {
+    width:100%;height:100%;
+    font: 16px/1.4em 'PT Sans', sans-serif;
+    background-color: #feefff;
+}
+* {
+    padding:0px; margin:0px;
+    box-sizing: border-box;
+}
+ 
+h3 {
+    font-family: 'PT Serif', serif;
+    font-size: 20px;
+    line-height: 1.4em;
+    margin: 0 0 .1em;
+    font-weight: bold;
+}
+h4 {
+    font-family: 'PT Serif', serif;
+    font-size: 15px;
+    line-height: 1.4em;
+    margin: 0 0 .1em;
+    font-weight: bold;
+}
+ol, ul {
+    list-style: none;
+}
+
+#all {
+    display: flex;min-height: 100vh;flex-direction: column;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+    background-color: #fff;
+    height: 50px;
+    zoom:1;    /* For IE 6/7 (trigger hasLayout) */
+    box-shadow: 0 1px 2px #999; 
+    background-color:#feefff;
+}
+
+h1.logo a {
+    font-weight: bold;
+    font-size: 22px;
+    float: left;
+    letter-spacing: 0.2em;
+    padding: 13px 0 15px 33px;
+}
+ 
+header:before,header:after {
+    content:"";
+    display:table;
+}
+         
+header:after {
+    clear:both;
+}
+
+/* --------------------------------mobile-------------------------------- */
+
+header label {
+    float: right;
+    font-size: 16px;
+    font-weight: bold;
+    /* text-transform: uppercase; */
+    letter-spacing: 0.1em;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    padding: 15px 22px 15px 0;
+}
+
+nav {
+    padding-top: 50px; 
+    height: 0;
+    display: block;
+	overflow: hidden;
+}
+         
+nav ul li label {
+    display:block;
+    padding:12px 25px ;
+	background: #333;
+	color: #fff;
+}
+
+nav ul li input[type='checkbox'] {
+	display: none;
+}
+
+nav ul li input[type='checkbox']:checked ~ .options {
+	height: auto;
+    display:block;
+	min-height:40px;
+	max-height:400px;
+}
+
+nav ul li span {
+    float:right;
+	background:#666; 
+	border:1px solid #3c434c;
+    border-bottom:1px solid #111;
+	font-size:10px;
+	border-radius: 12px;
+	box-shadow: inner 0 0 10px #111;
+}
+
+nav ul ul {
+    background:#555;
+    margin:0; padding:0;
+    border-bottom:1px solid #555;
+}
+
+nav ul ul li a {
+	display:block;
+	padding:12px 25px ;
+	color:#fff;
+	text-decoration:none;
+}
+
+nav ul ul li a:hover {
+	color:#44c6eb;
+}
+
+nav ul ul li {
+	border-bottom:1px solid #333;
+}
+
+
+nav .options {
+	height: 0;
+	display: block;
+	overflow: hidden;
+}
+
+/* ------------------------------mobile - main----------------------------- */
+
+
+main {
+    flex: 1;  /* 1 代表盡可能最大，會自動填滿除了 header footer 以外的空間 */
+    margin: 0 11% 22px 11%;
+} 
+#content {
+    margin-top: 16px;
+}
+.content::after {
+        content: "";
+        clear: both;
+        display: table;
+}
+[class*="re-"] {
+    float: left;
+}
+article {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 15px 15px 15px;
+    margin: 0 0 1px 0;
+    background-color: #ffffff;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+
+article #top #title {
+    margin: -9px -15px 0 -15px;
+    height: 44px;
+    background-color: #feefff;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+article #top #title a {
+    margin: 12px 0 0 8px;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+}
+article #top #topic {
+    margin: 15px 0 0 0 ;
+    border-bottom:1px solid #eeeeee;
+}
+article #blog a {
+    font-weight: bold;
+}
+article #blog #info {
+    display: inline-block;
+    font-size: 13px;
+}
+
+article #top #login {
+    margin: 30px 0 0 30px;
+}
+article #top button {
+    margin-left: 30px;
+    width:55px; 
+    line-height:30px;
+    background-color:aqua;
+    border :1px solid #eeeeee;
+}
+
+#theme {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 15px 15px 15px;
+    margin: 0 0 14px 0;
+    background-color: #ffffff;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+
+#reply {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 15px 15px 15px;
+    margin: 0 0 14px 0;
+    background-color: #ffffff;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+#answer {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 15px 15px 15px;
+    margin: 0 0 14px 0;
+    background-color: #ffffff;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+#answer button {
+    width:55px; 
+    line-height:30px;
+    background-color:aqua;
+    border :1px solid #eeeeee;
+}
+#answer textarea {
+    width:100%; 
+    height: 133px;
+}
+
+/*--------------------------------- new ------------------------------- */
+#new input {
+   
+}
+#new textarea {
+    width:100%; 
+    height: 133px;
+}
+
+
+
+
+#aside {
+        background-color: #ffffff;
+        padding: 15px 15px 15px 15px;
+        margin: 0 0 15px 15px;
+        text-align: center;
+        font-size: 15px;
+        box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+} 
+#aside #new_theme {
+    font-weight: bold;
+    text-align: center;
+    background: #feefff;
+    line-height: 44px;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+} 
+
+/* ------------------------mobile - footer ----------------------- */
+
+/* ---------------------desk -------nav ---------------------- */ 
+
+#primary_nav, #nav_left, #nav_right {
+    display: none;
+}
+
+/*----------Media Query 多屏幕时 小屏幕放前面-----------  */
+
+@media only screen and (min-width: 550px) {
+    /* For tablets: */
+    .re-table-100 {width: 100%;}
+
+} 
+
+
+/*-------------------------------------Desktop------------------------  */
+
+@media only screen and (min-width: 768px) {
+ 
+    #menu, #mnav {
+        display: none;
+    }
+    #nav_left {
+        display: block; 
+        position: fixed;
+        height: auto;
+        left: 148px;
+        line-height: 50px;
+        font-weight: 700;
+        background-color:#feefff;
+    }
+    #nav_left li {
+        display: inline-block;
+        padding: 0 33px 0 0;
+    }
+    #nav_right {
+        display: block; 
+        position: fixed;
+        height: auto;
+        right: 33px;
+        line-height: 50px;
+        font-weight: 700;
+        /* background-color:#039BE5; */
+        background-color:#feefff;
+    }
+    #nav_right input {
+        display: none;
+    }
+    #nav_right li {
+        display: inline-block;
+    }
+    #primary_nav {
+        display: block; 
+        position: fixed;
+        height: auto;
+        right: 0;
+        line-height: 50px;
+        background-color:#feefff;
+    }
+    #primary_nav {
+        margin-right: 136px;
+    }
+    #primary_nav ul li {
+        display: inline-block; 
+    }
+    #primary_nav ul li a {
+        padding: 0 11px 0 22px;
+        font-weight: 700;
+    }
+    #primary_nav ul li:hover .submenu {
+        display: block;
+    }
+    #primary_nav ul li .submenu {
+        display: none;
+        position: absolute;
+    }
+    #primary_nav ul ul li {
+        display: block;
+        border-bottom:1px solid #333;
+        background-color:#33b5e5;
+    }
+    #primary_nav ul ul li span {
+        float:right;
+        font-size:15px;
+        margin-right: 11px;
+        font-weight: bold;
+    }
+    #primary_nav ul ul li #subitem {
+        height: 0;
+        overflow: hidden;
+    }
+    #primary_nav ul ul ul li {
+        border-bottom:1px solid #444;
+        background-color:#C1CDCD;
+    }
+    main {
+        margin-top: 50px;
+    }
+
+     /* For desktop: */
+    .re-desk-25 {width: 25%;}
+    .re-desk-75 {width: 75%;}
+}
+ 

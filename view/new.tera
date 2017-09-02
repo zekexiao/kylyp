@@ -71,20 +71,50 @@
         <main id="main">
             <div id="content" >
                 <div class="re-desk-75 re-table-100 ">
-                    <div id="theme">
-                        <div >
-                            <h3> {{ username }} </h3> 
-                            <p>welcome!!!</p>
+                    <div>
+                        <h4>新主题</h4>
+                        <div id="new">
+                            <input id="toptics"> &emsp; <input id="title">
+                            <textarea class="ans_con" ></textarea><br>
+                            <button type="submit" id="submit"><span class="tip"> 回复 </span></button>
+                            <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+                            <script type="text/javascript" >
+                            var running = false;
+                            $('#submit').on('click', function(){
+                                if(running) return;
+                                running = true;
+                                $('.tip').text('');
+
+                                var ans_con = $('.ans_con').val();
+                                if(!ans_con){
+                                $('.tip').text('*输入不能为空');
+                                return;
+                                }
+                                $('.tip').text('数据正在提交中...');
+                                    
+                                var pid = $(this).data('pid');
+                                $.ajax({
+                                async: false,
+                                url : '/theme/addreply',
+                                data : {pid:pid, content:ans_con},
+                                dataType : 'json',
+                                type : 'get'
+                                }).done(function(){
+                                    
+                                running = false;
+                                })
+                                window.location.reload ( true );  
+                            })
+                            </script>
                         </div>
                     </div>
-                    
                 </div>
 
 
                 <div class="re-desk-25 re-table-100">
                     <div id="aside">
-                        <div id="new_theme">
-                            <a href="/theme/new" class="button">新主题</a>
+                        <div id="new_blog">
+                            <a href="" class="button">新主题</a>
                         </div>
                     </div>
                 </div>

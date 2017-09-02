@@ -73,11 +73,61 @@
                 <div class="re-desk-75 re-table-100 ">
                     <div id="theme">
                         <div >
-                            <h3> {{ username }} </h3> 
-                            <p>welcome!!!</p>
+                            <h3> {{ toptic.title }} </h3> 
+                            <span id="one-info">时间:{{ toptic.createtime }}</span>
                         </div>
+                        <div>{{ toptic.content }}</div>
                     </div>
-                    
+                    <div id="reply">
+                        <h2>评论</h2>
+                        {% for reply in replys %}
+                            <div class="reply_blog">
+                                <div>
+                                    <td>{{loop.index}}.</td>
+                                    <td>{{ reply.content }}
+                                </div>
+                                <span>{{ reply.createtime }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div id="answer">
+                        {% if username %}
+                            <textarea class="ans_con" ></textarea><br>
+                            <button type="submit" id="submit" data-pid="{{ toptic.id }}"><span class="tip"> 回复 </span></button>
+                            <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
+                            <script type="text/javascript" >
+                            var running = false;
+                            $('#submit').on('click', function(){
+                                if(running) return;
+                                running = true;
+                                $('.tip').text('');
+
+                                var ans_con = $('.ans_con').val();
+                                if(!ans_con){
+                                $('.tip').text('*输入不能为空');
+                                return;
+                                }
+                                $('.tip').text('数据正在提交中...');
+                                
+                                var pid = $(this).data('pid');
+
+                                $.ajax({
+                                async: false,
+                                url : '/theme/addreply',
+                                data : {pid:pid, content:ans_con},
+                                dataType : 'json',
+                                type : 'get'
+                                }).done(function(){
+                                
+                                running = false;
+                                })
+                                window.location.reload ( true );  
+                            })
+                            </script>
+                        {% else %}
+                            <span style="background-color:aqua">请登录后回复.<a href="/user/login">登录</a></span>
+                        {% endif %}
+                    </div>
                 </div>
 
 
