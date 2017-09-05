@@ -74,8 +74,8 @@
                     <article >
                         <div id="top">
                             <div id="title">
-                                <a href="">登录 &emsp;</a>
-                                <a href="">注册 &emsp;</a> 
+                                <a href="/user/login">登录 &emsp;</a>
+                                <a href="/user/register">注册 &emsp;</a> 
                             </div>
                             <form action="/user/login" method="post" accept-charset="utf-8">
                             <div id="login">
