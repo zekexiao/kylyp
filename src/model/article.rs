@@ -1,9 +1,9 @@
 use model::user::User;
-use utils::schema::{list,reply};
+use utils::schema::{article,comment};
 
 #[derive(Clone,Debug,Serialize,Queryable, Associations)]
 #[belongs_to(User)]
-pub struct List {
+pub struct Article {
     pub id: i32,
     pub uid: i32,
     pub title: String,
@@ -13,8 +13,8 @@ pub struct List {
 
 
 #[derive(Insertable)]
-#[table_name="list"]
-pub struct NewList<'a> {
+#[table_name="article"]
+pub struct NewArticle<'a> {
     pub uid: i32,
     pub title: &'a str,
     pub content: &'a str,
@@ -23,7 +23,7 @@ pub struct NewList<'a> {
 
 #[derive(Clone,Debug,Serialize,Queryable,  Associations)]
 #[belongs_to(User)]
-pub struct Reply {
+pub struct Comment {
     pub id: i32,
     pub pid: i32,
     pub uid: i32,
@@ -32,8 +32,8 @@ pub struct Reply {
 }
 
 #[derive(Insertable)]
-#[table_name="reply"]
-pub struct NewReply<'a> {
+#[table_name="comment"]
+pub struct NewComment<'a> {
     pub pid: i32,
     pub uid: i32,
     pub content: &'a str,

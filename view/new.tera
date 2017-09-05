@@ -95,7 +95,7 @@
                                 var pid = $(this).data('pid');
                                 $.ajax({
                                 async: false,
-                                url : '/theme/addreply',
+                                url : '/article/addarticle',
                                 data : {pid:pid, content:ans_con},
                                 dataType : 'json',
                                 type : 'get'
@@ -212,7 +212,7 @@
                         </li>
                     </span>
                     <span id="dright">
-                        <li class="menu-item"><a>Center</a></li>
+                        <li class="menu-item"><a>中心</a></li>
                     </span>
                 </ul>
         </span>

@@ -135,8 +135,8 @@
         </span>
         {% else %}
         <span id="nav_right">
-                <li class="menu-item"><a>注册 &emsp;</a></li>
-                <li class="menu-item"><a>登录</a></li>
+                <li ><a href="/user/register">注册 &emsp;</a></li>
+                <li ><a href="/user/login">登录</a></li>
         </span>
         {% endif %}
     </div>

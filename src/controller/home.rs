@@ -1,26 +1,20 @@
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use rocket::request::{Form, Request};
+use rocket::request::Request;
 use rocket::response::NamedFile;
 use rocket_contrib::Template;
 use controller::user::{UserId,UserOr};
-use handler::content::{Ulist,date_index,add_topic_uid};
+use handler::content::{Uarticle,article_list};
 
 #[derive(Serialize)]
 struct TemplateContext {
-    datas: Vec<Ulist>,
+    datas: Vec<Uarticle>,
     username: String,
-}
-
-#[derive(FromForm,Debug)]
-pub struct DataList {
-    pub title: String,
-    pub content: String,
 }
 
 #[get("/",rank = 2)]
 pub fn index() -> Template {
-    let datas = date_index();
+    let datas = article_list();
     let context = TemplateContext {
         datas: datas,
         username: "".to_string(),
@@ -30,22 +24,7 @@ pub fn index() -> Template {
 
 #[get("/")]
 pub fn index_user(user: UserOr) -> Template {
-    let datas = date_index();
-    let context = TemplateContext {
-        datas: datas,
-        username: user.0,
-    };
-    Template::render("index", &context)
-}
-
-#[post("/addtoptic", data = "<data_list>")]
-fn add_toptic(user: UserOr, user_id: UserId, data_list: Form<DataList>)  -> Template {
-    let data = data_list.get();
-    let uid = user_id.0;
-    let title = &data.title;
-    let content = &data.content;
-    add_topic_uid(uid, &title,&content);
-    let datas = date_index();
+    let datas = article_list();
     let context = TemplateContext {
         datas: datas,
         username: user.0,

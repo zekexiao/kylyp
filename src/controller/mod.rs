@@ -1,3 +1,3 @@
 pub mod home;
 pub mod user;
-pub mod theme;
+pub mod article;

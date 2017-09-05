@@ -5,7 +5,7 @@ use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
 use rocket::response::{Redirect,Flash};
 use model::db::establish_connection;
 use model::pg::get_conn;
-use model::user::{NewUser};
+use model::user::{User,NewUser};
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
 use std::collections::HashMap;
@@ -139,7 +139,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
         Err("password != password2".to_string())
     }
 }
-
+// -------------- 方法一 -------------
 #[post("/login", data = "<user_form>")]
 fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
     let post_user = user_form.get();
@@ -160,6 +160,7 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
     } 
 }
 
+// -------------- 方法二 -------------
 // #[post("/login", data = "<user_form>")]
 // fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
 //     use utils::schema::users::dsl::*;
@@ -177,7 +178,7 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
 //         Some(login_user) => {
 //             if &post_user.password == &login_user.password {
 //                 cookies.add_private(Cookie::new("username",post_user.username.to_string() ));
-//                 cookies.add_private(Cookie::new("id",login_user.id.to_string() ));
+//                 cookies.add_private(Cookie::new("user_id",login_user.id.to_string() ));
 //                 Flash::success(Redirect::to("/"), "Successfully logged in")
 //             }else {
 //                 Flash::error(Redirect::to("/user/login"), "Incorrect Password")

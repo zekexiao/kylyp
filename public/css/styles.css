@@ -166,7 +166,7 @@ nav .options {
 
 main {
     flex: 1;  /* 1 代表盡可能最大，會自動填滿除了 header footer 以外的空間 */
-    margin: 0 11% 22px 11%;
+    margin: 0 10% 22px 10%;
 } 
 #content {
     margin-top: 16px;
@@ -182,7 +182,7 @@ main {
 article {
     border-bottom: 1px solid #d8d8d8;
     padding: 10px 15px 15px 15px;
-    margin: 0 0 1px 0;
+    margin: 0 10px 1px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
@@ -225,32 +225,32 @@ article #top button {
 #theme {
     border-bottom: 1px solid #d8d8d8;
     padding: 10px 15px 15px 15px;
-    margin: 0 0 14px 0;
+    margin: 0 10px 14px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 
+#comment {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 15px 15px 15px;
+    margin: 0 10px 14px 0;
+    background-color: #ffffff;
+    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
 #reply {
     border-bottom: 1px solid #d8d8d8;
     padding: 10px 15px 15px 15px;
-    margin: 0 0 14px 0;
+    margin: 0 10px 14px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
-#answer {
-    border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 0 14px 0;
-    background-color: #ffffff;
-    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
-}
-#answer button {
+#reply button {
     width:55px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
 }
-#answer textarea {
+#reply textarea {
     width:100%; 
     height: 133px;
 }
@@ -270,7 +270,7 @@ article #top button {
 #aside {
         background-color: #ffffff;
         padding: 15px 15px 15px 15px;
-        margin: 0 0 15px 15px;
+        margin-bottom: 15px;
         text-align: center;
         font-size: 15px;
         box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

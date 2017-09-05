@@ -1,8 +1,8 @@
-use utils::schema::{list,reply};
+use utils::schema::{article,comment};
 use utils::schema::users;
 
 #[derive(Clone,Debug,Serialize,Identifiable,Queryable)]
-#[has_many(list,reply)]
+#[has_many(article,comment)]
 pub struct User {
     pub id: i32,
     pub username: String,

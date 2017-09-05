@@ -19,15 +19,15 @@ extern crate chrono;
 mod utils;
 
 use rocket_contrib::Template;
-use controller::{home,user,theme};
+use controller::{home,user,article};
 
 
 fn main() {
     rocket::ignite()
-        .mount("/", routes![home::public,home::index_user,home::index,home::add_toptic])
+        .mount("/", routes![home::public,home::index_user,home::index])
         .mount("/user",routes![user::register,user::login_register,user::register_post,
                                user::login_user,user::login,user::login_post,user::user_page,user::user_page_login,user::logout])
-        .mount("/theme",routes![theme::toptic,theme::reply,theme::toptic_no,theme::new])
+        .mount("/article",routes![article::article,article::comment,article::article_nouser,article::new,article::add_article])
         .attach(Template::fairing())
         .catch(errors![home::not_found])
         .launch();
