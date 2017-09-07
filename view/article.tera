@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Responsive</title>
+    <title>Rust-Forum</title>
     <meta name="description" content="CSS only mobile first navigation">
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
@@ -12,7 +12,7 @@
     <![endif]-->
  
     <!-- Favicons-->
-    <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+    <link rel="shortcut icon" href="../img/favicon.ico">
 </head>
 <body >
     <div id="all">
@@ -73,27 +73,29 @@
                 <div class="re-desk-75 re-table-100 ">
                     <div id="theme">
                         <div >
-                            <h3> {{ toptic.title }} </h3> 
-                            <span id="one-info">时间:{{ toptic.createtime }}</span>
+                            <h3> {{ article.title }} </h3> 
+                            <span id="one-info">作者:{{ article.username }}</span>
+                            <span id="one-info">分类:{{ article.category }}</span>
+                            <span id="one-info">时间:{{ article.createtime }}</span>
                         </div>
-                        <div>{{ toptic.content }}</div>
+                        <div>{{ article.content }}</div>
                     </div>
                     <div id="comment">
                         <h2>评论</h2>
                         {% for comment in comments %}
                             <div >
                                 <div>
-                                    <td>{{loop.index}}.</td>
-                                    <td>{{ comment.content }}
+                                    <span>{{loop.index}}.</span>
+                                    <span>{{ comment.username }}</span><span>{{ comment.createtime }}</span>
                                 </div>
-                                <span>{{ comment.createtime }}</span>
+                                <div>  {{ comment.content }} </div>
                             </div>
                         {% endfor %}
                     </div>
                     <div id="reply">
                         {% if username %}
                             <textarea class="ans_con" ></textarea><br>
-                            <button type="submit" id="submit" data-pid="{{ toptic.id }}"><span class="tip"> 回复 </span></button>
+                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> 回复 </span></button>
                             <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
                             <script type="text/javascript" >
                             var running = false;
@@ -109,12 +111,12 @@
                                 }
                                 $('.tip').text('数据正在提交中...');
                                 
-                                var pid = $(this).data('pid');
+                                var aid = $(this).data('aid');
 
                                 $.ajax({
                                 async: false,
                                 url : '/article/addcomment',
-                                data : {pid:pid, content:ans_con},
+                                data : {aid:aid, content:ans_con},
                                 dataType : 'json',
                                 type : 'get'
                                 }).done(function(){

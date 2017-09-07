@@ -47,6 +47,7 @@ impl<'a, 'r> FromRequest<'a, 'r> for UserId {
 
 #[derive(FromForm)]
 struct UserRegister {
+    email: String,
     username: String,
     password: String,
     password2: String,
@@ -123,18 +124,15 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
     let post_user = user_form.get();
     use utils::schema::users;
     if &post_user.password == &post_user.password2 {
-        if true {
             let connection = establish_connection();
             let new_user = NewUser {
+                email: &post_user.email,
                 username: &post_user.username,
                 password: &post_user.password,
                 regtime: &Local::now().to_string(),
             };
-            diesel::insert(&new_user).into(users::table).execute(&connection).expect("Error saving new user");
+            diesel::insert(&new_user).into(users::table).execute(&connection).expect("User is  Exist!");
             Ok(Redirect::to("/user/login"))
-        } else {
-                Err("Something Wrong!".to_string())
-        }
     }else {
         Err("password != password2".to_string())
     }

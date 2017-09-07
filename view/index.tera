@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Responsive</title>
+    <title>Rust-Forum</title>
     <meta name="description" content="CSS only mobile first navigation">
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
@@ -12,7 +12,7 @@
     <![endif]-->
  
     <!-- Favicons-->
-    <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+    <link rel="shortcut icon" href="../img/favicon.ico">
 </head>
 <body >
     <div id="all">
@@ -98,7 +98,7 @@
                     <article>
                         <div id="blog">
                             <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                            <span id="info">作者:{{ data.username }}</span>  <span id="info">时间:{{ data.createtime }}</span>
+                            <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
                         </div>
                     </article>
                     {% endfor %}

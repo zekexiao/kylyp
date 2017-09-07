@@ -1,9 +1,19 @@
 <!DOCTYPE html>
- <html>
-   <head>
-     <meta charset="utf-8" />
-     <title>404</title>
-   </head>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rust-Forum</title>
+    <meta name="description" content="CSS only mobile first navigation">
+    <meta name="author" content="Ian Yates">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+ 
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+</head>
    <body>
      <h1>404: Hey! There's nothing here.</h1>
      The page at {{ path }} does not exist!

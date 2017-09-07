@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Responsive</title>
+    <title>Rust-Forum</title>
     <meta name="description" content="CSS only mobile first navigation">
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
@@ -12,7 +12,7 @@
     <![endif]-->
  
     <!-- Favicons-->
-    <!-- <link rel="shortcut icon" href="img/favicon.ico"> -->
+    <link rel="shortcut icon" href="../img/favicon.ico">
 </head>
 <body >
     <div id="all">
@@ -80,7 +80,7 @@
                             <form action="/user/login" method="post" accept-charset="utf-8">
                             <div id="login">
                                 {% if errmsg %} <p class="tip">*{{ errmsg }}</p> {% endif %}
-                                <h4>用户名：<input name="username" required="required" type="text"></h4><br>
+                                <h4>名字：&emsp;<input name="username" required="required" type="text"></h4><br>
                                 <h4>密码：&emsp;<input name="password" required="required" type="password" minlength=3></h4>
                             </div><br>
 			                <button type="submit" > 登录 </button>

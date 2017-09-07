@@ -2,14 +2,13 @@ use rocket_contrib::Template;
 use std::collections::HashMap;
 use rocket::request::Form;
 use controller::user::{UserId,UserOr};
-use model::article::{Article,Comment,NewArticle,NewComment};
-use handler::content::{ get_article_by_id,get_comment_by_pid,add_comment_by_pid};
-use handler::content::{Uarticle,article_list,add_article_by_uid};
+use handler::content::{ get_article_by_aid,get_comment_by_aid,add_comment_by_aid};
+use handler::content::{ Ucomment,Uarticle,article_list,add_article_by_uid};
 
 #[derive(Debug,Serialize)]
 struct TemplateContext {
-    toptic: Article,
-    comments: Vec<Comment>,
+    article: Uarticle,
+    comments: Vec<Ucomment>,
     username: String,
 }
 
@@ -26,28 +25,28 @@ pub struct DataArticle {
 
 #[derive(FromForm,Debug)]
 pub struct DataComment {
-    pub pid: Option<i32>,
+    pub aid: Option<i32>,
     pub content: String,
 }
 
-#[get("/<pid>", rank = 2)]
-pub fn article_nouser( pid: i32) -> Template {
-    let toptic_data = get_article_by_id(pid );
-    let comment_data = get_comment_by_pid(pid);
+#[get("/<aid>", rank = 2)]
+pub fn article_nouser( aid: i32) -> Template {
+    let article_data = get_article_by_aid(aid );
+    let comment_data = get_comment_by_aid(aid);
     let context = TemplateContext {
-        toptic: toptic_data,
+        article: article_data,
         comments: comment_data,
         username: "".to_string(),
     };
     Template::render("article", &context)
 }
 
-#[get("/<pid>")]
-pub fn article(user: UserOr, pid: i32) -> Template {
-    let toptic_data = get_article_by_id(pid );
-    let comment_data = get_comment_by_pid(pid);
+#[get("/<aid>")]
+pub fn article(user: UserOr, aid: i32) -> Template {
+    let article_data = get_article_by_aid(aid );
+    let comment_data = get_comment_by_aid(aid);
     let context = TemplateContext {
-        toptic: toptic_data,
+        article: article_data,
         comments: comment_data,
         username: user.0,
     };
@@ -55,12 +54,12 @@ pub fn article(user: UserOr, pid: i32) -> Template {
 }
 
 #[get("/addcomment?<data_comment>")]
-pub fn comment(user: UserOr,  user_id: UserId, data_comment: DataComment)  {
+pub fn comment(user: UserOr, user_id: UserId, data_comment: DataComment)  {
     let uid = user_id.0;
-    if let Some(pid) = data_comment.pid {
-        let use_pid = pid;
+    if let Some(aid) = data_comment.aid {
+        let use_aid = aid;
         let use_content = data_comment.content;
-        add_comment_by_pid(use_pid, uid, &use_content);
+        add_comment_by_aid(use_aid, uid, &use_content);
     } else {
         "Something Wrong!".to_string();
     }

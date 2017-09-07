@@ -25,7 +25,7 @@ pub struct NewArticle<'a> {
 #[belongs_to(User)]
 pub struct Comment {
     pub id: i32,
-    pub pid: i32,
+    pub aid: i32,
     pub uid: i32,
     pub content: String,
     pub createtime: String,
@@ -34,7 +34,7 @@ pub struct Comment {
 #[derive(Insertable)]
 #[table_name="comment"]
 pub struct NewComment<'a> {
-    pub pid: i32,
+    pub aid: i32,
     pub uid: i32,
     pub content: &'a str,
     pub createtime: &'a str,
