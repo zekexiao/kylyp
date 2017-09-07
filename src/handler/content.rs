@@ -10,7 +10,7 @@ use chrono::prelude::*;
 pub struct Uarticle {
     pub id: i32,
     pub uid: i32,
-    pub category: i32,
+    pub category: String,
     pub status: i32,
     pub comments_count: i32,
     pub title: String,
@@ -58,7 +58,7 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
     let mut article_result = Uarticle {
             id: 0,
             uid: 0,
-            category: 0,
+            category: "".to_string(),
             status: 0,
             comments_count: 0,
             title: "".to_string(),
@@ -102,15 +102,18 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
     
 }
 
-pub fn add_article_by_uid<'a>(uid: i32, title: &'a str, content: &'a str) {
+pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, content: &'a str) {
     use utils::schema::article;
     let connection = establish_connection();
     let createtime = &Local::now().to_string();
+    let updatetime = &Local::now().to_string();
     let new_article = NewArticle {
         uid : uid,
+        category: category,
         title : title,
         content : content,
         createtime : createtime,
+        updatetime : updatetime,
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }
@@ -120,10 +123,14 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
     let connection = establish_connection();
     let createtime = &Local::now().to_string();
     let new_comment = NewComment {
-        aid: aid,
+        aid : aid,
         uid : uid,
         content : content,
         createtime : createtime,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
+}
+
+pub fn get_user_info() {
+
 }

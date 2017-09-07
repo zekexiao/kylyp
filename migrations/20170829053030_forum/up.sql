@@ -16,22 +16,22 @@ SELECT setval('users_id_seq', 2, true);
 CREATE TABLE  article (
   id SERIAL NOT NULL PRIMARY KEY,
   uid integer NOT NULL,
-  category integer NOT NULL DEFAULT '0',
+  category varchar NOT NULL,
   status integer NOT NULL DEFAULT '0',
   comments_count integer NOT NULL DEFAULT '0',
   title varchar NOT NULL,
   content text NOT NULL,
   createtime varchar NOT NULL,
-  updatetime varchar NOT NULL
+  updatetime varchar NOT NULL 
 );
 
 INSERT INTO article (id, uid, category, status, comments_count, title, content, createtime, updatetime) VALUES
-(1, 1, 0, 0, 0, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-24 23:41:45.672805609 +08:00', '2017-07-23 23:41:45.672805609 +08:00'),
-(2, 2, 1, 0, 0, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
-(3, 2, 1, 0, 0, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
-(4, 1, 2, 0, 0, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-24 23:41:45.672805609 +08:00', '2017-07-23 23:41:45.672805609 +08:00'),
-(5, 2, 0, 0, 0, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
-(6, 2, 1, 0, 0, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00');
+(1, 1, '话题', 0, 0, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-24 23:41:45.672805609 +08:00', '2017-07-23 23:41:45.672805609 +08:00'),
+(2, 2, '文章', 0, 0, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
+(3, 2, '问答', 0, 0, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
+(4, 1, '分享', 0, 0, 'Rust文章', 'generic 可用在 struct, fn,  method,  Bound, trait.\r\n定义封装的模块；\r\n定义新模块对其他模块的依赖；\r\n可对其他模块的引入支持；\r\n那么就需要一套规范准则来定义这些能力', '2017-07-24 23:41:45.672805609 +08:00', '2017-07-23 23:41:45.672805609 +08:00'),
+(5, 2, '分享', 0, 0, 'Rust范型','Rust是一个多范式 (multi-paradigm) 的编译型语言。', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00'),
+(6, 2, '话题', 0, 0, 'Rust函数','Rust 还支持高阶函数 (high order function)，允许把闭包作为参数来生成新的函数', '2017-07-23 23:41:45.672805609 +08:00', '2017-07-24 23:41:45.672805609 +08:00');
 SELECT setval('article_id_seq', 6, true);
 
 

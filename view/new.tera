@@ -79,18 +79,17 @@
                         <form id="form" method="post" action="/article/addarticle" accept-charset="utf-8">
                             <div id="topic-group">
                                     <span id="category">
-                                        <select id="category-control">
-                                            <option value="0">选择类别</option>
-                                            <option value="1">话题</option>
-                                            <option value="2">文章</option>
-                                            <option value="3">求助</option>
-                                            <option value="4">未评论</option>
-                                            <option value="5">招聘</option>
+                                        <select name="category" id="category-control">
+                                            <option value="选择类别">选择类别</option>
+                                            <option value="话题">话题</option>
+                                            <option value="分享">分享</option>
+                                            <option value="文章">文章</option>
+                                            <option value="问答">问答</option>
+                                            <option value="招聘">招聘</option>
                                         </select>
                                     </span>&emsp;
-
                                     <span id="title">
-                                        <input type="text"  placeholder="请输入标题">
+                                        <input type="text" name="title" placeholder="请输入标题">
                                     </span>
                             </div>    
                             <div id="new">

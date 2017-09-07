@@ -74,9 +74,10 @@
                     <article class="one">
                         <div id="top">
                             <div id="title">
-                                <span><a href="">话题 &emsp;</a><span>
+                                <span><a href="">全部 &emsp;</a><span>
+                                <span><a href="">分享 &emsp;</a><span>
                                 <span><a href="">文章 &emsp;</a><span> 
-                                <span><a href="">求助 &emsp;</a><span> 
+                                <span><a href="">问答 &emsp;</a><span> 
                                 <span><a href="">未评论 &emsp;</a><span>
                                 <span><a href="">招聘</a><span>
                             </div>
@@ -88,7 +89,7 @@
                                 <a href=""><h3>Rust new Forum in rust!</h3></a> 
                                 <p>Look, my liege! Shut up! But you are dressed as one&hellip;</p>
                             </div>
-                            <div id="topic">
+                            <div id="topic" class="last">
                                 <a href=""><h3>Rust new Forum in rust!</h3></a>
                                 <p>Look, my liege! Shut up! But you are dressed as one&hellip;</p>
                             </div>

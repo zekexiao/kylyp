@@ -19,6 +19,7 @@ struct TemplateArticle {
 }
 #[derive(FromForm,Debug)]
 pub struct DataArticle {
+    pub category: String,
     pub title: String,
     pub content: String,
 }
@@ -76,9 +77,10 @@ pub fn new(user: UserOr) -> Template {
 fn add_article(user: UserOr, user_id: UserId, data_article: Form<DataArticle>)  -> Template {
     let data = data_article.get();
     let uid = user_id.0;
+    let category = &data.category;
     let title = &data.title;
     let content = &data.content;
-    add_article_by_uid(uid, &title,&content);
+    add_article_by_uid(uid, &category, &title,&content);
     let datas = article_list();
     let context = TemplateArticle {
         datas: datas,

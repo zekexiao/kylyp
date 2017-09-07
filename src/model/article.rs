@@ -6,9 +6,11 @@ use utils::schema::{article,comment};
 pub struct Article {
     pub id: i32,
     pub uid: i32,
+    pub category: String,
     pub title: String,
     pub content: String,
     pub createtime: String,
+    pub updatetime: String,
 }
 
 
@@ -16,9 +18,11 @@ pub struct Article {
 #[table_name="article"]
 pub struct NewArticle<'a> {
     pub uid: i32,
+    pub category: &'a str,
     pub title: &'a str,
     pub content: &'a str,
     pub createtime: &'a str,
+    pub updatetime: &'a str,
 }
 
 #[derive(Clone,Debug,Serialize,Queryable,  Associations)]

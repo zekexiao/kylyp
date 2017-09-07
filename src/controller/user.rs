@@ -65,7 +65,6 @@ pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
     if let Some(ref msg) = flash {
         context.insert("flash", msg.msg().to_string());
     }
-    // println!("=====name login =========",);
     Template::render("login", &context)
 }
 
@@ -75,11 +74,12 @@ pub fn user_page_login(name: &RawStr,user: UserOr) -> Template {
     let mut context = HashMap::new();
     context.insert("username", user.0);
     // println!("=====login   user=========",);
+    
     Template::render("user", &context)
     }else{
         let mut context = HashMap::new();
-        context.insert("title", "Forum".to_string());
-        Template::render("login", &context)
+        context.insert("该用户不存在".to_string());
+        Template::render("user", &context)
     }
 }
 
