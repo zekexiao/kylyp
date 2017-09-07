@@ -95,7 +95,7 @@
                     <div id="reply">
                         {% if username %}
                             <textarea class="ans_con" ></textarea><br>
-                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> 回复 </span></button>
+                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> 评论 </span></button>
                             <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
                             <script type="text/javascript" >
                             var running = false;
@@ -127,7 +127,7 @@
                             })
                             </script>
                         {% else %}
-                            <span style="background-color:aqua">请登录后回复.<a href="/user/login">登录</a></span>
+                            <span style="background-color:aqua">请登录后评论.<a href="/user/login">登录</a></span>
                         {% endif %}
                     </div>
                 </div>

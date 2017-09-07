@@ -71,53 +71,42 @@
         <main id="main">
             <div id="content" >
                 <div class="re-desk-75 re-table-100 ">
-                    <div>
+                <div id="top">
+                    <div id="new-theme">
                         <h4>新主题</h4>
-                        <div id="new">
-                            <input id="toptics"> &emsp; <input id="title">
-                            <textarea class="ans_con" ></textarea><br>
-                            <button type="submit" id="submit"><span class="tip"> 回复 </span></button>
-                            <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
-                            <script type="text/javascript" >
-                            var running = false;
-                            $('#submit').on('click', function(){
-                                if(running) return;
-                                running = true;
-                                $('.tip').text('');
-
-                                var ans_con = $('.ans_con').val();
-                                if(!ans_con){
-                                $('.tip').text('*输入不能为空');
-                                return;
-                                }
-                                $('.tip').text('数据正在提交中...');
-                                    
-                                var pid = $(this).data('pid');
-                                $.ajax({
-                                async: false,
-                                url : '/article/addarticle',
-                                data : {pid:pid, content:ans_con},
-                                dataType : 'json',
-                                type : 'get'
-                                }).done(function(){
-                                    
-                                running = false;
-                                })
-                                window.location.reload ( true );  
-                            })
-                            </script>
-                        </div>
                     </div>
+                    <div >
+                        <form id="form" method="post" action="/article/addarticle" accept-charset="utf-8">
+                            <div id="topic-group">
+                                    <span id="category">
+                                        <select id="category-control">
+                                            <option value="0">选择类别</option>
+                                            <option value="1">话题</option>
+                                            <option value="2">文章</option>
+                                            <option value="3">求助</option>
+                                            <option value="4">未评论</option>
+                                            <option value="5">招聘</option>
+                                        </select>
+                                    </span>&emsp;
+
+                                    <span id="title">
+                                        <input type="text"  placeholder="请输入标题">
+                                    </span>
+                            </div>    
+                            <div id="new">
+                                <textarea name="content" data-provide="markdown" rows="20"></textarea>
+                            </div>
+                            <div class="form-group hidden text-danger" id="error">
+                            </div>
+                            <div id="new">
+                                <button type="submit" id="submit"><span class="tip"> 发表 </span></button>
+                            </div>
+                        </form>
+                    </div>                                         
+                </div>
                 </div>
 
 
-                <div class="re-desk-25 re-table-100">
-                    <div id="aside">
-                        <div id="new_blog">
-                            <a href="" class="button">新主题</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="re-desk-25 re-table-100">
                     <div id="aside">
                         <h3>What</h3>

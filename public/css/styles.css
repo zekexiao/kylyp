@@ -166,7 +166,7 @@ nav .options {
 
 main {
     flex: 1;  /* 1 代表盡可能最大，會自動填滿除了 header footer 以外的空間 */
-    margin: 0 10% 22px 10%;
+    margin: 0 9% 22px 9%;
 } 
 #content {
     margin-top: 16px;
@@ -178,6 +178,7 @@ main {
 }
 [class*="re-"] {
     float: left;
+    width: 100%;
 }
 article {
     border-bottom: 1px solid #d8d8d8;
@@ -188,13 +189,12 @@ article {
 }
 
 article #top #title {
-    margin: -9px -15px 0 -15px;
-    height: 44px;
+    margin: -9px -25px 0 -15px;
     background-color: #feefff;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 article #top #title a {
-    margin: 12px 0 0 8px;
+    margin: 10px 0 5px 8px;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
@@ -256,21 +256,56 @@ article #top button {
 }
 
 /*--------------------------------- new ------------------------------- */
-#new input {
-   
+#top {
+    background-color: #ffffff;
+    margin: 0 10px 10px 0;
+    padding: 0 0 10px 0;
 }
-#new textarea {
+#new-theme {
+    padding: 12px 0 10px 1px;
+    margin-right: -0.01px;
+    background-color: #feefff;
+    box-shadow: 0 0 1px rgba(0,0,0,0.22), 0 1px 1px rgba(0,0,0,0.22);
+}
+form #topic-group {
+   margin: 11px 0 11px 0;
+}
+form #topic-group #category #category-control {
+    line-height:30px;
+    border :1px solid #CAC1C1; /*Chrome和Firefox里面的边框是不一样的，所以复写了一下*/
+    border: solid 1px #CAC1C1;
+    /*很关键：将默认的select选择框样式清除*/
+    appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding: 0 14px 0 6px;
+}
+form #topic-group input {
+    width: 78%;
+    height: 30px;
+}
+form #new textarea {
     width:100%; 
-    height: 133px;
+    height: 333px;
 }
-
-
-
+form #new button {
+    width:55px; 
+    line-height:30px;
+    background-color:aqua;
+    border :1px solid #eeeeee;
+}
+/*--------------------------------- user ------------------------------- */
+#top #new-theme #persion-more {
+    display: inline-block;
+}
 
 #aside {
         background-color: #ffffff;
         padding: 15px 15px 15px 15px;
-        margin-bottom: 15px;
+        margin: 0 10px 15px 0;
         text-align: center;
         font-size: 15px;
         box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
@@ -293,11 +328,10 @@ article #top button {
 
 /*----------Media Query 多屏幕时 小屏幕放前面-----------  */
 
-@media only screen and (min-width: 550px) {
-    /* For tablets: */
+/* @media only screen and (min-width: 550px) {
     .re-table-100 {width: 100%;}
 
-} 
+}  */
 
 
 /*-------------------------------------Desktop------------------------  */

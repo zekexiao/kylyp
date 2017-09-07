@@ -71,20 +71,33 @@
         <main id="main">
             <div id="content" >
                 <div class="re-desk-75 re-table-100 ">
-                    <div id="theme">
-                        <div >
-                            <h3> {{ username }} </h3> 
-                            <p>welcome!!!</p>
+                    <div id="top">
+                            <div id="new-theme">
+                                <h4> 个人中心 </h4> 
+                            </div>
+                            <div id="persion">
+                                <span id="persion-info">个人图像</span><span id="persion-info">{{ username }}</span>
+                                <div id="persion-info">
+                                    <p>email:</p>
+                                    <p>注册时间:</p>
+                                    <p>话题数，评论数</p>
+                                </div>
+                            </div>
+                    </div>
+                    <div id="top">
+                        <div id="new-theme">
+                            <div id="persion-more"><h4>我的话题</h4></div>&emsp;
+                            <div id="persion-more"><h4>我的评论</h4></div>&emsp;
+                            <div id="persion-more"><h4>我的消息</h4></div>
                         </div>
                     </div>
-                    
                 </div>
 
 
                 <div class="re-desk-25 re-table-100">
                     <div id="aside">
                         <div id="new_theme">
-                            <a href="/theme/new" class="button">新主题</a>
+                            <a href="/article/new" class="button">新主题</a>
                         </div>
                     </div>
                 </div>
