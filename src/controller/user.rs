@@ -78,7 +78,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr) -> Template {
     Template::render("user", &context)
     }else{
         let mut context = HashMap::new();
-        context.insert("该用户不存在".to_string());
+        context.insert("flash","该用户不存在".to_string());
         Template::render("user", &context)
     }
 }
