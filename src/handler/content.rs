@@ -157,13 +157,10 @@ pub fn get_user_info(user_id: &UserId) -> Option<User> {
     login_user
 }
 
-pub fn get_user_articles(user_id: &UserId) -> Result<Vec<Article>,()> {
-    use utils::schema::article::dsl::*;
-    let connection = establish_connection();
-    let u_id = user_id.0;
-    let articles = article.filter(&uid.eq(&u_id)).load::<Article>(&connection);
-    match articles {
-        Ok(user_articles) => user_articles,
-        Err(e) => (),
-    }
-}
+// pub fn get_user_articles(user_id: &UserId)  {
+//     use utils::schema::article::dsl::*;
+//     let connection = establish_connection();
+//     let u_id = user_id.0;
+//     let articles = article.filter(&uid.eq(&u_id)).load::<Article>(&connection);
+    
+// }

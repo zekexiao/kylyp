@@ -12,7 +12,7 @@ use rocket::http::RawStr;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
-use handler::content::{UserArticles,get_user_info,get_user_articles};
+use handler::content::{UserArticles,get_user_info};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -63,7 +63,6 @@ struct UserLogin {
 #[derive(Serialize)]
 struct UserInfo {
     login_user: Option<User>,
-    user_articles: Vec<Article>,
     username: String,
 }
 
@@ -80,14 +79,13 @@ pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
 pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<FlashMessage>) -> Template {
     if name == &user.0 {
         let this_user = get_user_info(&user_id);
-        get_user_articles(&user_id);
-        let mut context = HashMap::new();
-        context.insert("flash", "".to_string());
-        // let context = UserInfo {
-        //     login_user: this_user,
-        //     user_articles: articles,
-        //     username: user.0,
-        // };
+        //get_user_articles(&user_id);
+        // let mut context = HashMap::new();
+        // context.insert("flash", "".to_string());
+        let context = UserInfo {
+            login_user: this_user,
+            username: user.0,
+        };
         Template::render("user", &context)
     }else{
         let mut context = HashMap::new();
@@ -104,7 +102,6 @@ pub fn register(flash: Option<FlashMessage>) -> Template {
     if let Some(ref msg) = flash {
         context.insert("flash", msg.msg().to_string());
     }
-    // println!("=====register =========",);
     Template::render("register", &context)
 }
 
@@ -112,7 +109,6 @@ pub fn register(flash: Option<FlashMessage>) -> Template {
 pub fn login_register(user: UserOr) -> Template {
     let mut context = HashMap::new();
     context.insert("username", user.0);
-    // println!("=====login   register=========",);
     Template::render("index", &context)
 }
 
