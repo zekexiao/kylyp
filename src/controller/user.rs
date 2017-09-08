@@ -200,6 +200,7 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
 #[get("/logout")]
 pub fn logout(mut cookies: Cookies) -> Flash<Redirect> {
     cookies.remove_private(Cookie::named("username"));
+    cookies.remove_private(Cookie::named("user_id"));
     Flash::success(Redirect::to("/user/login"), "Successfully logged out.")
 }
 

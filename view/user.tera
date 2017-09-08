@@ -136,78 +136,21 @@
             </div>
         </main>
     
-        <span id="nav_left">
+         <span id="nav_left">
                 <li class="menu-item"><a>文档</a></li>
                 <li class="menu-item"><a>新闻</a></li>
         </span>
+        {% if username %}
         <span id="primary_nav">
                 <ul id="dmenu">
-                    <span id="dleft">
-                        <li class="menu-item"><a>通知</a>
-                            <ul class="submenu">
-                                <li class="submenu-item"> <a class="subs" >Web Design</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li  class="submenu-item"> <a class="subs" >Web Development<span>More</span></a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Web Hosting</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a>消息</a>
-                            <ul class="submenu">
-                                <li class="submenu-item"> <a class="subs" >Our Company</a>
-                                <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Our Team</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Our Reach</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                            </ul>
-                        </li>
-                    </span>
                     <span id="dright">
-                        <li class="menu-item"><a>中心</a></li>
+                        <li class="menu-item"><a href="/article/new">新主题</a></li>
                     </span>
                 </ul>
         </span>
-        {% if username %}
         <span id="nav_right">
-            <input type="checkbox" name="item" id="item1" />   
-            <label for="item1"> {{ username }} <span class="icon-arrow"></span></label>
-            <ul class="options">
-                <li><a href="#"> 个人中心</a></li>
-                <li><a href="#"> 设置</a></li>
-                <li><a href="#"> 退出</a></li>
-            </ul>
+                <li ><a href="/user/{{ username }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/logou">退出</a></li>
         </span>
         {% else %}
         <span id="nav_right">
