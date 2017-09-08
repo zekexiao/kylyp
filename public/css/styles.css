@@ -261,7 +261,7 @@ article #top button {
     padding: 0 0 10px 0;
 }
 #new-theme {
-    padding: 12px 0 10px 1px;
+    padding: 12px 0 10px 10px;
     margin-right: -0.01px;
     background-color: #feefff;
     box-shadow: 0 0 1px rgba(0,0,0,0.22), 0 1px 1px rgba(0,0,0,0.22);
@@ -297,7 +297,10 @@ form #new button {
     border :1px solid #eeeeee;
 }
 /*--------------------------------- user ------------------------------- */
-#top #new-theme #persion-more {
+#top #person {
+    margin: 11px;
+}
+#top #new-theme #person-more {
     display: inline-block;
 }
 
@@ -307,7 +310,7 @@ form #new button {
         margin: 0 10px 15px 0;
         text-align: center;
         font-size: 15px;
-        box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.12);
 } 
 #aside #new_theme {
     font-weight: bold;
@@ -344,7 +347,7 @@ form #new button {
         display: block; 
         position: fixed;
         height: auto;
-        left: 148px;
+        left: 122px;
         line-height: 50px;
         font-weight: 700;
         background-color:#feefff;

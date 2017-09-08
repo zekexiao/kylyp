@@ -1,8 +1,10 @@
 use diesel;
 use diesel::prelude::*;
-use model::article::{NewArticle, NewComment};
+use model::article::{Article,Comment,NewArticle,NewComment};
+use model::user::User;
 use model::pg::get_conn;
 use model::db::establish_connection;
+use controller::user::UserId;
 use chrono::prelude::*;
 use easy::string::Htmlentities;
 
@@ -38,6 +40,14 @@ pub struct Ucomment {
     pub content: String,
     pub createtime: String,
     pub username: String,
+}
+#[derive(Debug,Serialize)]
+pub struct UserArticles<'a> {
+    pub username: &'a str,
+    pub title: &'a str,
+    pub category: &'a str,
+    pub createtime: &'a str,
+    pub comments_count: i32,
 }
 
 pub fn article_list() -> Vec<Uarticle> {
@@ -148,4 +158,26 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
 }
 
-pub fn get_user_info() {}
+pub fn get_user_info(user_id: &UserId) -> Option<User> {
+    use utils::schema::users::dsl::*;
+    // use utils::schema::{users,article,comment,message};
+    let connection = establish_connection();
+    let uid = user_id.0;
+    let user_result =  users.filter(&id.eq(&uid)).load::<User>(&connection);
+    let login_user = match user_result {
+        Ok(user_s) => match user_s.first() {
+            Some(a_user) => Some(a_user.clone()),
+            None => None,
+        },
+        Err(_) => None,
+    };
+    login_user
+}
+
+// pub fn get_user_articles(user_id: &UserId)  {
+//     use utils::schema::article::dsl::*;
+//     let connection = establish_connection();
+//     let u_id = user_id.0;
+//     let articles = article.filter(&uid.eq(&u_id)).load::<Article>(&connection);
+    
+// }

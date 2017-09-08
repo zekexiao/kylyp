@@ -75,32 +75,25 @@
                             <div id="new-theme">
                                 <h4> 个人中心 </h4> 
                             </div>
-                            <div id="persion">
-                                <span id="persion-info">个人图像</span><span id="persion-info">{{ username }}</span>
-                                <div id="persion-info">
-                                    <p>email:</p>
-                                    <p>注册时间:</p>
+                            <div id="person">
+                                <span id="person-info">个人图像</span><span id="person-info">{{ username }}</span>
+                                <div id="person-info">
+                                    <p>email:{{ login_user.email }}</p>
+                                    <p>注册时间:{{ login_user.regtime }}</p>
                                     <p>话题数，评论数</p>
                                 </div>
                             </div>
                     </div>
                     <div id="top">
                         <div id="new-theme">
-                            <div id="persion-more"><h4>我的话题</h4></div>&emsp;
-                            <div id="persion-more"><h4>我的评论</h4></div>&emsp;
-                            <div id="persion-more"><h4>我的消息</h4></div>
+                            <div id="person-more"><h4>我的话题</h4></div>&emsp;
+                            <div id="person-more"><h4>我的评论</h4></div>&emsp;
+                            <div id="person-more"><h4>我的消息</h4></div>
                         </div>
                     </div>
-                </div>
+                </div> 
 
 
-                <div class="re-desk-25 re-table-100">
-                    <div id="aside">
-                        <div id="new_theme">
-                            <a href="/article/new" class="button">新主题</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="re-desk-25 re-table-100">
                     <div id="aside">
                         <h3>What</h3>
@@ -136,78 +129,21 @@
             </div>
         </main>
     
-        <span id="nav_left">
+         <span id="nav_left">
                 <li class="menu-item"><a>文档</a></li>
                 <li class="menu-item"><a>新闻</a></li>
         </span>
+        {% if username %}
         <span id="primary_nav">
                 <ul id="dmenu">
-                    <span id="dleft">
-                        <li class="menu-item"><a>通知</a>
-                            <ul class="submenu">
-                                <li class="submenu-item"> <a class="subs" >Web Design</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li  class="submenu-item"> <a class="subs" >Web Development<span>More</span></a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Web Hosting</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#">Design<span>More</span></a></li>
-                                        <li > <a href="#">Development<span>More</span></a></li>
-                                        <li > <a href="#">Hosting</a></li>
-                                    </ul> 
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item"><a>消息</a>
-                            <ul class="submenu">
-                                <li class="submenu-item"> <a class="subs" >Our Company</a>
-                                <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Our Team</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                                <li class="submenu-item"> <a class="subs" >Our Reach</a>
-                                    <ul id="subitem" >
-                                        <li > <a href="#" >Design<span>More</span></a></li>
-                                        <li > <a href="#" >Development<span>More</span></a></li>
-                                        <li > <a href="#" >Hosting</a></li>
-                                    </ul> 
-                                </li>
-                            </ul>
-                        </li>
-                    </span>
                     <span id="dright">
-                        <li class="menu-item"><a>中心</a></li>
+                        <li class="menu-item"><a href="/article/new">新主题</a></li>
                     </span>
                 </ul>
         </span>
-        {% if username %}
         <span id="nav_right">
-            <input type="checkbox" name="item" id="item1" />   
-            <label for="item1"> {{ username }} <span class="icon-arrow"></span></label>
-            <ul class="options">
-                <li><a href="#"> 个人中心</a></li>
-                <li><a href="#"> 设置</a></li>
-                <li><a href="#"> 退出</a></li>
-            </ul>
+                <li ><a href="/user/{{ username }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/logou">退出</a></li>
         </span>
         {% else %}
         <span id="nav_right">
