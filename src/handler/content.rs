@@ -108,12 +108,12 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
     let createtime = &Local::now().to_string();
     let updatetime = &Local::now().to_string();
     let new_article = NewArticle {
-        uid : uid,
-        category: category,
-        title : title,
-        content : content,
-        createtime : createtime,
-        updatetime : updatetime,
+        uid,
+        category,
+        title,
+        content,
+        createtime,
+        updatetime,
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }
@@ -123,10 +123,10 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
     let connection = establish_connection();
     let createtime = &Local::now().to_string();
     let new_comment = NewComment {
-        aid : aid,
-        uid : uid,
-        content : content,
-        createtime : createtime,
+        aid,
+        uid,
+        content,
+        createtime,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
 }
