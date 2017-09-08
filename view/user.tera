@@ -91,16 +91,9 @@
                             <div id="person-more"><h4>我的消息</h4></div>
                         </div>
                     </div>
-                   
+                </div> 
 
 
-                <div class="re-desk-25 re-table-100">
-                    <div id="aside">
-                        <div id="new_theme">
-                            <a href="/article/new" class="button">新主题</a>
-                        </div>
-                    </div>
-                </div>
                 <div class="re-desk-25 re-table-100">
                     <div id="aside">
                         <h3>What</h3>

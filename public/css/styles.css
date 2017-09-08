@@ -310,7 +310,7 @@ form #new button {
         margin: 0 10px 15px 0;
         text-align: center;
         font-size: 15px;
-        box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.12);
 } 
 #aside #new_theme {
     font-weight: bold;
