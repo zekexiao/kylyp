@@ -92,7 +92,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
     }else{
         let mut context = HashMap::new();
         if let Some(ref msg) = flash {
-            context.insert("flash", msg.msg().to_string());
+            context.insert("flash","该用户不存在".to_string());
         }
         Template::render("login", &context)
     }
