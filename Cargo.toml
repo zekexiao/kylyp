@@ -15,3 +15,4 @@ diesel_codegen = { version = "^0.16.0", features = ["postgres"] }
 postgres = "^0.14.0"
 dotenv = "^0.10.0"
 chrono = { version = "0.4", features = ["serde"] }
+easy={git="https://github.com/uncode/easy.git"}

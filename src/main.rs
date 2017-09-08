@@ -16,6 +16,7 @@ extern crate rocket_contrib;
 extern crate serde_json;
 extern crate dotenv;
 extern crate chrono;
+extern crate easy;
 
 #[macro_use]
 mod controller;
@@ -27,7 +28,6 @@ mod utils;
 
 use rocket_contrib::Template;
 use controller::{home, user, article};
-
 
 fn main() {
     rocket::ignite()
