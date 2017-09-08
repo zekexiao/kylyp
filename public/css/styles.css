@@ -261,7 +261,7 @@ article #top button {
     padding: 0 0 10px 0;
 }
 #new-theme {
-    padding: 12px 0 10px 1px;
+    padding: 12px 0 10px 10px;
     margin-right: -0.01px;
     background-color: #feefff;
     box-shadow: 0 0 1px rgba(0,0,0,0.22), 0 1px 1px rgba(0,0,0,0.22);
@@ -297,7 +297,10 @@ form #new button {
     border :1px solid #eeeeee;
 }
 /*--------------------------------- user ------------------------------- */
-#top #new-theme #persion-more {
+#top #person {
+    margin: 11px;
+}
+#top #new-theme #person-more {
     display: inline-block;
 }
 

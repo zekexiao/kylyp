@@ -6,11 +6,13 @@ use rocket::response::{Redirect,Flash};
 use model::db::establish_connection;
 use model::pg::get_conn;
 use model::user::{User,NewUser};
+use model::article::{Article,Comment};
 use rocket::http::{Cookie, Cookies};
 use rocket::http::RawStr;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
+use handler::content::{UserArticles,get_user_info,get_user_articles};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -58,6 +60,12 @@ struct UserLogin {
     username: String,
     password: String,
 }
+#[derive(Serialize)]
+struct UserInfo {
+    login_user: Option<User>,
+    user_articles: Vec<Article>,
+    username: String,
+}
 
 #[get("/<name>",rank = 3)]
 pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
@@ -69,17 +77,24 @@ pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
 }
 
 #[get("/<name>")]
-pub fn user_page_login(name: &RawStr,user: UserOr) -> Template {
+pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<FlashMessage>) -> Template {
     if name == &user.0 {
-    let mut context = HashMap::new();
-    context.insert("username", user.0);
-    // println!("=====login   user=========",);
-    
-    Template::render("user", &context)
+        let this_user = get_user_info(&user_id);
+        get_user_articles(&user_id);
+        let mut context = HashMap::new();
+        context.insert("flash", "".to_string());
+        // let context = UserInfo {
+        //     login_user: this_user,
+        //     user_articles: articles,
+        //     username: user.0,
+        // };
+        Template::render("user", &context)
     }else{
         let mut context = HashMap::new();
-        context.insert("该用户不存在".to_string());
-        Template::render("user", &context)
+        if let Some(ref msg) = flash {
+            context.insert("flash", msg.msg().to_string());
+        }
+        Template::render("login", &context)
     }
 }
 
@@ -168,9 +183,9 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
 //     let login_user = match user_result {
 //         Ok(user_s) => match user_s.first() {
 //             Some(a_user) => Some(a_user.clone()),
-//             None => None
+//             None => None,
 //         },
-//         Err(_) => None
+//         Err(_) => None,
 //     };
 //     match login_user {
 //         Some(login_user) => {

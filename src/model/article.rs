@@ -7,6 +7,8 @@ pub struct Article {
     pub id: i32,
     pub uid: i32,
     pub category: String,
+    pub status: i32,
+    pub comments_count: i32,
     pub title: String,
     pub content: String,
     pub createtime: String,
