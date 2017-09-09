@@ -10,6 +10,7 @@ use handler::content::{Uarticle,article_list};
 struct TemplateContext {
     datas: Vec<Uarticle>,
     username: String,
+    user_id: i32,
 }
 
 #[get("/",rank = 2)]
@@ -18,16 +19,18 @@ pub fn index() -> Template {
     let context = TemplateContext {
         datas: datas,
         username: "".to_string(),
+        user_id: 0,
     };
     Template::render("index", &context)
 }
 
 #[get("/")]
-pub fn index_user(user: UserOr) -> Template {
+pub fn index_user(user: UserOr, user_id: UserId) -> Template {
     let datas = article_list();
     let context = TemplateContext {
         datas: datas,
         username: user.0,
+        user_id: user_id.0,
     };
     Template::render("index", &context)
 }

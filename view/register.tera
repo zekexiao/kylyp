@@ -121,26 +121,11 @@
                 <li class="menu-item"><a>文档</a></li>
                 <li class="menu-item"><a>新闻</a></li>
         </span>
-        <span id="primary_nav">
-                <ul id="dmenu">
-                </ul>
-        </span>
-        {% if username %}
-        <span id="nav_right">
-            <input type="checkbox" name="item" id="item1" />   
-            <label for="item1"> {{ username }} <span class="icon-arrow"></span></label>
-            <ul class="options">
-                <li><a href="#"> 个人中心</a></li>
-                <li><a href="#"> 设置</a></li>
-                <li><a href="#"> 退出</a></li>
-            </ul>
-        </span>
-        {% else %}
+       
         <span id="nav_right">
                 <li ><a href="/user/register">注册 &emsp;</a></li>
                 <li ><a href="/user/login">登录</a></li>
         </span>
-        {% endif %}
     </div>
     <script src="../js/nav.js"></script>
 </body>

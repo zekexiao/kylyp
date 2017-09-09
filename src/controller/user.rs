@@ -12,7 +12,7 @@ use rocket::http::RawStr;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
-use handler::content::{UserArticles,get_user_info};
+use handler::content::{UserComment,get_user_info,get_user_articles,get_user_comments};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -63,7 +63,10 @@ struct UserLogin {
 #[derive(Serialize)]
 struct UserInfo {
     login_user: Option<User>,
+    user_articles: Vec<Article>,
+    user_comments: Vec<UserComment>,
     username: String,
+    user_id: i32,
 }
 
 #[get("/<name>",rank = 3)]
@@ -77,14 +80,16 @@ pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
 
 #[get("/<name>")]
 pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<FlashMessage>) -> Template {
-    if name == &user.0 {
+    if name == &user_id.0.to_string() {
         let this_user = get_user_info(&user_id);
-        //get_user_articles(&user_id);
-        // let mut context = HashMap::new();
-        // context.insert("flash", "".to_string());
+        let articles = get_user_articles(&user_id);
+        let comments = get_user_comments(&user_id);
         let context = UserInfo {
             login_user: this_user,
+            user_articles: articles,
+            user_comments: comments,
             username: user.0,
+            user_id: user_id.0,
         };
         Template::render("user", &context)
     }else{
