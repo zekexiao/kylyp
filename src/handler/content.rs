@@ -6,8 +6,9 @@ use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserId;
 use chrono::prelude::*;
-use regex::Regex;
-
+use regex::{Regex,Captures};
+use config::*;
+use CFG_DEFAULT;
 
 #[derive(Debug,Serialize)]
 pub struct Uarticle {
@@ -57,12 +58,33 @@ pub struct UserComment {
 //     pub comment_content: String,
 //     pub comment_createtime: String,
 // }
+
+#[derive(Debug, Deserialize)]
+struct Setting {
+    development: Development,
+}
+#[derive(Debug, Deserialize)]
+struct Development {
+    address: Option<String>,
+    port: Option<String>,
+}
 struct CommentId{
-        id: i32,
-    }
+    id: i32,
+}
 struct ToUid{
-        id: i32,
+    id: i32,
+}
+
+impl Setting {
+    pub fn new(& mut self) -> Result<Self, ConfigError> {
+        let mut cfg = Config::new();
+        cfg.merge(File::with_name(CFG_DEFAULT))?;
+        self.development.address = cfg.get("development.address").ok();
+        self.development.port = cfg.get("development.port").ok();
+        cfg.try_into()
     }
+}
+
 
 pub fn article_list() -> Vec<Uarticle> {
     let conn = get_conn();
@@ -151,11 +173,45 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }
+        
+pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
+    let env = Development {
+        address: Some("".to_string()),
+        port: Some("".to_string()),
+    };
+    let mut path =  Setting { development: env};
+    let f_path = Setting::new(& mut path).unwrap();
+    let mut forum_path = "".to_string();
+    {
+        if let Some(address) = f_path.development.address { 
+            forum_path =  address;
+        };
+    }
+    let mut app_path = "http://".to_string() + &forum_path + &":".to_string();
+    {
+        if let Some(port) = f_path.development.port { 
+            app_path +=  &port;
+        };
+    }
 
-pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
     let conn = get_conn();
     use utils::schema::comment;
     let connection = establish_connection();
+    // let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
+    // let mut to_uids: Vec<u64> = Vec::new();
+    // let new_content = re.replace_all(&content, |cap: &Captures| {
+    //     match get_uids(cap.at(1).unwrap()) {
+    //         Some(user_id) => {
+    //             to_uids.push(user_id);
+    //             format!("[@{}]({}{}{})",
+    //                     cap.at(1).unwrap(),
+    //                     app_path,
+    //                     "/user/",
+    //                     user_id)
+    //         },
+    //         None => format!("@{}", cap.at(1).unwrap()),
+    //     }
+    // });
     let createtime = &Local::now().to_string();
     let new_comment = NewComment {
         aid : aid,
@@ -164,6 +220,7 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
         createtime : createtime,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
+    
     let mut comment_id: i32 = 0;
     for row in &conn.query("SELECT comment.id FROM comment WHERE comment.content = $1",&[&content]).unwrap() {
         let comment = CommentId {
@@ -171,17 +228,36 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
         };
         comment_id = comment.id;
     }
-    let mut to_uid: i32 = 0;
+    let mut author_id: i32 = 0;
     for row in &conn.query("SELECT article.uid FROM article WHERE article.id = $1",&[&aid]).unwrap() {
         let t_uid = ToUid {
             id: row.get(0),
         };
-        to_uid = t_uid.id;
+        author_id = t_uid.id;
     }
-    if uid != to_uid {
+    if uid != author_id {
         conn.execute("INSERT INTO message (aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                 &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
+                 &[&aid, &comment_id, &uid, &author_id, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
     }
+    // to_uids.sort();
+    // to_uids.dedup();
+    // for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
+    //     conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+    //             &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
+    // }
+}
+
+pub fn get_uids(username: &str) -> i32 {
+
+    let conn = get_conn();
+    let mut to_uid: i32 = 0;
+    for row in &conn.query("SELECT id from user where username = $1",&[&username]).unwrap() {
+        let uid = ToUid {
+            id: row.get(0),
+        };
+        to_uid = uid.id;
+    }
+    to_uid
 }
 
     //println!("-------------------{:?}-----------------------",comment_id);

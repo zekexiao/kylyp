@@ -16,3 +16,4 @@ postgres = "^0.14.0"
 dotenv = "^0.10.0"
 regex = "^0.2.0"
 chrono = { version = "0.4", features = ["serde"] }
+config = "^0.7.0"
