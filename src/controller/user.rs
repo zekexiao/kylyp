@@ -12,7 +12,7 @@ use rocket::http::RawStr;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
-use handler::content::{UserComment,get_user_info,get_user_articles,get_user_comments};
+use handler::content::{UserComment,UserMessage,get_user_info,get_user_articles,get_user_comments,get_user_messages};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -65,6 +65,7 @@ struct UserInfo {
     login_user: Option<User>,
     user_articles: Vec<Article>,
     user_comments: Vec<UserComment>,
+    user_messages: Vec<UserMessage>,
     username: String,
     user_id: i32,
 }
@@ -84,10 +85,12 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
         let this_user = get_user_info(&user_id);
         let articles = get_user_articles(&user_id);
         let comments = get_user_comments(&user_id);
+        let messages = get_user_messages(&user_id);
         let context = UserInfo {
             login_user: this_user,
             user_articles: articles,
             user_comments: comments,
+            user_messages: messages,
             username: user.0,
             user_id: user_id.0,
         };
@@ -123,7 +126,6 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
     if let Some(ref msg) = flash {
         context.insert("flash", msg.msg().to_string());
     }
-    // println!("=====login =========",);
     Template::render("login", &context)
 }
 
@@ -131,7 +133,6 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
 pub fn login_user(user: UserOr) -> Template {
     let mut context = HashMap::new();
     context.insert("username", user.0);
-    // println!("=====login   user=========",);
     Template::render("index", &context)
 }
 

@@ -49,15 +49,17 @@ pub struct UserComment {
     pub comment_content: String,
     pub comment_createtime: String,
 }
-// #[derive(Debug,Serialize)]
-// pub struct UserMessage {
-//     pub article_title: String,
-//     pub id: i32,
-//     pub aid: i32,
-//     pub cid: i32,
-//     pub comment_content: String,
-//     pub comment_createtime: String,
-// }
+#[derive(Debug,Serialize)]
+pub struct UserMessage {
+    pub message_status: i32,
+    pub message_createtime: String,
+    pub comment_content: String,
+    pub from_uid: i32,
+    pub from_uid_name: String,
+    pub from_uid_email: String,
+    pub article_id: i32,
+    pub article_title: String,
+}
 
 #[derive(Debug, Deserialize)]
 struct Setting {
@@ -323,28 +325,28 @@ pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
     user_comments
 }
 
-// pub fn get_user_message(user_id: &UserId)  {
-//     let conn = get_conn();
-//     let u_id = user_id.0;
-//     let mut user_comments: Vec<UserComment> = vec![];
-//     for row in &conn.query("SELECT comment.*, article.* FROM comment, article where comment.aid = article.id and comment.uid = $1 order by comment.id ",&[&u_id]).unwrap() {
-//         let comment = UserComment {
-//             id: row.get(5),
-//             uid: row.get(6),
-//             category: row.get(7),
-//             status: row.get(8),
-//             comments_count: row.get(9),
-//             title: row.get(10),
-//             content: row.get(11),
-//             createtime: row.get(12),
-//             updatetime: row.get(13),
-//             comment_id: row.get(0),
-//             comment_aid: row.get(1),
-//             comment_uid: row.get(2),
-//             comment_content: row.get(3),
-//             comment_createtime: row.get(4),
-//         };
-//         user_comments.push(comment);
-//     }
-//     user_comments
-// }
+pub fn get_user_messages(user_id: &UserId) -> Vec<UserMessage> {
+    let conn = get_conn();
+    let u_id = user_id.0;
+    let mut user_messages: Vec<UserMessage> = vec![];
+    for row in &conn.query("SELECT m.status, m.createtime, c.content, u.id as user_id, u.username,
+         u.email, a.id as article_id, a.title as article_title 
+         from message as m join users as u on m.from_uid = u.id 
+         join article as a on a.id=m.aid 
+         join comment as c on c.id=m.cid 
+         where to_uid= $1 order by createtime desc;",&[&u_id]).unwrap() {
+        let message = UserMessage {
+            message_status: row.get(0),
+            message_createtime: row.get(1),
+            comment_content: row.get(2),
+            from_uid: row.get(3),
+            from_uid_name: row.get(4),
+            from_uid_email: row.get(5),
+            article_id: row.get(6),
+            article_title: row.get(7),
+        };
+        user_messages.push(message);
+    }
+    user_messages
+}
+

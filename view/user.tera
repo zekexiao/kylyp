@@ -111,7 +111,16 @@
                             </article>
                             {% endfor %}
                         </div>
-                        
+                        <div >
+                            {% for message in user_messages %}
+                            <article>
+                                <div id="blog">
+                                    <div><span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span><span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> &emsp; <span id="info">{{ message.message_createtime }}</span>></div>
+                                    <span id="info">{{ message.comment_content }}</span>
+                                </div>
+                            </article>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div> 
 
