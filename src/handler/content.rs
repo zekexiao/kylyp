@@ -197,26 +197,26 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
     let conn = get_conn();
     use utils::schema::comment;
     let connection = establish_connection();
-    // let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
-    // let mut to_uids: Vec<u64> = Vec::new();
-    // let new_content = re.replace_all(&content, |cap: &Captures| {
-    //     match get_uids(cap.at(1).unwrap()) {
-    //         Some(user_id) => {
-    //             to_uids.push(user_id);
-    //             format!("[@{}]({}{}{})",
-    //                     cap.at(1).unwrap(),
-    //                     app_path,
-    //                     "/user/",
-    //                     user_id)
-    //         },
-    //         None => format!("@{}", cap.at(1).unwrap()),
-    //     }
-    // });
+    let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
+    let mut to_uids: Vec<i32> = Vec::new();
+    let new_content = re.replace_all(&content, |cap: &Captures| {
+        match get_uids(cap.at(1).unwrap()) {
+            Some(user_id) => {
+                to_uids.push(user_id);
+                format!("[@{}]({}{}{})",
+                        cap.at(1).unwrap(),
+                        app_path,
+                        "/user/",
+                        user_id)
+            },
+            None => format!("@{}", cap.at(1).unwrap()),
+        }
+    });
     let createtime = &Local::now().to_string();
     let new_comment = NewComment {
         aid : aid,
         uid : uid,
-        content : content,
+        content : &new_content,
         createtime : createtime,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
@@ -239,45 +239,26 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
         conn.execute("INSERT INTO message (aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                  &[&aid, &comment_id, &uid, &author_id, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
     }
-    // to_uids.sort();
-    // to_uids.dedup();
-    // for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
-    //     conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-    //             &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
-    // }
+    to_uids.sort();
+    to_uids.dedup();
+    for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
+        conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
+    }
 }
 
-pub fn get_uids(username: &str) -> i32 {
+pub fn get_uids(username: &str) -> Option<i32> {
 
     let conn = get_conn();
-    let mut to_uid: i32 = 0;
+    let mut to_uid: Option<i32> = Some(0);
     for row in &conn.query("SELECT id from user where username = $1",&[&username]).unwrap() {
         let uid = ToUid {
             id: row.get(0),
         };
-        to_uid = uid.id;
+        to_uid = Some(uid.id);
     }
     to_uid
 }
-
-    //println!("-------------------{:?}-----------------------",comment_id);
-
-// pub fn add_message_to_author() {
-//         use utils::schema::message;
-//         let connection = establish_connection();
-//         let createtime = &Local::now().to_string();
-//         let new_message = NewMessage {
-//             aid : aid,
-//             cid: i32,
-//             from_uid: i32,
-//             to_uid: i32,
-//             content: &'a str,
-//             mode: i32,
-//             status: i32,
-//             createtime: &'a str,
-//         };
-//         diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error adding new message");
-// }
 
 pub fn get_user_info(user_id: &UserId) -> Option<User> {
     use utils::schema::users::dsl::*;
