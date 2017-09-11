@@ -219,7 +219,7 @@ article #top button {
 }
 #reply {
     border-bottom: 1px solid #d8d8d8;
-    padding: 3px 0 3px 0;
+    padding: 6px 0 3px 0;
     margin: 0 10px 4px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
@@ -362,7 +362,7 @@ form #new button {
         display: block; 
         position: fixed;
         height: auto;
-        right: 33px;
+        right: 30px;
         line-height: 50px;
         font-weight: 700;
         /* background-color:#039BE5; */
