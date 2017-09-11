@@ -72,7 +72,7 @@ struct UserInfo {
 
 #[get("/<name>",rank = 3)]
 pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
-   let mut context = HashMap::new();
+    let mut context = HashMap::new();
     if let Some(ref msg) = flash {
         context.insert("flash", msg.msg().to_string());
     }

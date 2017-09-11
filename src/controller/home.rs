@@ -12,6 +12,11 @@ struct TemplateContext {
     username: String,
     user_id: i32,
 }
+#[derive(Serialize)]
+struct TemplateDoc {
+    username: String,
+    user_id: i32,
+}
 
 #[get("/",rank = 2)]
 pub fn index() -> Template {
@@ -35,6 +40,22 @@ pub fn index_user(user: UserOr, user_id: UserId) -> Template {
     Template::render("index", &context)
 }
 
+#[get("/doc",rank = 2)]
+pub fn doc() -> Template {
+    let mut context = HashMap::new();
+    context.insert("No login user", "".to_string());
+    Template::render("doc", &context)
+}
+
+#[get("/doc")]
+pub fn doc_user(user: UserOr, user_id: UserId) -> Template {
+    let datas = article_list();
+    let context = TemplateDoc {
+        username: user.0,
+        user_id: user_id.0,
+    };
+    Template::render("doc", &context)
+}
 
 #[get("/<file..>",rank = 9)]
 pub fn public(file: PathBuf) -> Option<NamedFile> {
