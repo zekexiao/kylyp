@@ -18,6 +18,7 @@ $ cargo run
  
 welcome to contribute !
 
+## <a name="screenshots"> What it looks like </a>
 **Login**
 ![登录注册](https://github.com/mcux/kylyp/blob/master/public/2017-09-06%2001-17-07%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png?raw=true)
 **Home**
