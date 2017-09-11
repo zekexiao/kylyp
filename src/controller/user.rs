@@ -104,7 +104,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
     }
 }
 
-#[get("/register", rank = 2)]
+#[get("/register", rank = 4)]
 pub fn register(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {
@@ -120,7 +120,7 @@ pub fn login_register(user: UserOr) -> Template {
     Template::render("index", &context)
 }
 
-#[get("/login", rank = 2)]
+#[get("/login", rank = 5)]
 pub fn login(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {

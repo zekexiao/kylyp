@@ -232,9 +232,9 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
     }
     let article = get_article_by_aid(aid);
     let new_comments_count = article.comments_count + 1;
-    
-    conn.execute("INSERT INTO article (uid, category, status, comments_count, title, content, createtime, updatetime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                    &[&article.uid, &article.category, &article.status, &new_comments_count , &article.title, &article.content, &article.createtime, &article.updatetime]).unwrap();
+
+    conn.execute("UPDATE article SET uid = $1, category = $2, status = $3, comments_count = $4, title = $5, content = $6, createtime = $7, updatetime = $8",
+                    &[&article.uid, &article.category, &article.status, &new_comments_count, &article.title, &article.content, &article.createtime, &article.updatetime]).unwrap();
     let mut author_id: i32 = 0;
     for row in &conn.query("SELECT article.uid FROM article WHERE article.id = $1",&[&aid]).unwrap() {
         let t_uid = ToUid {

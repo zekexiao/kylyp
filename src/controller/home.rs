@@ -49,7 +49,6 @@ pub fn doc() -> Template {
 
 #[get("/doc")]
 pub fn doc_user(user: UserOr, user_id: UserId) -> Template {
-    let datas = article_list();
     let context = TemplateDoc {
         username: user.0,
         user_id: user_id.0,
