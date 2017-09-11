@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Rust-Forum</title>
+    <meta name="description" content="CSS only mobile first navigation">
+    <meta name="author" content="Ian Yates">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
+    <link rel="stylesheet" href="../css/styles.css">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+ 
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="../img/favicon.ico">
+</head>
+<body >
+    <div id="all">
+        <header >
+                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <label ><a id="menu" href="#" >Menu</a></label>
+        </header>
+        <nav id="mnav" >
+                <ul>
+                    <li >
+                        <a href="/doc">文档</a>
+                    </li>
+                    <li >
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
+                    </li>
+                    <li >
+                        <a href="/bolg/new">新博客</a>
+                    </li>
+                    <li >
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
+                    </li>
+                </ul>
+        </nav>
+        <main id="main">
+            <div id="content" >
+                <div class="re-desk-75 re-table-100 ">
+                    <div id="theme">
+                        <div id="title">
+                            <h3> 文档与资源 for Rust </h3>
+                            <span id="info">Rusters</span>&emsp;
+                            <span id="info">2017-9-11</span>
+                        </div>
+                        <div id="content">
+                            <ul>
+                                <h3 id="rust" style="color:aqua;"><a href="https://www.rust-lang.org/zh-CN/documentation.html">Rust官方文档</a></h3>
+                            </ul>
+                            <ul>
+                                    <ul>
+                                    <li><a href="https://github.com/ctjhoa/rust-learning">rust-learning</a></li>
+
+                                    <li><a href="https://github.com/carols10cents/rustlings">rustlings</a></li>
+
+                                    <li><a href="https://library.oreilly.com/book/0636920040385/programming-rust/toc">programming-rust</a></li>
+
+                                    <li><a href="https://github.com/kud1ing/awesome-rust">awesome-rust</a></li>
+
+                                    <li><a href="http://rosettacode.org/wiki/Category:Rust">Category:Rust</a></li>
+
+                                    <li><a href="https://twitter.com/rustlang">rustlang</a></li>
+
+                                    <li><a href="https://www.reddit.com/r/rust">rust</a></li>
+
+                                    <li><a href="https://play.rust-lang.org/">play.rust</a></li>
+
+                                    <li><a href="http://rustyprogrammers.com/">rustyprogrammers</a></li>
+
+                                    <li><a href="http://doc.crates.io/">crates.io</a></li>
+
+                                    <li><a href="https://chat.rust-china.org/home">chat.rust-china</a></li>
+
+                                    <li><a href="https://github.com/rust-community">rust-community</a></li>
+
+                                    <li><a href="https://rust.zeef.com/harris.brakmic">rust.zeef</a></li>
+
+                                    <li><a href="https://libraries.io/cargo">libraries.io/cargo</a></li>
+
+                                    <li><a href="https://www.libhunt.com/">libhunt</a></li>
+
+                                    <li><a href="https://rust.libhunt.com/">rust.libhunt</a></li>
+
+                                    <li><a href="https://forge.rust-lang.org/">forge.rust</a></li>
+
+                                    <li><a href="https://github.com/contain-rs">contain-rs</a></li>
+
+                                    <li><a href="http://calculist.org/">neon</a></li>
+
+                                    <li><a href="https://github.com/rust-lang-nursery">rust-lang-nursery</a></li>
+
+                                    <li><a href="https://github.com/rust-lang-deprecated">rust-lang-deprecated</a></li>
+
+                                    <li><a href="http://www.rustaceans.org/">rustaceans</a></li>
+
+                                    <li><a href="http://www.ncameron.org/rust.html">ncameron</a></li>
+
+                                    <li><a href="http://devdocs.io/rust/">devdocs</a></li>
+
+                                    <li><a href="http://rustconf.com/">rustconf</a></li>
+
+                                    <li><a href="https://old.etherpad-mozilla.org/rust-whistler15">rust-whistler</a></li>
+
+                                    <li><a href="http://rust-class.org/index.html">rust-class</a></li>
+
+                                    <li><a href="http://www.newrustacean.com/">newrustacean</a></li>
+
+                                    <li><a href="https://public.etherpad-mozilla.org/p/rustup-new-experience">rustup</a></li>
+
+                                    <li><a href="http://killercup.github.io/bitrust/">bitrust</a></li>
+
+                                    <li><a href="http://rusty-dash.com/">rusty-dash</a></li>
+
+                                    <li><a href="https://github.com/cis198-2016s">cis198-2016s</a></li>
+
+                                    <li><a href="https://rust.godbolt.org/">godbolt</a></li>
+
+                                    <h2 style="background-color:aqua;"><strong>DateStrutAndAlgorithm</strong></h2>
+                                    
+                                    <li>
+                                        <ul>
+                                        <li><a href="https://github.com/bluss/petgraph">petgraph</a></li>
+
+                                        <li><a href="https://github.com/kaisellgren/comp_sci.rs">comp_sci</a></li>
+
+                                        <li><a href="https://github.com/skywritergr/Rust-basic-algorithms">Rust-basic-algorithms</a></li>
+
+                                        <li><a href="https://github.com/alexcrichton/rust-compress">rust-compress</a></li>
+
+                                        <li><a href="https://github.com/DaGenix/rust-crypto">rust-crypto</a></li>
+
+                                        <li><a href="https://github.com/critiqjo/binary-tree">binary-tree</a></li>
+
+                                        <li><a href="https://github.com/SunyDays/introduction_to_algorithms_rust">introduction<em>to</em>algorithms</a></li>
+
+                                        <li><a href="https://github.com/bluss/petulant-avenger-graphlibrary">petulant-avenger-graphlibrary</a></li>
+                                        </ul>
+                                    </li>
+                                    </ul>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="re-desk-25 re-table-100">
+                    <div id="aside">
+                        <h3>What</h3>
+                        <p>Chania is a city on the island of Crete.</p>
+                        <h3>Where</h3>
+                        <p>Crete is a Greek island in the Mediterranean Sea.</p>
+                        <h3>How</h3>
+                        <p>You can reach Chania airport from all over Europe.</p>
+                    </div>
+                </div>
+                <footer class="re-desk-25 re-table-100" >
+                    <div id="aside">
+                        <div >
+                            <ul >
+                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
+        </span>
+        {% if username %}
+        <span id="primary_nav">
+                <ul id="dmenu">
+                    <span id="dright">
+                        <li class="menu-item"><a href="/article/new">新主题</a></li>
+                    </span>
+                </ul>
+        </span>
+        <span id="nav_right">
+                <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/logou">退出</a></li>
+        </span>
+        {% else %}
+        <span id="nav_right">
+                <li ><a href="/user/register">注册 &emsp;</a></li>
+                <li ><a href="/user/login">登录</a></li>
+        </span>
+        {% endif %}
+    </div>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

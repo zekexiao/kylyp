@@ -1,6 +1,6 @@
 [package]
 name = "kylyp"
-version = "0.1.0"
+version = "0.6.0"
 authors = ["kriry <krircc@gmail.com>"]
 
 [dependencies]
@@ -14,5 +14,7 @@ diesel = { version = "^0.16.0", features = ["postgres"] }
 diesel_codegen = { version = "^0.16.0", features = ["postgres"] }
 postgres = "^0.14.0"
 dotenv = "^0.10.0"
-chrono = { version = "0.4", features = ["serde"] }
 easy={git="https://github.com/uncode/easy.git"}
+regex = "^0.1.0"
+chrono = { version = "0.4", features = ["serde"] }
+config = "^0.7.0"

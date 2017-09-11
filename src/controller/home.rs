@@ -10,6 +10,12 @@ use handler::content::{Uarticle,article_list};
 struct TemplateContext {
     datas: Vec<Uarticle>,
     username: String,
+    user_id: i32,
+}
+#[derive(Serialize)]
+struct TemplateDoc {
+    username: String,
+    user_id: i32,
 }
 
 #[get("/",rank = 2)]
@@ -18,20 +24,37 @@ pub fn index() -> Template {
     let context = TemplateContext {
         datas: datas,
         username: "".to_string(),
+        user_id: 0,
     };
     Template::render("index", &context)
 }
 
 #[get("/")]
-pub fn index_user(user: UserOr) -> Template {
+pub fn index_user(user: UserOr, user_id: UserId) -> Template {
     let datas = article_list();
     let context = TemplateContext {
         datas: datas,
         username: user.0,
+        user_id: user_id.0,
     };
     Template::render("index", &context)
 }
 
+#[get("/doc",rank = 2)]
+pub fn doc() -> Template {
+    let mut context = HashMap::new();
+    context.insert("No login user", "".to_string());
+    Template::render("doc", &context)
+}
+
+#[get("/doc")]
+pub fn doc_user(user: UserOr, user_id: UserId) -> Template {
+    let context = TemplateDoc {
+        username: user.0,
+        user_id: user_id.0,
+    };
+    Template::render("doc", &context)
+}
 
 #[get("/<file..>",rank = 9)]
 pub fn public(file: PathBuf) -> Option<NamedFile> {

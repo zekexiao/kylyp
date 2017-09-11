@@ -13,6 +13,7 @@
  
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
+    <script src="../js/tabs.js"></script>
 </head>
 <body >
     <div id="all">
@@ -23,48 +24,25 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <input type="checkbox" name="item" id="item1" />   
-                        <label for="item1"> Friends <span>134</span></label>
-                        <ul class="options">
-                            <li><a href="#"> Find New Friends<span>11</span></a></li>
-                            <li><a href="#"> Poke A Friend</a></li>
-                            <li><a href="#"> Incinerate Existing Friends</a></li>
-                        </ul>
+                        <a href="/doc">文档</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item2" />   
-                        <label for="item2"> Videos <span>1,034</span></label>
-                        <ul class="options">
-                            <li><a href="#"> My Videos <span>7</span></a></li>
-                            <li><a href="#"> My Downloaded Videos <span>3</span></a></li>
-                            <li><a href="#"> My Well Dodgy Videos <span>1,024</span></a></li>
-                        </ul>
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item3" />   
-                        <label for="item3"> Galleries <span>4</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> My Deviant Art</a></li>
-                            <li><a href="#" target="_blank"> Latest Dribbble Images</a></li>
-                            <li><a href="#" target="_blank"> Sample Flickr Stream</a></li>
-                            <li><a href="#" target="_blank"> Sample Picasa Stream</a></li>
-                        </ul>
+                        <a href="/bolg/new">新博客</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item4" />   
-                        <label for="item4"> Podcasts <span>1</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> CSS-Tricks</a></li>
-                        </ul>
-                    </li>
-                    <li >
-                        <input type="checkbox" name="item" id="item5" />   
-                        <label for="item5"> Robots <span>3</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> Hal 9000</a></li>
-                            <li><a href="#" target="_blank"> Skynet</a></li>
-                            <li><a href="#" target="_blank"> Johnny 5</a></li>
-                        </ul>
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
                     </li>
                 </ul>
         </nav>
@@ -84,12 +62,38 @@
                                 </div>
                             </div>
                     </div>
-                    <div id="top">
-                        <div id="new-theme">
-                            <div id="person-more"><h4>我的话题</h4></div>&emsp;
-                            <div id="person-more"><h4>我的评论</h4></div>&emsp;
-                            <div id="person-more"><h4>我的消息</h4></div>
-                        </div>
+                    <div id="tab1" class="tab1">
+                        <ul id="menu-title">
+                            <li id="one1" onclick="setTab('one',1)"><h4>我的话题</h4></li>&emsp;
+                            <li id="one2" onclick="setTab('one',2)"><h4>我的评论</h4></li>&emsp;
+                            <li id="one3" onclick="setTab('one',3)"><h4>我的消息</h4></li>
+                        </ul>
+                        <div id="message-content">
+                            <div id="con_one_1" class="tab_content">
+                                {% for article in user_articles %}
+                                    <div id="blog">
+                                        <div><a href="/article/{{ article.id }}"> {{ article.title }} </a></div>
+                                        <span id="info">分类:{{ article.category }}</span><span id="info">作者:{{ login_user.username }}</span> <span id="info">时间:{{ article.createtime }}</span><span id="info">评论数:{{ article.comments_count }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div id="con_one_2" style="display:none;" class="tab_content">
+                                {% for comment_article in user_comments %}
+                                    <div id="blog">
+                                        <div><span><a href="/article/{{ comment_article.id }}"> {{ comment_article.title }} </a></span> &emsp; <span id="info">分类:{{ comment_article.category }}</span><span id="info">{{ comment_article.comment_createtime }}</span><span id="info">评论数:{{ comment_article.comments_count }}</span></div>
+                                        <span id="info">{{ comment_article.comment_content }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div id="con_one_3" style="display:none;" class="tab_content">
+                                {% for message in user_messages %}
+                                    <div id="blog">
+                                        <div><span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span><span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> &emsp; <span id="info">{{ message.message_createtime }}</span>></div>
+                                        <span id="info">{{ message.comment_content }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>    
                     </div>
                 </div> 
 
@@ -129,9 +133,9 @@
             </div>
         </main>
     
-         <span id="nav_left">
-                <li class="menu-item"><a>文档</a></li>
-                <li class="menu-item"><a>新闻</a></li>
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">
@@ -142,7 +146,7 @@
                 </ul>
         </span>
         <span id="nav_right">
-                <li ><a href="/user/{{ username }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
                 <li ><a href="/user/logou">退出</a></li>
         </span>
         {% else %}

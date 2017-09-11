@@ -60,7 +60,6 @@ ol, ul {
 header {
     position: fixed;
     width: 100%;
-    background-color: #fff;
     height: 50px;
     zoom:1;    /* For IE 6/7 (trigger hasLayout) */
     box-shadow: 0 1px 2px #999; 
@@ -72,7 +71,7 @@ h1.logo a {
     font-size: 22px;
     float: left;
     letter-spacing: 0.2em;
-    padding: 13px 0 15px 33px;
+    padding: 13px 0 15px 24px;
 }
  
 header:before,header:after {
@@ -104,65 +103,18 @@ nav {
     display: block;
 	overflow: hidden;
 }
-         
-nav ul li label {
+nav ul li a {
     display:block;
-    padding:12px 25px ;
-	background: #333;
-	color: #fff;
-}
-
-nav ul li input[type='checkbox'] {
-	display: none;
-}
-
-nav ul li input[type='checkbox']:checked ~ .options {
-	height: auto;
-    display:block;
-	min-height:40px;
-	max-height:400px;
-}
-
-nav ul li span {
-    float:right;
-	background:#666; 
-	border:1px solid #3c434c;
-    border-bottom:1px solid #111;
-	font-size:10px;
-	border-radius: 12px;
-	box-shadow: inner 0 0 10px #111;
-}
-
-nav ul ul {
-    background:#555;
-    margin:0; padding:0;
-    border-bottom:1px solid #555;
-}
-
-nav ul ul li a {
-	display:block;
-	padding:12px 25px ;
-	color:#fff;
-	text-decoration:none;
-}
-
-nav ul ul li a:hover {
-	color:#44c6eb;
-}
-
-nav ul ul li {
-	border-bottom:1px solid #333;
-}
-
-
-nav .options {
-	height: 0;
-	display: block;
-	overflow: hidden;
+    background-color: #feefff;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold; 
+    padding:11px 0 11px 0 ;
+    text-align: center;
+    border-bottom: 1px solid #d8d8d8;
 }
 
 /* ------------------------------mobile - main----------------------------- */
-
 
 main {
     flex: 1;  /* 1 代表盡可能最大，會自動填滿除了 header footer 以外的空間 */
@@ -186,6 +138,12 @@ article {
     margin: 0 10px 1px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+}
+#top {
+    background-color: #ffffff;
+    margin: 0 10px 10px 0;
+    padding: 0 0 4px 0;
+    
 }
 article #top #title {
     margin: -9px -22px 0 -11px;
@@ -223,23 +181,46 @@ article #top button {
 
 #theme {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 10px 14px 0;
+    margin: 0 10px 11px 0;
+    background-color: #ffffff;
+}
+#theme #title {
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
+    margin: 10px 0 11px 0;
+    padding: 10px 10px 10px 10px;
+    background-color: #feefff;
+}
+#theme #title #info {
+    display: inline-block;
+    font-size: 13px;
+}
+#theme #content {
+    margin: 11px 10px 11px 10px;
+}
+#comment {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 0 10px 11px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
-
-#comment {
+#comment #title{
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    background-color: #feefff;
+}
+#comment #comment-content {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 10px 14px 0;
-    background-color: #ffffff;
-    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+    padding: 6px 10px 6px 10px;
+}
+#comment #comment-content #info {
+    display: inline-block;
+    font-size: 13px;
 }
 #reply {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 10px 14px 0;
+    padding: 6px 0 3px 0;
+    margin: 0 10px 4px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
@@ -253,13 +234,16 @@ article #top button {
     width:100%; 
     height: 133px;
 }
-
-/*--------------------------------- new ------------------------------- */
-#top {
-    background-color: #ffffff;
-    margin: 0 10px 10px 0;
-    padding: 0 0 10px 0;
+/*--------------------------------- doc ------------------------------- */
+#theme #title button {
+    margin-left: 30px;
+    width:55px; 
+    line-height:30px;
+    background-color:aqua;
+    border :1px solid #eeeeee;
 }
+/*--------------------------------- new ------------------------------- */
+
 #new-theme {
     padding: 12px 0 10px 10px;
     margin-right: -0.01px;
@@ -300,8 +284,33 @@ form #new button {
 #top #person {
     margin: 11px;
 }
-#top #new-theme #person-more {
+#tab1 {
+    margin: 0 10px 10px 0;
+}
+#tab1 #menu-title {
+    padding: 12px 0 10px 10px;
+    margin-bottom: 1px;
+    background-color: #feefff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.22), 0 2px 2px rgba(0,0,0,0.22);
+}
+#tab1 #menu-title li{
     display: inline-block;
+}
+#tab1 #menu-title li.off{
+    background:#FFFFFF;color:#336699;font-weight:bold;
+}
+#message-content {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 11px 11px 11px;
+    margin: 0 0 1px 0;
+    background-color: #ffffff;
+}
+#message-content #blog a {
+    font-weight: bold;
+}
+#message-content #blog #info {
+    display: inline-block;
+    font-size: 13px;
 }
 
 #aside {
@@ -360,7 +369,7 @@ form #new button {
         display: block; 
         position: fixed;
         height: auto;
-        right: 33px;
+        right: 30px;
         line-height: 50px;
         font-weight: 700;
         /* background-color:#039BE5; */

@@ -1,22 +1,15 @@
 use diesel;
 use diesel::prelude::*;
-use model::article::{Article,Comment,NewArticle,NewComment};
-use model::user::User;
+use model::article::{Article,Comment,NewArticle,NewComment,STATUS};
+use model::user::{User,NewMessage,message_mode,message_status};
 use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserId;
 use chrono::prelude::*;
 use easy::string::Htmlentities;
-
-//trait Htmlentities {
-//    fn html_encode(&mut self) -> String;
-//}
-//
-//impl Htmlentities for String {
-//    fn html_encode(&mut self) -> String {
-//        self.replace("\"", "&quot;").replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace(" ", "&nbsp;").replace("¡", "&iexcl;").replace("¢", "&cent;").replace("£", "&pound;").replace("¤", "&curren;").replace("¥", "&yen;").replace("¦", "&brvbar;").replace("§", "&sect;").replace("¨", "&uml;").replace("©", "&copy;").replace("ª", "&ordf;").replace("«", "&laquo;").replace("¬", "&not;").replace("­", "&shy;").replace("®", "&reg;").replace("¯", "&macr;").replace("°", "&deg;").replace("±", "&plusmn;").replace("²", "&sup2;").replace("³", "&sup3;").replace("´", "&acute;").replace("µ", "&micro;").replace("¶", "&para;").replace("·", "&middot;").replace("¸", "&cedil;").replace("¹", "&sup1;").replace("º", "&ordm;").replace("»", "&raquo;").replace("¼", "&frac14;").replace("½", "&frac12;").replace("¾", "&frac34;").replace("¿", "&iquest;").replace("À", "&Agrave;").replace("Á", "&Aacute;").replace("Â", "&Acirc;").replace("Ã", "&Atilde;").replace("Ä", "&Auml;").replace("Å", "&Aring;").replace("Æ", "&AElig;").replace("Ç", "&Ccedil;").replace("È", "&Egrave;").replace("É", "&Eacute;").replace("Ê", "&Ecirc;").replace("Ë", "&Euml;").replace("Ì", "&Igrave;").replace("Í", "&Iacute;").replace("Î", "&Icirc;").replace("Ï", "&Iuml;").replace("Ð", "&ETH;").replace("Ñ", "&Ntilde;").replace("Ò", "&Ograve;").replace("Ó", "&Oacute;").replace("Ô", "&Ocirc;").replace("Õ", "&Otilde;").replace("Ö", "&Ouml;").replace("×", "&times;").replace("Ø", "&Oslash;").replace("Ù", "&Ugrave;").replace("Ú", "&Uacute;").replace("Û", "&Ucirc;").replace("Ü", "&Uuml;").replace("Ý", "&Yacute;").replace("Þ", "&THORN;").replace("ß", "&szlig;").replace("à", "&agrave;").replace("á", "&aacute;").replace("â", "&acirc;").replace("ã", "&atilde;").replace("ä", "&auml;").replace("å", "&aring;").replace("æ", "&aelig;").replace("ç", "&ccedil;").replace("è", "&egrave;").replace("é", "&eacute;").replace("ê", "&ecirc;").replace("ë", "&euml;").replace("ì", "&igrave;").replace("í", "&iacute;").replace("î", "&icirc;").replace("ï", "&iuml;").replace("ð", "&eth;").replace("ñ", "&ntilde;").replace("ò", "&ograve;").replace("ó", "&oacute;").replace("ô", "&ocirc;").replace("õ", "&otilde;").replace("ö", "&ouml;").replace("÷", "&divide;").replace("ø", "&oslash;").replace("ù", "&ugrave;").replace("ú", "&uacute;").replace("û", "&ucirc;").replace("ü", "&uuml;").replace("ý", "&yacute;").replace("þ", "&thorn;").replace("ÿ", "&yuml;").replace("Œ", "&OElig;").replace("œ", "&oelig;").replace("Š", "&Scaron;").replace("š", "&scaron;").replace("Ÿ", "&Yuml;").replace("ƒ", "&fnof;").replace("ˆ", "&circ;").replace("˜", "&tilde;").replace("Α", "&Alpha;").replace("Β", "&Beta;").replace("Γ", "&Gamma;").replace("Δ", "&Delta;").replace("Ε", "&Epsilon;").replace("Ζ", "&Zeta;").replace("Η", "&Eta;").replace("Θ", "&Theta;").replace("Ι", "&Iota;").replace("Κ", "&Kappa;").replace("Λ", "&Lambda;").replace("Μ", "&Mu;").replace("Ν", "&Nu;").replace("Ξ", "&Xi;").replace("Ο", "&Omicron;").replace("Π", "&Pi;").replace("Ρ", "&Rho;").replace("Σ", "&Sigma;").replace("Τ", "&Tau;").replace("Υ", "&Upsilon;").replace("Φ", "&Phi;").replace("Χ", "&Chi;").replace("Ψ", "&Psi;").replace("Ω", "&Omega;").replace("α", "&alpha;").replace("β", "&beta;").replace("γ", "&gamma;").replace("δ", "&delta;").replace("ε", "&epsilon;").replace("ζ", "&zeta;").replace("η", "&eta;").replace("θ", "&theta;").replace("ι", "&iota;").replace("κ", "&kappa;").replace("λ", "&lambda;").replace("μ", "&mu;").replace("ν", "&nu;").replace("ξ", "&xi;").replace("ο", "&omicron;").replace("π", "&pi;").replace("ρ", "&rho;").replace("ς", "&sigmaf;").replace("σ", "&sigma;").replace("τ", "&tau;").replace("υ", "&upsilon;").replace("φ", "&phi;").replace("χ", "&chi;").replace("ψ", "&psi;").replace("ω", "&omega;").replace("ϑ", "&thetasym;").replace("ϒ", "&upsih;").replace("ϖ", "&piv;").replace(" ", "&ensp;").replace(" ", "&emsp;").replace(" ", "&thinsp;").replace("‎", "&lrm;").replace("‏", "&rlm;").replace("–", "&ndash;").replace("—", "&mdash;").replace("‘", "&lsquo;").replace("’", "&rsquo;").replace("‚", "&sbquo;").replace("“", "&ldquo;").replace("”", "&rdquo;").replace("„", "&bdquo;").replace("†", "&dagger;").replace("‡", "&Dagger;").replace("•", "&bull;").replace("…", "&hellip;").replace("‰", "&permil;").replace("′", "&prime;").replace("″", "&Prime;").replace("‹", "&lsaquo;").replace("›", "&rsaquo;").replace("‾", "&oline;").replace("⁄", "&frasl;").replace("€", "&euro;").replace("ℑ", "&image;").replace("℘", "&weierp;").replace("ℜ", "&real;").replace("™", "&trade;").replace("ℵ", "&alefsym;").replace("←", "&larr;").replace("↑", "&uarr;").replace("→", "&rarr;").replace("↓", "&darr;").replace("↔", "&harr;").replace("↵", "&crarr;").replace("⇐", "&lArr;").replace("⇑", "&uArr;").replace("⇒", "&rArr;").replace("⇓", "&dArr;").replace("⇔", "&hArr;").replace("∀", "&forall;").replace("∂", "&part;").replace("∃", "&exist;").replace("∅", "&empty;").replace("∇", "&nabla;").replace("∈", "&isin;").replace("∉", "&notin;").replace("∋", "&ni;").replace("∏", "&prod;").replace("∑", "&sum;").replace("−", "&minus;").replace("∗", "&lowast;").replace("√", "&radic;").replace("∝", "&prop;").replace("∞", "&infin;").replace("∠", "&ang;").replace("∧", "&and;").replace("∨", "&or;").replace("∩", "&cap;").replace("∪", "&cup;").replace("∫", "&int;").replace("∴", "&there4;").replace("∼", "&sim;").replace("≅", "&cong;").replace("≈", "&asymp;").replace("≠", "&ne;").replace("≡", "&equiv;").replace("≤", "&le;").replace("≥", "&ge;").replace("⊂", "&sub;").replace("⊃", "&sup;").replace("⊄", "&nsub;").replace("⊆", "&sube;").replace("⊇", "&supe;").replace("⊕", "&oplus;").replace("⊗", "&otimes;").replace("⊥", "&perp;").replace("⋅", "&sdot;").replace("⌈", "&lceil;").replace("⌉", "&rceil;").replace("⌊", "&lfloor;").replace("⌋", "&rfloor;").replace("〈", "&lang;").replace("〉", "&rang;").replace("◊", "&loz;").replace("♠", "&spades;").replace("♣", "&clubs;").replace("♥", "&hearts;").replace("♦", "&diams;")
-//    }
-//}
+use regex::{Regex,Captures};
+use config::*;
+use CFG_DEFAULT;
 
 #[derive(Debug, Serialize)]
 pub struct Uarticle {
@@ -42,39 +35,85 @@ pub struct Ucomment {
     pub username: String,
 }
 #[derive(Debug,Serialize)]
-pub struct UserArticles<'a> {
-    pub username: &'a str,
-    pub title: &'a str,
-    pub category: &'a str,
-    pub createtime: &'a str,
+pub struct UserComment {
+    pub id: i32,
+    pub uid: i32,
+    pub category: String,
+    pub status: i32,
     pub comments_count: i32,
+    pub title: String,
+    pub content: String,
+    pub createtime: String,
+    pub updatetime: String,
+    pub comment_id: i32,
+    pub comment_aid: i32,
+    pub comment_uid: i32,
+    pub comment_content: String,
+    pub comment_createtime: String,
 }
+#[derive(Debug,Serialize)]
+pub struct UserMessage {
+    pub message_status: i32,
+    pub message_createtime: String,
+    pub comment_content: String,
+    pub from_uid: i32,
+    pub from_uid_name: String,
+    pub from_uid_email: String,
+    pub article_id: i32,
+    pub article_title: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct Setting {
+    development: Development,
+}
+#[derive(Debug, Deserialize)]
+struct Development {
+    address: Option<String>,
+    port: Option<String>,
+}
+struct CommentId{
+    id: i32,
+}
+struct ToUid{
+    id: i32,
+}
+
+impl Setting {
+    pub fn new(& mut self) -> Result<Self, ConfigError> {
+        let mut cfg = Config::new();
+        cfg.merge(File::with_name(CFG_DEFAULT))?;
+        self.development.address = cfg.get("development.address").ok();
+        self.development.port = cfg.get("development.port").ok();
+        cfg.try_into()
+    }
+}
+
 
 pub fn article_list() -> Vec<Uarticle> {
     let conn = get_conn();
     let mut article_result: Vec<Uarticle> = vec![];
-    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id", &[]).unwrap()
-        {
-            let mut result = Uarticle {
-                id: row.get(0),
-                uid: row.get(1),
-                category: row.get(2),
-                status: row.get(3),
-                comments_count: row.get(4),
-                title: row.get(5),
-                content: row.get(6),
-                createtime: row.get(7),
-                updatetime: row.get(8),
-                username: row.get(9),
-            };
-            result.username = result.username.html_entities();
-            result.content = result.content.html_entities();
-            result.title = result.title.html_entities();
-            article_result.push(result);
-        }
+    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id", &[]).unwrap()
+    {
+        let result = Uarticle {
+            id: row.get(0),
+            uid: row.get(1),
+            category: row.get(2),
+            status: row.get(3),
+            comments_count: row.get(4),
+            title: row.get(5),
+            content: row.get(6),
+            createtime: row.get(7),
+            updatetime: row.get(8),
+            username: row.get(9),
+        };
+        result.username = result.username.html_entities();
+        result.content = result.content.html_entities();
+        result.title = result.title.html_entities();
+        article_result.push(result);
+    }
     article_result
 }
-
 
 pub fn get_article_by_aid(aid: i32) -> Uarticle {
     let conn = get_conn();
@@ -144,18 +183,92 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }
+        
+pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
+    let env = Development {
+        address: Some("".to_string()),
+        port: Some("".to_string()),
+    };
+    let mut path =  Setting { development: env};
+    let f_path = Setting::new(& mut path).unwrap();
+    let mut forum_path = "".to_string();
+    {
+        if let Some(address) = f_path.development.address { 
+            forum_path =  address;
+        };
+    }
+    let mut app_path = "http://".to_string() + &forum_path + &":".to_string();
+    {
+        if let Some(port) = f_path.development.port { 
+            app_path +=  &port;
+        };
+    }
 
-pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str) {
+    let conn = get_conn();
     use utils::schema::comment;
     let connection = establish_connection();
+    let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
+    let mut to_uids: Vec<i32> = Vec::new();
+    let new_content = re.replace_all(&content, |cap: &Captures| {
+        match get_uids(cap.at(1).unwrap()) {
+            Some(user_id) => {
+                to_uids.push(user_id);
+                format!("[@{}]({}{}{})",
+                        cap.at(1).unwrap(),
+                        app_path,
+                        "/user/",
+                        user_id)
+            },
+            None => format!("@{}", cap.at(1).unwrap()),
+        }
+    });
     let createtime = &Local::now().to_string();
     let new_comment = NewComment {
-        aid,
-        uid,
-        content,
-        createtime,
+        aid : aid,
+        uid : uid,
+        content : &new_content,
+        createtime : createtime,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
+    
+    let mut comment_id: i32 = 0;
+    for row in &conn.query("SELECT comment.id FROM comment WHERE comment.content = $1",&[&content]).unwrap() {
+        let comment = CommentId {
+            id: row.get(0),
+        };
+        comment_id = comment.id;
+    }
+    conn.execute("UPDATE article SET comments_count = comments_count + 1 where id = $1", &[&aid]).unwrap();
+    let mut author_id: i32 = 0;
+    for row in &conn.query("SELECT article.uid FROM article WHERE article.id = $1",&[&aid]).unwrap() {
+        let t_uid = ToUid {
+            id: row.get(0),
+        };
+        author_id = t_uid.id;
+    }
+    if uid != author_id {
+        conn.execute("INSERT INTO message (aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                 &[&aid, &comment_id, &uid, &author_id, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
+    }
+    to_uids.sort();
+    to_uids.dedup();
+    for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
+        conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, content, mode, status, createtime) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &createtime]).unwrap();
+    }
+}
+
+pub fn get_uids(username: &str) -> Option<i32> {
+
+    let conn = get_conn();
+    let mut to_uid: Option<i32> = Some(0);
+    for row in &conn.query("SELECT id from user where username = $1",&[&username]).unwrap() {
+        let uid = ToUid {
+            id: row.get(0),
+        };
+        to_uid = Some(uid.id);
+    }
+    to_uid
 }
 
 pub fn get_user_info(user_id: &UserId) -> Option<User> {
@@ -174,10 +287,75 @@ pub fn get_user_info(user_id: &UserId) -> Option<User> {
     login_user
 }
 
-// pub fn get_user_articles(user_id: &UserId)  {
-//     use utils::schema::article::dsl::*;
-//     let connection = establish_connection();
-//     let u_id = user_id.0;
-//     let articles = article.filter(&uid.eq(&u_id)).load::<Article>(&connection);
-    
-// }
+pub fn get_user_articles(user_id: &UserId) -> Vec<Article> {
+    let conn = get_conn();
+    let u_id = user_id.0;
+    let mut user_articles: Vec<Article> = vec![];
+    for row in &conn.query("SELECT article.* FROM article WHERE article.uid = $1 ",&[&u_id]).unwrap() {
+        let article = Article {
+            id: row.get(0),
+            uid: row.get(1),
+            category: row.get(2),
+            status: row.get(3),
+            comments_count: row.get(4),
+            title: row.get(5),
+            content: row.get(6),
+            createtime: row.get(7),
+            updatetime: row.get(8),
+        };
+        user_articles.push(article);
+    }
+    user_articles
+}
+
+pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
+    let conn = get_conn();
+    let u_id = user_id.0;
+    let mut user_comments: Vec<UserComment> = vec![];
+    for row in &conn.query("SELECT comment.*, article.* FROM comment, article where comment.aid = article.id and comment.uid = $1 order by comment.id ",&[&u_id]).unwrap() {
+        let comment = UserComment {
+            id: row.get(5),
+            uid: row.get(6),
+            category: row.get(7),
+            status: row.get(8),
+            comments_count: row.get(9),
+            title: row.get(10),
+            content: row.get(11),
+            createtime: row.get(12),
+            updatetime: row.get(13),
+            comment_id: row.get(0),
+            comment_aid: row.get(1),
+            comment_uid: row.get(2),
+            comment_content: row.get(3),
+            comment_createtime: row.get(4),
+        };
+        user_comments.push(comment);
+    }
+    user_comments
+}
+
+pub fn get_user_messages(user_id: &UserId) -> Vec<UserMessage> {
+    let conn = get_conn();
+    let u_id = user_id.0;
+    let mut user_messages: Vec<UserMessage> = vec![];
+    for row in &conn.query("SELECT m.status, m.createtime, c.content, u.id as user_id, u.username,
+         u.email, a.id as article_id, a.title as article_title 
+         from message as m join users as u on m.from_uid = u.id 
+         join article as a on a.id=m.aid 
+         join comment as c on c.id=m.cid 
+         where to_uid= $1 order by createtime desc;",&[&u_id]).unwrap() {
+        let message = UserMessage {
+            message_status: row.get(0),
+            message_createtime: row.get(1),
+            comment_content: row.get(2),
+            from_uid: row.get(3),
+            from_uid_name: row.get(4),
+            from_uid_email: row.get(5),
+            article_id: row.get(6),
+            article_title: row.get(7),
+        };
+        user_messages.push(message);
+    }
+    user_messages
+}
+

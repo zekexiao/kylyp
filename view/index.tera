@@ -23,48 +23,25 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <input type="checkbox" name="item" id="item1" />   
-                        <label for="item1"> Friends <span>134</span></label>
-                        <ul class="options">
-                            <li><a href="#"> Find New Friends<span>11</span></a></li>
-                            <li><a href="#"> Poke A Friend</a></li>
-                            <li><a href="#"> Incinerate Existing Friends</a></li>
-                        </ul>
+                        <a href="/doc">文档</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item2" />   
-                        <label for="item2"> Videos <span>1,034</span></label>
-                        <ul class="options">
-                            <li><a href="#"> My Videos <span>7</span></a></li>
-                            <li><a href="#"> My Downloaded Videos <span>3</span></a></li>
-                            <li><a href="#"> My Well Dodgy Videos <span>1,024</span></a></li>
-                        </ul>
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item3" />   
-                        <label for="item3"> Galleries <span>4</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> My Deviant Art</a></li>
-                            <li><a href="#" target="_blank"> Latest Dribbble Images</a></li>
-                            <li><a href="#" target="_blank"> Sample Flickr Stream</a></li>
-                            <li><a href="#" target="_blank"> Sample Picasa Stream</a></li>
-                        </ul>
+                        <a href="/bolg/new">新博客</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item4" />   
-                        <label for="item4"> Podcasts <span>1</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> CSS-Tricks</a></li>
-                        </ul>
-                    </li>
-                    <li >
-                        <input type="checkbox" name="item" id="item5" />   
-                        <label for="item5"> Robots <span>3</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> Hal 9000</a></li>
-                            <li><a href="#" target="_blank"> Skynet</a></li>
-                            <li><a href="#" target="_blank"> Johnny 5</a></li>
-                        </ul>
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
                     </li>
                 </ul>
         </nav>
@@ -142,8 +119,8 @@
         </main>
     
         <span id="nav_left">
-                <li class="menu-item"><a>文档</a></li>
-                <li class="menu-item"><a>新闻</a></li>
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">
@@ -154,7 +131,7 @@
                 </ul>
         </span>
         <span id="nav_right">
-                <li ><a href="/user/{{ username }}">{{ username }} &emsp;</a></li>
+                <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
                 <li ><a href="/user/logou">退出</a></li>
         </span>
         {% else %}

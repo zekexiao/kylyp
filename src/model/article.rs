@@ -45,3 +45,8 @@ pub struct NewComment<'a> {
     pub content: &'a str,
     pub createtime: &'a str,
 }
+
+pub mod STATUS {
+    pub const NORMAL: i32 = 0;
+    pub const DELETED: i32 = -1;
+}
