@@ -70,15 +70,6 @@ struct UserInfo {
     user_id: i32,
 }
 
-#[get("/<name>",rank = 3)]
-pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
-    let mut context = HashMap::new();
-    if let Some(ref msg) = flash {
-        context.insert("flash", msg.msg().to_string());
-    }
-    Template::render("login", &context)
-}
-
 #[get("/<name>")]
 pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<FlashMessage>) -> Template {
     if name == &user_id.0.to_string() {
@@ -104,7 +95,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
     }
 }
 
-#[get("/register", rank = 4)]
+#[get("/register", rank = 2)]
 pub fn register(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {
@@ -120,7 +111,7 @@ pub fn login_register(user: UserOr) -> Template {
     Template::render("index", &context)
 }
 
-#[get("/login", rank = 5)]
+#[get("/login", rank = 2)]
 pub fn login(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {

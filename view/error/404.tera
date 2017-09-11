@@ -14,8 +14,85 @@
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
 </head>
-   <body>
-     <h1>404: Hey! There's nothing here.</h1>
-     The page at {{ path }} does not exist!
-   </body>
- </html>
+<body >
+    <div id="all">
+        <header >
+                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <label ><a id="menu" href="#" >Menu</a></label>
+        </header>
+        <nav id="mnav" >
+                <ul>
+                    <li >
+                        <a href="/doc">文档</a>
+                    </li>
+                    <li >
+                        <a href="/news">新闻</a>
+                    <li >
+                        <a href="/article/new">新主题</a>
+                    </li>
+                    <li >
+                        <a href="/bolg/new">新博客</a>
+                    </li>
+                    <li >
+                    {% if username %}
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">退出</a>
+                        </div>
+                    {% else %}
+                        <a href="/user/login">登录与注册</a>
+                    {% endif %}
+                    </li>
+                </ul>
+        </nav>
+        <main id="main">
+            <div id="content" >
+                <div class="re-desk-75 re-table-100 ">
+                    <article >
+                        <div id="top">
+                            <h3>
+                                <h3>注意!</h3> &emsp;404: Hey! There's nothing here. you must login first or the page at {{ path }} does not exist!
+                            </h3>
+                        </div>
+                    </article>
+                </div>
+
+
+                <footer class="re-desk-25 re-table-100" >
+                    <div id="aside">
+                        <div >
+                            <ul >
+                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">文档</a></li>
+                <li class="menu-item"><a href="/news">新闻</a></li>
+        </span>
+        
+        <span id="nav_right">
+                <li ><a href="/user/register">注册 &emsp;</a></li>
+                <li ><a href="/user/login">登录</a></li>
+        </span>
+    </div>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

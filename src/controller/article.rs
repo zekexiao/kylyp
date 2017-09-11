@@ -32,7 +32,7 @@ pub struct DataComment {
     pub content: String,
 }
 
-#[get("/<aid>", rank = 6)]
+#[get("/<aid>", rank = 2)]
 pub fn article_nouser( aid: i32) -> Template {
     let article_data = get_article_by_aid(aid );
     let comment_data = get_comment_by_aid(aid);
