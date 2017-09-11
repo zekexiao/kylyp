@@ -17,6 +17,7 @@ struct TemplateContext {
 struct TemplateArticle {
     datas: Vec<Uarticle>,
     username: String,
+    user_id: i32,
 }
 #[derive(FromForm,Debug)]
 pub struct DataArticle {
@@ -84,11 +85,12 @@ fn add_article(user: UserOr, user_id: UserId, data_article: Form<DataArticle>)  
     let category = &data.category;
     let title = &data.title;
     let content = &data.content;
-    add_article_by_uid(uid, &category, &title,&content);
+    add_article_by_uid(uid, &category, &title, &content);
     let datas = article_list();
     let context = TemplateArticle {
         datas: datas,
         username: user.0,
+        user_id: user_id.0,
     };
     Template::render("index", &context)
 }
