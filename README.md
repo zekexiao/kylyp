@@ -1,4 +1,4 @@
-# kylyp (rust-web QQ群:661633549)
+# kylyp (rust-web qq群:661633549)
 
 A new Forum !
 
@@ -13,7 +13,7 @@ $ diesel migration run
 $ cargo run
 ```
 ### 项目进展与计划
-
+[Releases.md](https://github.com/mcux/kylyp/blob/master/Releases.md)
 
 ### Contribute
  

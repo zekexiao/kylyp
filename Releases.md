@@ -1,4 +1,4 @@
-## Releases :  **0.6**
+## Releases :  **0.6** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-11
 
 ### 项目进度：
 - 完成基本功能包括：
