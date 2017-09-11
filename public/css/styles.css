@@ -143,19 +143,23 @@ article {
     background-color: #ffffff;
     margin: 0 10px 10px 0;
     padding: 0 0 4px 0;
-    
 }
 article #top #title {
     margin: -9px -22px 0 -11px;
     background-color: #feefff;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-article #top #title a {
+article #top #title li {
+    display: inline-block;
     margin: 10px 0 8px 8px;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
 }
+article #top #title li.off {
+    background:#FFFFFF;color:#336699;font-weight:bold;
+}
+
 article #top #topic {
     margin: 15px 0 0 0 ;
     border-bottom:1px solid #eeeeee;
