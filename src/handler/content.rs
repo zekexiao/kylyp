@@ -230,6 +230,12 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
         };
         comment_id = comment.id;
     }
+    let article = get_article_by_aid(aid);
+    println!("-----------------------{:?}--------------",article.comments_count);
+    let new_comments_count = article.comments_count + 1;
+    println!("-----------------------{:?}--------------",new_comments_count);
+    conn.execute("INSERT INTO article (uid, category, status, comments_count, title, content, createtime, updatetime) VALUES (&article.uid, &article.category, &article.status, $4, , &article.title, &article.content, &articlecreatetime, &article.updatetime)",
+                    &[&new_comments_count]).unwrap();
     let mut author_id: i32 = 0;
     for row in &conn.query("SELECT article.uid FROM article WHERE article.id = $1",&[&aid]).unwrap() {
         let t_uid = ToUid {
