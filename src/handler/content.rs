@@ -6,11 +6,12 @@ use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserId;
 use chrono::prelude::*;
+use easy::string::Htmlentities;
 use regex::{Regex,Captures};
 use config::*;
 use CFG_DEFAULT;
 
-#[derive(Debug,Serialize)]
+#[derive(Debug, Serialize)]
 pub struct Uarticle {
     pub id: i32,
     pub uid: i32,
@@ -23,7 +24,8 @@ pub struct Uarticle {
     pub updatetime: String,
     pub username: String,
 }
-#[derive(Debug,Serialize)]
+
+#[derive(Debug, Serialize)]
 pub struct Ucomment {
     pub id: i32,
     pub aid: i32,
@@ -93,7 +95,7 @@ pub fn article_list() -> Vec<Uarticle> {
     let mut article_result: Vec<Uarticle> = vec![];
     for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id", &[]).unwrap()
     {
-        let result = Uarticle {
+        let mut result = Uarticle {
             id: row.get(0),
             uid: row.get(1),
             category: row.get(2),
@@ -105,8 +107,10 @@ pub fn article_list() -> Vec<Uarticle> {
             updatetime: row.get(8),
             username: row.get(9),
         };
-            article_result.push(result);
-
+        result.username = result.username.html_entities();
+        result.content = result.content.html_entities();
+        result.title = result.title.html_entities();
+        article_result.push(result);
     }
     article_result
 }
@@ -114,18 +118,18 @@ pub fn article_list() -> Vec<Uarticle> {
 pub fn get_article_by_aid(aid: i32) -> Uarticle {
     let conn = get_conn();
     let mut article_result = Uarticle {
-            id: 0,
-            uid: 0,
-            category: "".to_string(),
-            status: 0,
-            comments_count: 0,
-            title: "".to_string(),
-            content: "".to_string(),
-            createtime: "".to_string(),
-            updatetime: "".to_string(),
-            username: "".to_string(),
+        id: 0,
+        uid: 0,
+        category: "".to_string(),
+        status: 0,
+        comments_count: 0,
+        title: "".to_string(),
+        content: "".to_string(),
+        createtime: "".to_string(),
+        updatetime: "".to_string(),
+        username: "".to_string(),
     };
-    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id and article.id = $1",&[&aid]).unwrap() {
+    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id and article.id = $1", &[&aid]).unwrap() {
         article_result = Uarticle {
             id: row.get(0),
             uid: row.get(1),
@@ -139,14 +143,17 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
             username: row.get(9),
         };
     }
+    article_result.content = article_result.content.html_entities();
+    article_result.title = article_result.title.html_entities();
+    article_result.username = article_result.username.html_entities();
     article_result
 }
 
 pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
     let conn = get_conn();
     let mut result: Vec<Ucomment> = vec![];
-    for row in &conn.query("SELECT comment.*, users.username FROM comment, users WHERE comment.uid = users.id and comment.aid = $1 order by comment.id",&[&aid]).unwrap() {
-        let comment_result = Ucomment {
+    for row in &conn.query("SELECT comment.*, users.username FROM comment, users WHERE comment.uid = users.id and comment.aid = $1 order by comment.id", &[&aid]).unwrap() {
+        let mut comment_result = Ucomment {
             id: row.get(0),
             aid: row.get(1),
             uid: row.get(2),
@@ -154,10 +161,11 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
             createtime: row.get(4),
             username: row.get(5),
         };
+        comment_result.content = comment_result.content.html_entities();
+        comment_result.username = comment_result.username.html_entities();
         result.push(comment_result);
     }
     result
-    
 }
 
 pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, content: &'a str) {
@@ -166,12 +174,12 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
     let createtime = &Local::now().to_string();
     let updatetime = &Local::now().to_string();
     let new_article = NewArticle {
-        uid : uid,
-        category: category,
-        title : title,
-        content : content,
-        createtime : createtime,
-        updatetime : updatetime,
+        uid,
+        category,
+        title,
+        content,
+        createtime,
+        updatetime,
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }

@@ -2,26 +2,34 @@
 #![plugin(rocket_codegen)]
 #![feature(custom_derive)]
 #![feature(custom_attribute)]
-#![recursion_limit="128"]
+#![recursion_limit = "128"]
 
-#[macro_use] extern crate serde_derive;
-#[macro_use] extern crate diesel;
-#[macro_use] extern crate diesel_codegen; 
+#[macro_use]
+extern crate serde_derive;
+#[macro_use]
+extern crate diesel;
+#[macro_use]
+extern crate diesel_codegen;
 extern crate postgres;
 extern crate rocket;
 extern crate rocket_contrib;
 extern crate serde_json;
 extern crate dotenv;
 extern crate chrono;
+extern crate easy;
 extern crate regex;
 extern crate config;
 
-#[macro_use] mod controller;
-#[macro_use] mod handler;
-#[macro_use] mod model;
+#[macro_use]
+mod controller;
+#[macro_use]
+mod handler;
+#[macro_use]
+mod model;
 mod utils;
 
 use rocket_contrib::Template;
+
 use controller::{home,user,article};
 
 const CFG_DEFAULT: &'static str = "Rocket";
