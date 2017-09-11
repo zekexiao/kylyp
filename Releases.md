@@ -1,4 +1,12 @@
-## Releases :  **0.6** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-11
+## Releases :  **0.7.0** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-12
+### 项目进度：
+- 添加Doc导航
+- 优化首页显示
+### 项目计划：
+- 增加博客功能
+- 增加板块类别导航
+
+## Releases :  **0.6.0** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-11
 
 ### 项目进度：
 - 完成基本功能包括：

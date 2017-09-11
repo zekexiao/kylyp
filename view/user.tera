@@ -13,7 +13,7 @@
  
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <script src="../js/tabs.js"></script>
+    <script src="../js/tabs.js" async="async"></script>
 </head>
 <body >
     <div id="all">
@@ -136,6 +136,7 @@
         <span id="nav_left">
                 <li class="menu-item"><a href="/doc">文档</a></li>
                 <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">

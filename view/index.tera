@@ -13,7 +13,7 @@
  
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
-    <script src="../js/tabs-index.js"></script>
+    <script src="../js/tabs-index.js" async="async"></script>
 </head>
 <body >
     <div id="all">
@@ -52,11 +52,11 @@
                     <article class="one">
                         <div id="top" class="tab1">
                             <div id="title">
-                                <li id="one1" onclick="setTab('one',1)">全部 &emsp;</li>
-                                <li id="one2" onclick="setTab('one',2)">分享 &emsp;</li>
-                                <li id="one3" onclick="setTab('one',3)">文章 &emsp;</li> 
-                                <li id="one4" onclick="setTab('one',4)">问答 &emsp;</li>
-                                <li id="one5" onclick="setTab('one',5)">未评论 &emsp;</li>
+                                <li id="one1" onclick="setTab('one',1)">全部</li>&emsp;
+                                <li id="one2" onclick="setTab('one',2)">分享</li>&emsp;
+                                <li id="one3" onclick="setTab('one',3)">文章</li>&emsp; 
+                                <li id="one4" onclick="setTab('one',4)">问答</li>&emsp;
+                                <li id="one5" onclick="setTab('one',5)">未评论</li>&emsp;
                                 <li id="one6" onclick="setTab('one',6)">招聘</li>
                             </div>
                             <div id="topic">
@@ -186,6 +186,7 @@
         <span id="nav_left">
                 <li class="menu-item"><a href="/doc">文档</a></li>
                 <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">

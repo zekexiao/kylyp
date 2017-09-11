@@ -148,6 +148,7 @@
         <span id="nav_left">
                 <li class="menu-item"><a href="/doc">文档</a></li>
                 <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">

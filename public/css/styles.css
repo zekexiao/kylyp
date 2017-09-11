@@ -157,9 +157,9 @@ article #top #title li {
     font-weight: bold;
 }
 article #top #title li.off {
-    background:#FFFFFF;color:#336699;font-weight:bold;
+    background:#F6C6EB;
+    font-weight:bold;
 }
-
 article #top #topic {
     margin: 15px 0 0 0 ;
     border-bottom:1px solid #eeeeee;
@@ -171,7 +171,14 @@ article #blog #info {
     display: inline-block;
     font-size: 13px;
 }
-
+/*--------------------------------- login-register ------------------------------- */
+article #top #user-reg {
+    margin: -9px -22px 0 -11px;
+    padding: 10px 11px 11px 11px;
+    font-weight: bold;
+    background-color: #feefff;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
 article #top #login {
     margin: 30px 0 0 30px;
 }
@@ -268,10 +275,10 @@ form #topic-group #category #category-control {
     /*在选择框的最右侧中间显示小箭头图片*/
     background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-    padding: 0 14px 0 6px;
+    padding: 0 17px 0 9px;
 }
 form #topic-group input {
-    width: 78%;
+    width: 82%;
     height: 30px;
 }
 form #new textarea {

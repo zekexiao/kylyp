@@ -57,7 +57,6 @@
                             <div id="topic-group">
                                     <span id="category">
                                         <select name="category" id="category-control">
-                                            <option value="选择类别">选择类别</option>
                                             <option value="话题">话题</option>
                                             <option value="分享">分享</option>
                                             <option value="文章">文章</option>
@@ -121,6 +120,7 @@
         <span id="nav_left">
                 <li class="menu-item"><a href="/doc">文档</a></li>
                 <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/area">板块</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">
