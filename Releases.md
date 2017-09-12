@@ -1,10 +1,11 @@
 ## Releases :  **0.7.0** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-12
-### 项目进度：
-- 添加Doc导航
-- 优化首页显示
-### 项目计划：
-- 增加博客功能
-- 增加板块类别导航
+### Done：
+- add Doc Nav
+- make index right
+### Plan：
+- add blog module
+- add Area Nav
+- add News Nav
 
 ## Releases :  **0.6.0** &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2017-9-11
 
