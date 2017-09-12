@@ -1,5 +1,6 @@
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
+#![plugin(dotenv_macros)]
 #![feature(custom_derive)]
 #![feature(custom_attribute)]
 #![recursion_limit = "128"]
@@ -14,6 +15,7 @@ extern crate postgres;
 extern crate rocket;
 extern crate rocket_contrib;
 extern crate serde_json;
+#[macro_use]
 extern crate dotenv;
 extern crate chrono;
 extern crate easy;
