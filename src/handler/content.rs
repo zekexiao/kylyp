@@ -93,7 +93,7 @@ impl Setting {
 pub fn article_list() -> Vec<Uarticle> {
     let conn = get_conn();
     let mut article_result: Vec<Uarticle> = vec![];
-    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id", &[]).unwrap()
+    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id desc", &[]).unwrap()
     {
         let mut result = Uarticle {
             id: row.get(0),

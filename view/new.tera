@@ -62,7 +62,7 @@
                                             <option value="文章">文章</option>
                                             <option value="问答">问答</option>
                                             <option value="招聘">招聘</option>
-                                            <option value="招聘">博客</option>
+                                            <option value="博客">博客</option>
                                         </select>
                                     </span>&emsp;
                                     <span id="title">
@@ -75,7 +75,7 @@
                             <div class="form-group hidden text-danger" id="error">
                             </div>
                             <div id="new">
-                                <button type="submit" id="submit"><span class="tip"> 发表 </span></button>
+                                <button type="submit" id="submit"><span class="tip"> 发布 </span></button>
                             </div>
                         </form>
                     </div>                                         
