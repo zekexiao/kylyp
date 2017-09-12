@@ -1,5 +1,6 @@
 # kylyp (rust-web qq群:661633549)
 
+[![Build Status](https://travis-ci.org/ivanceras/kylyp.svg?branch=master)](https://travis-ci.org/ivanceras/kylyp)
 A new Forum !
 
 The project use rust, rocket, diesel, postgresql, and responsive design to build a new Forum.
