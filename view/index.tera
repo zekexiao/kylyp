@@ -93,8 +93,12 @@
                         {% if data.category == "分享" %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                          {% endif %}
@@ -105,8 +109,12 @@
                          {% if data.category == "文章" %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endif %}
@@ -117,8 +125,12 @@
                         {% if data.category == "问答" %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endif %}
@@ -129,8 +141,12 @@
                         {% if data.comments_count == 0 %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endif %}
@@ -141,8 +157,12 @@
                         {% if data.category == "招聘" %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endif %}
@@ -153,8 +173,12 @@
                         {% if data.category == "博客" %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endif %}

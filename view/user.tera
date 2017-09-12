@@ -64,7 +64,7 @@
                     </div>
                     <div id="tab1" class="tab1">
                         <ul id="menu-title">
-                            <li id="one1" onclick="setTab('one',1)"><h4>我的话题</h4></li>&emsp;
+                            <li id="one1" onclick="setTab('one',1)"><h4>我的发布</h4></li>&emsp;
                             <li id="one2" onclick="setTab('one',2)"><h4>我的评论</h4></li>&emsp;
                             <li id="one3" onclick="setTab('one',3)"><h4>我的消息</h4></li>
                         </ul>
