@@ -49,11 +49,11 @@ pub struct NewMessage<'a> {
 }
 
 pub mod message_mode {
-    pub const REPLY_ARTICLE: i32 = 1;       // 文章下面回复
-    pub const MENTION: i32 = 2;             // 在回复中提到某人
+    pub const REPLY_ARTICLE: i32 = 1;       
+    pub const MENTION: i32 = 2;             
 }
 
 pub mod message_status {
-    pub const INIT: i32 = 0;                // 初始
-    pub const READ: i32 = 1;                // 已读
+    pub const INIT: i32 = 0;                
+    pub const READ: i32 = 1;                
 }    

@@ -18,7 +18,6 @@ extern crate serde_json;
 #[macro_use]
 extern crate dotenv;
 extern crate chrono;
-extern crate easy;
 extern crate regex;
 extern crate config;
 

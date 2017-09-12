@@ -90,7 +90,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
     }else{
         let mut context = HashMap::new();
         if let Some(ref msg) = flash {
-            context.insert("flash","该用户不存在".to_string());
+            context.insert("flash","NO this user".to_string());
         }
         Template::render("login", &context)
     }
@@ -120,14 +120,19 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
     }
     Template::render("login", &context)
 }
-
+// ----------------method 1--------------
+// #[get("/login")]
+// pub fn login_user(user: UserOr) -> Template {
+//     let mut context = HashMap::new();
+//     context.insert("username", user.0);
+//     Template::render("index", &context)
+// }
+// ----------------method 2--------------
 #[get("/login")]
-pub fn login_user(user: UserOr) -> Template {
-    let mut context = HashMap::new();
-    context.insert("username", user.0);
-    Template::render("index", &context)
-}
-
+pub fn login_user(user: UserId) -> Redirect {
+    Redirect::to(&*("/user/".to_string() + &*user.0.to_string()))
+  }
+  
 #[post("/register",data = "<user_form>")]
 fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
     let post_user = user_form.get();
@@ -146,7 +151,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
         Err("password != password2".to_string())
     }
 }
-// -------------- 方法一 -------------
+// -------------- method 1-------------
 #[post("/login", data = "<user_form>")]
 fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
     let post_user = user_form.get();
@@ -167,7 +172,7 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
     } 
 }
 
-// -------------- 方法二 -------------
+// -------------- method 2 -------------
 // #[post("/login", data = "<user_form>")]
 // fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
 //     use utils::schema::users::dsl::*;

@@ -6,7 +6,6 @@ use model::pg::get_conn;
 use model::db::establish_connection;
 use controller::user::UserId;
 use chrono::prelude::*;
-use easy::string::Htmlentities;
 use regex::{Regex,Captures};
 use config::*;
 use CFG_DEFAULT;
@@ -96,7 +95,7 @@ pub fn article_list() -> Vec<Uarticle> {
     let mut article_result: Vec<Uarticle> = vec![];
     for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id desc", &[]).unwrap()
     {
-        let mut result = Uarticle {
+        let result = Uarticle {
             id: row.get(0),
             uid: row.get(1),
             category: row.get(2),
@@ -108,9 +107,6 @@ pub fn article_list() -> Vec<Uarticle> {
             updated_at: row.get(8),
             username: row.get(9),
         };
-        result.username = result.username.html_entities();
-        result.content = result.content.html_entities();
-        result.title = result.title.html_entities();
         article_result.push(result);
     }
     article_result
@@ -144,9 +140,6 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
             username: row.get(9),
         };
     }
-    article_result.content = article_result.content.html_entities();
-    article_result.title = article_result.title.html_entities();
-    article_result.username = article_result.username.html_entities();
     article_result
 }
 
@@ -154,7 +147,7 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
     let conn = get_conn();
     let mut result: Vec<Ucomment> = vec![];
     for row in &conn.query("SELECT comment.*, users.username FROM comment, users WHERE comment.uid = users.id and comment.aid = $1 order by comment.id", &[&aid]).unwrap() {
-        let mut comment_result = Ucomment {
+        let comment_result = Ucomment {
             id: row.get(0),
             aid: row.get(1),
             uid: row.get(2),
@@ -162,8 +155,6 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
             created_at: row.get(4),
             username: row.get(5),
         };
-        comment_result.content = comment_result.content.html_entities();
-        comment_result.username = comment_result.username.html_entities();
         result.push(comment_result);
     }
     result
@@ -175,12 +166,12 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
     let created_at = Utc::now();
     let updated_at = Utc::now();
     let new_article = NewArticle {
-        uid,
-        category,
-        title,
-        content,
-        created_at,
-        updated_at,
+        uid: uid,
+        category: category,
+        title: title,
+        content: content,
+        created_at: created_at,
+        updated_at: updated_at,
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }

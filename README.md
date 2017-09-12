@@ -1,4 +1,4 @@
-# kylyp (rust-web qq群:661633549)
+# kylyp 
 
 [![Build Status](https://travis-ci.org/ivanceras/kylyp.svg?branch=master)](https://travis-ci.org/ivanceras/kylyp)
 
@@ -9,9 +9,9 @@ The project use rust, rocket, diesel, postgresql, and responsive design to build
 ### Start
 
 ```bash
+$ cd kylyp
 $ cargo install diesel_cli
 $ diesel setup
-$ diesel migration run
 $ cargo run
 ```
 ### Project And Plan

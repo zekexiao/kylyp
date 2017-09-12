@@ -23,26 +23,30 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <a href="/doc">文档</a>
+                        <a href="/doc">Doc</a>
                     </li>
                     <li >
-                        <a href="/news">新闻</a>
+                        <a href="/news">News</a>
+                    </li >
                     <li >
-                        <a href="/article/new">新主题</a>
-                    </li>
-                    <li >
-                        <a href="/bolg/new">新博客</a>
-                    </li>
-                    <li >
+                        <a href="/area">Area</a>
+                    </li >
                     {% if username %}
+                    <li >
+                        <a href="/article/new">New</a>
+                    </li>
+                    <li >
                         <div id="last">
                         <a  href="/user/{{ user_id }}">{{ username }}</a>
-                        <a  href="/user/logout">退出</a>
+                        <a  href="/user/logout">Logout</a>
                         </div>
-                    {% else %}
-                        <a href="/user/login">登录与注册</a>
-                    {% endif %}
                     </li>
+                    {% else %}
+                    <li >
+                        <a href="/user/login">Login-Reg</a>
+                    </li>
+                    {% endif %}
+                    
                 </ul>
         </nav>
         <main id="main">
@@ -51,7 +55,7 @@
                     <article >
                         <div id="top">
                             <h3>
-                                <h3>注意!</h3> &emsp;404: Hey! There's nothing here. you must login first or the page at {{ path }} does not exist!
+                                <h3>WARING!</h3> &emsp;404: Hey! There's nothing here. you must login first or the page at {{ path }} does not exist!
                             </h3>
                         </div>
                     </article>
@@ -62,19 +66,16 @@
                     <div id="aside">
                         <div >
                             <ul >
-                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">About</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Help</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Copyright</a> &nbsp;
                                 <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
-                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <a class="Footer-link" href="" rel="noopener">ADs</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Mark</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Blog</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Application</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Job</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Developer</a>
                                 <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
                             </ul>
                         </div>
@@ -84,13 +85,13 @@
         </main>
     
         <span id="nav_left">
-                <li class="menu-item"><a href="/doc">文档</a></li>
-                <li class="menu-item"><a href="/news">新闻</a></li>
+                <li class="menu-item"><a href="/doc">Doc</a></li>
+                <li class="menu-item"><a href="/news">News</a></li>
         </span>
         
         <span id="nav_right">
-                <li ><a href="/user/register">注册 &emsp;</a></li>
-                <li ><a href="/user/login">登录</a></li>
+                <li ><a href="/user/register">Register &emsp;</a></li>
+                <li ><a href="/user/login">Login</a></li>
         </span>
     </div>
     <script src="../js/nav.js"></script>

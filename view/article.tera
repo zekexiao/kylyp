@@ -23,26 +23,30 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <a href="/doc">文档</a>
+                        <a href="/doc">Doc</a>
                     </li>
                     <li >
-                        <a href="/news">新闻</a>
+                        <a href="/news">News</a>
+                    </li >
                     <li >
-                        <a href="/article/new">新主题</a>
-                    </li>
-                    <li >
-                        <a href="/bolg/new">新博客</a>
-                    </li>
-                    <li >
+                        <a href="/area">Area</a>
+                    </li >
                     {% if username %}
+                    <li >
+                        <a href="/article/new">New</a>
+                    </li>
+                    <li >
                         <div id="last">
                         <a  href="/user/{{ user_id }}">{{ username }}</a>
-                        <a  href="/user/logout">退出</a>
+                        <a  href="/user/logout">Logout</a>
                         </div>
-                    {% else %}
-                        <a href="/user/login">登录与注册</a>
-                    {% endif %}
                     </li>
+                    {% else %}
+                    <li >
+                        <a href="/user/login">Login-Reg</a>
+                    </li>
+                    {% endif %}
+                    
                 </ul>
         </nav>
         <main id="main">
@@ -58,7 +62,7 @@
                         <div id="content">{{ article.content }}</div>
                     </div>
                     <div id="comment">
-                        <div id="title">评论 &nbsp;{{ article.comments_count }}</div>
+                        <div id="title">Comment &nbsp;{{ article.comments_count }}</div>
                         {% for comment in comments %}
                             <div id="comment-content">
                                 <div>
@@ -72,7 +76,7 @@
                     <div id="reply">
                         {% if username %}
                             <textarea class="ans_con" ></textarea><br>
-                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> 评论 </span></button>
+                            <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> Comment </span></button>
                             <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
                             <script type="text/javascript" >
                             var running = false;
@@ -83,10 +87,10 @@
 
                                 var ans_con = $('.ans_con').val();
                                 if(!ans_con){
-                                $('.tip').text('*输入不能为空');
+                                $('.tip').text('*Input can't be Null');
                                 return;
                                 }
-                                $('.tip').text('数据正在提交中...');
+                                $('.tip').text('Date Submitting...');
                                 
                                 var aid = $(this).data('aid');
 
@@ -104,7 +108,7 @@
                             })
                             </script>
                         {% else %}
-                            <span style="background-color:aqua">请登录后评论.<a href="/user/login">登录</a></span>
+                            <span style="background-color:aqua">Please login first and make a Comment.<a href="/user/login">Login</a></span>
                         {% endif %}
                     </div>
                 </div>
@@ -124,19 +128,16 @@
                     <div id="aside">
                         <div >
                             <ul >
-                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">About</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Help</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Copyright</a> &nbsp;
                                 <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
-                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <a class="Footer-link" href="" rel="noopener">ADs</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Mark</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Blog</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Application</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Job</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Developer</a>
                                 <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
                             </ul>
                         </div>
@@ -146,26 +147,26 @@
         </main>
     
         <span id="nav_left">
-                <li class="menu-item"><a href="/doc">文档</a></li>
-                <li class="menu-item"><a href="/news">新闻</a></li>
-                <li class="menu-item"><a href="/area">板块</a></li>
+                <li class="menu-item"><a href="/doc">Doc</a></li>
+                <li class="menu-item"><a href="/news">News</a></li>
+                <li class="menu-item"><a href="/area">Area</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">
                 <ul id="dmenu">
                     <span id="dright">
-                        <li class="menu-item"><a href="/article/new">新发布</a></li>
+                        <li class="menu-item"><a href="/article/new">New</a></li>
                     </span>
                 </ul>
         </span>
         <span id="nav_right">
                 <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
-                <li ><a href="/user/logou">退出</a></li>
+                <li ><a href="/user/logou">Logout</a></li>
         </span>
         {% else %}
         <span id="nav_right">
-                <li ><a href="/user/register">注册 &emsp;</a></li>
-                <li ><a href="/user/login">登录</a></li>
+                <li ><a href="/user/register">Register &emsp;</a></li>
+                <li ><a href="/user/login">Login</a></li>
         </span>
         {% endif %}
     </div>
