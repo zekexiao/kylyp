@@ -13,6 +13,7 @@ use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
 use handler::content::{UserComment,UserMessage,get_user_info,get_user_articles,get_user_comments,get_user_messages};
+use chrono::{DateTime,Utc};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -137,7 +138,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
                 email: &post_user.email,
                 username: &post_user.username,
                 password: &post_user.password,
-                regtime: &Local::now().to_string(),
+                created_at: Utc::now(), 
             };
             diesel::insert(&new_user).into(users::table).execute(&connection).expect("User is  Exist!");
             Ok(Redirect::to("/user/login"))
