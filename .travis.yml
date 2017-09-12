@@ -1,0 +1,19 @@
+language: rust
+rust:
+- nightly
+
+services:
+  - postgresql
+
+before_install:
+  - cargo install diesel_cli
+
+before_script:
+  - psql -c "create user rforum with login password 'rforum';" -U postgres
+  - psql -c "create database rforum with owner rforum encoding 'utf8';" -U postgres
+  - diesel database setup
+
+
+script:
+- cargo build
+- cargo test
