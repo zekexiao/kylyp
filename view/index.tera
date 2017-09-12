@@ -78,8 +78,12 @@
                         {% for data in datas %}
                         <article>
                             <div id="blog">
-                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">评论:{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.createtime }}</span>
                             </div>
                         </article>
                         {% endfor %}

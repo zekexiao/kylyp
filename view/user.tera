@@ -73,23 +73,33 @@
                                 {% for article in user_articles %}
                                     <div id="blog">
                                         <div><a href="/article/{{ article.id }}"> {{ article.title }} </a></div>
-                                        <span id="info">分类:{{ article.category }}</span><span id="info">作者:{{ login_user.username }}</span> <span id="info">时间:{{ article.createtime }}</span><span id="info">评论数:{{ article.comments_count }}</span>
+                                        <span id="info">{{ article.category }}</span>  • <span id="info">{{ article.createtime }}</span><span id="info">评论:{{ article.comments_count }}</span>
                                     </div>
                                 {% endfor %}
                             </div>
                             <div id="con_one_2" style="display:none;" class="tab_content">
                                 {% for comment_article in user_comments %}
                                     <div id="blog">
-                                        <div><span><a href="/article/{{ comment_article.id }}"> {{ comment_article.title }} </a></span> &emsp; <span id="info">分类:{{ comment_article.category }}</span><span id="info">{{ comment_article.comment_createtime }}</span><span id="info">评论数:{{ comment_article.comments_count }}</span></div>
-                                        <span id="info">{{ comment_article.comment_content }}</span>
+                                        <div>
+                                            <span><a href="/article/{{ comment_article.id }}"> {{ comment_article.title }} </a></span> &emsp; 
+                                            <span style="float:right;"> 
+                                                <span id="info">{{ comment_article.category }}</span> • <span id="info">{{ comment_article.comment_createtime }}</span> • 
+                                                <span id="info">评论:{{ comment_article.comments_count }}</span>
+                                            </span>
+                                        </div>
+                                        <span id="info" style="font-size:14px;">{{ comment_article.comment_content }}</span>
                                     </div>
                                 {% endfor %}
                             </div>
                             <div id="con_one_3" style="display:none;" class="tab_content">
                                 {% for message in user_messages %}
                                     <div id="blog">
-                                        <div><span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span><span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> &emsp; <span id="info">{{ message.message_createtime }}</span>></div>
-                                        <span id="info">{{ message.comment_content }}</span>
+                                        <div>
+                                            <span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span> 
+                                            <span id="info"> 在</span> <span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> <span id="info"> 评论了你</span>  
+                                            <span id="info" >{{ message.message_createtime }}</span>>
+                                        </div>
+                                        <span id="info" style="font-size:14px;">{{ message.comment_content }}</span>
                                     </div>
                                 {% endfor %}
                             </div>

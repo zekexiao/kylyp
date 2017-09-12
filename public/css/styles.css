@@ -147,6 +147,7 @@ article {
 article #top #title {
     margin: -9px -22px 0 -11px;
     background-color: #feefff;
+    color: #671696;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 article #top #title li {
@@ -157,7 +158,7 @@ article #top #title li {
     font-weight: bold;
 }
 article #top #title li.off {
-    background:#F6C6EB;
+    background:#E6D5D5;
     font-weight:bold;
 }
 article #top #topic {
@@ -167,9 +168,16 @@ article #top #topic {
 article #blog a {
     font-weight: bold;
 }
+article #blog #right-info {
+    float:right;
+    font-size:12px;
+    font-weight: bold;
+    color:#EC0DBC;
+}
 article #blog #info {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
+    background-color:#F3FCFA;
 }
 /*--------------------------------- login-register ------------------------------- */
 article #top #user-reg {
@@ -316,12 +324,17 @@ form #new button {
     margin: 0 0 1px 0;
     background-color: #ffffff;
 }
+#message-content #blog{
+    border-bottom: 1px solid #d8d8d8; 
+    margin-bottom: 5px;  
+    padding-bottom: 5px;
+}
 #message-content #blog a {
     font-weight: bold;
 }
 #message-content #blog #info {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 #aside {
