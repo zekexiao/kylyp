@@ -50,7 +50,7 @@
                 <div class="re-desk-75 re-table-100 ">
                 <div id="top">
                     <div id="new-theme">
-                        <h4>新主题</h4>
+                        <h4>新发布</h4>
                     </div>
                     <div >
                         <form id="form" method="post" action="/article/addarticle" accept-charset="utf-8">
@@ -62,6 +62,7 @@
                                             <option value="文章">文章</option>
                                             <option value="问答">问答</option>
                                             <option value="招聘">招聘</option>
+                                            <option value="招聘">博客</option>
                                         </select>
                                     </span>&emsp;
                                     <span id="title">
@@ -126,7 +127,7 @@
         <span id="primary_nav">
                 <ul id="dmenu">
                     <span id="dright">
-                        <li class="menu-item"><a href="/article/new">新主题</a></li>
+                        <li class="menu-item"><a href="/article/new">新发布</a></li>
                     </span>
                 </ul>
         </span>

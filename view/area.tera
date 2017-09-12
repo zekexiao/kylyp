@@ -50,7 +50,7 @@
                 <div class="re-desk-75 re-table-100 ">
                     <div id="theme">
                         <div id="title">
-                            <h3> 文档与资源 for Rust </h3>
+                            <h3> 板块 </h3>
                             <span id="info">Rusters</span>&emsp;
                             <span id="info">2017-9-11</span>
                         </div>
@@ -109,7 +109,7 @@
         <span id="primary_nav">
                 <ul id="dmenu">
                     <span id="dright">
-                        <li class="menu-item"><a href="/article/new">新主题</a></li>
+                        <li class="menu-item"><a href="/article/new">新发布</a></li>
                     </span>
                 </ul>
         </span>

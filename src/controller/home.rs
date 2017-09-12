@@ -72,7 +72,21 @@ pub fn area_user(user: UserOr, user_id: UserId) -> Template {
     Template::render("area", &context)
 }
 
+#[get("/news",rank = 2)]
+pub fn news() -> Template {
+    let mut context = HashMap::new();
+    context.insert("No login user", "".to_string());
+    Template::render("news", &context)
+}
 
+#[get("/news")]
+pub fn news_user(user: UserOr, user_id: UserId) -> Template {
+    let context = TemplateDoc {
+        username: user.0,
+        user_id: user_id.0,
+    };
+    Template::render("news", &context)
+}
 
 
 

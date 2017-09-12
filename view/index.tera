@@ -57,7 +57,8 @@
                                 <li id="one3" onclick="setTab('one',3)">文章</li>&emsp; 
                                 <li id="one4" onclick="setTab('one',4)">问答</li>&emsp;
                                 <li id="one5" onclick="setTab('one',5)">未评论</li>&emsp;
-                                <li id="one6" onclick="setTab('one',6)">招聘</li>
+                                <li id="one5" onclick="setTab('one',6)">招聘</li>&emsp;
+                                <li id="one6" onclick="setTab('one',7)">博客</li>
                             </div>
                             <div id="topic">
                                 <a href=""><h3>Rust new Forum in rust!</h3></a>
@@ -143,6 +144,18 @@
                         {% endif %}
                         {% endfor %}
                     </div>
+                    <div id="con_one_7" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.category == "博客" %}
+                        <article>
+                            <div id="blog">
+                                <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
+                                <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
 
 
@@ -192,7 +205,7 @@
         <span id="primary_nav">
                 <ul id="dmenu">
                     <span id="dright">
-                        <li class="menu-item"><a href="/article/new">新主题</a></li>
+                        <li class="menu-item"><a href="/article/new">新发布</a></li>
                     </span>
                 </ul>
         </span>
