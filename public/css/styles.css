@@ -158,12 +158,12 @@ article #top #title li {
     font-weight: bold;
 }
 article #top #title li.off {
-    background:#E6D5D5;
+    background:#B1F5D1;
     font-weight:bold;
 }
 article #top #topic {
     margin: 15px 0 0 0 ;
-    border-bottom:1px solid #eeeeee;
+    border-bottom:1px solid #D8FAE8;
 }
 article #blog a {
     font-weight: bold;

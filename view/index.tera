@@ -99,7 +99,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
@@ -115,7 +115,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
@@ -131,7 +131,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
@@ -147,7 +147,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
@@ -163,7 +163,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
@@ -179,7 +179,7 @@
                             <div id="blog">
                                 <div>
                                     <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
-                                    <div id="right-info">Comment:{{ data.comments_count }}</div>
+                                    <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
                                 <span id="info">{{ data.created_at }}</span>
