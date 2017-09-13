@@ -24,12 +24,12 @@ welcome to contribute !
 ### <a name="screenshots"> What it looks like </a>
 **PC**
 
-<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/2017-09-13%2002-17-49%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/2017-09-13%2013-21-09%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
 
 
 **Mobile**
 
-<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/2017-09-13%2002-17-42%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
+<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/2017-09-13%2013-21-27%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
 
 
 ### License
