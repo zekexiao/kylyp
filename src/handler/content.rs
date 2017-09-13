@@ -49,12 +49,12 @@ pub struct UserComment {
     pub comment_aid: i32,
     pub comment_uid: i32,
     pub comment_content: String,
-    pub comment_createtime: String,
+    pub comment_createtime: DateTime<Utc>,
 }
 #[derive(Debug,Serialize)]
 pub struct UserMessage {
     pub message_status: i32,
-    pub message_createtime: String,
+    pub message_createtime: DateTime<Utc>,
     pub comment_content: String,
     pub from_uid: i32,
     pub from_uid_name: String,

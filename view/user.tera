@@ -61,7 +61,7 @@
                                 <span id="person-info">user-img</span><span id="person-info">{{ username }}</span>
                                 <div id="person-info">
                                     <p>email:{{ login_user.email }}</p>
-                                    <p>Reg-time:{{ login_user.regtime }}</p>
+                                    <p>Reg-time:{{ login_user.created_at }}</p>
                                     <p>Topic:  Comment:</p>
                                 </div>
                             </div>

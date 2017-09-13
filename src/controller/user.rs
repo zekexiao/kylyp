@@ -143,7 +143,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
                 email: &post_user.email,
                 username: &post_user.username,
                 password: &post_user.password,
-                created_at: Utc::now(), 
+                created_at: Utc::now(),
             };
             diesel::insert(&new_user).into(users::table).execute(&connection).expect("User is  Exist!");
             Ok(Redirect::to("/user/login"))
