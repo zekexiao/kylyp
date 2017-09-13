@@ -20,6 +20,7 @@ extern crate dotenv;
 extern crate chrono;
 extern crate regex;
 extern crate config;
+extern crate spongedown;
 
 #[macro_use]
 mod controller;

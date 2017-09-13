@@ -10,6 +10,7 @@ use regex::{Regex,Captures};
 use config::*;
 use CFG_DEFAULT;
 use chrono::{DateTime,Utc};
+use spongedown;
 
 #[derive(Debug, Serialize)]
 pub struct Uarticle {
@@ -134,7 +135,10 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
             status: row.get(3),
             comments_count: row.get(4),
             title: row.get(5),
-            content: row.get(6),
+            content: {
+                let content: String = row.get(6); 
+                spongedown::parse(&content)
+            },
             created_at: row.get(7),
             updated_at: row.get(8),
             username: row.get(9),
@@ -151,7 +155,10 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
             id: row.get(0),
             aid: row.get(1),
             uid: row.get(2),
-            content: row.get(3),
+            content: {
+                let content:String = row.get(3);
+                spongedown::parse(&content)
+            },
             created_at: row.get(4),
             username: row.get(5),
         };
