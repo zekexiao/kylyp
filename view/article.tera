@@ -87,10 +87,10 @@
 
                                 var ans_con = $('.ans_con').val();
                                 if(!ans_con){
-                                $('.tip').text('*Input can't be Null');
+                                $('.tip').text('Input can not be Null');
                                 return;
                                 }
-                                $('.tip').text('Date Submitting...');
+                                $('.tip').text('Data Submitting...');
                                 
                                 var aid = $(this).data('aid');
 
@@ -108,7 +108,7 @@
                             })
                             </script>
                         {% else %}
-                            <span style="background-color:aqua">Please login first and make a Comment.<a href="/user/login">Login</a></span>
+                            <span >Please login first and make a Comment.<a href="/user/login" style="background-color:aqua">Login</a></span>
                         {% endif %}
                     </div>
                 </div>

@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 html,body {
     width:100%;height:100%;
     font: 16px/1.4em 'PT Sans', sans-serif;
-    background-color: #feefff;
+    background-color: #E5F7ED;
 }
 * {
     padding:0px; margin:0px;
@@ -63,7 +63,7 @@ header {
     height: 50px;
     zoom:1;    /* For IE 6/7 (trigger hasLayout) */
     box-shadow: 0 1px 2px #999; 
-    background-color:#feefff;
+    background-color:#C5F5DC;
 }
 
 h1.logo a {
@@ -105,7 +105,7 @@ nav {
 }
 nav ul li a {
     display:block;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     color: #000000;
     font-size: 14px;
     font-weight: bold; 
@@ -146,7 +146,7 @@ article {
 }
 article #top #title {
     margin: -9px -22px 0 -11px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     color: #671696;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
@@ -184,7 +184,7 @@ article #top #user-reg {
     margin: -9px -22px 0 -11px;
     padding: 10px 11px 11px 11px;
     font-weight: bold;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 article #top #login {
@@ -207,7 +207,7 @@ article #top button {
     box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
     margin: 2px 0 11px 0;
     padding: 10px 10px 10px 10px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
 }
 #theme #title #info {
     display: inline-block;
@@ -226,7 +226,7 @@ article #top button {
     box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
     font-weight: bold;
     padding: 10px 10px 10px 10px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
 }
 #comment #comment-content {
     border-bottom: 1px solid #d8d8d8;
@@ -244,7 +244,7 @@ article #top button {
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 #reply button {
-    width:55px; 
+    width:70px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
@@ -266,7 +266,7 @@ article #top button {
 #new-theme {
     padding: 12px 0 10px 10px;
     margin-right: -0.01px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     box-shadow: 0 0 1px rgba(0,0,0,0.22), 0 1px 1px rgba(0,0,0,0.22);
 }
 form #topic-group {
@@ -309,7 +309,7 @@ form #new button {
 #tab1 #menu-title {
     padding: 12px 0 10px 10px;
     margin-bottom: 1px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     box-shadow: 0 0 2px rgba(0,0,0,0.22), 0 2px 2px rgba(0,0,0,0.22);
 }
 #tab1 #menu-title li{
@@ -348,7 +348,7 @@ form #new button {
 #aside #new_theme {
     font-weight: bold;
     text-align: center;
-    background: #feefff;
+    background: #D8FAE8;
     line-height: 44px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 } 
@@ -383,7 +383,7 @@ form #new button {
         left: 122px;
         line-height: 50px;
         font-weight: 700;
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #nav_left li {
         display: inline-block;
@@ -397,7 +397,7 @@ form #new button {
         line-height: 50px;
         font-weight: 700;
         /* background-color:#039BE5; */
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #nav_right input {
         display: none;
@@ -411,10 +411,10 @@ form #new button {
         height: auto;
         right: 0;
         line-height: 50px;
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #primary_nav {
-        margin-right: 136px;
+        margin-right: 150px;
     }
     #primary_nav ul li {
         display: inline-block; 
