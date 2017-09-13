@@ -131,7 +131,7 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
 #[get("/login")]
 pub fn login_user(user: UserId) -> Redirect {
     Redirect::to(&*("/user/".to_string() + &*user.0.to_string()))
-  }
+}
   
 #[post("/register",data = "<user_form>")]
 fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {

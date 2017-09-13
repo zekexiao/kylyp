@@ -62,7 +62,7 @@
                             <div id="login">
                                 {% if errmsg %} <p class="tip">*{{ errmsg }}</p> {% endif %}
                                 <h4>Email：&emsp;&emsp;<input name="email" required="required" type="text"></h4><br>
-                                <h4>Name： &emsp;&emsp;<input name="username" required="required" type="text"></h4><br>
+                                <h4>Name：&emsp;&emsp;<input name="username" required="required" type="text"></h4><br>
                                 <h4>Password：&nbsp;&nbsp;<input name="password" required="required" type="password" minlength=3></h4><br>
                                 <h4>Password: &nbsp;&nbsp; <input name="password2" required="required" type="password" minlength=3></h4>
                             </div><br>

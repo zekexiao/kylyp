@@ -323,6 +323,7 @@ pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
         };
         user_comments.push(comment);
     }
+    
     user_comments
 }
 
