@@ -10,6 +10,7 @@ use regex::{Regex,Captures};
 use config::*;
 use CFG_DEFAULT;
 use chrono::{DateTime,Utc};
+use utils::render::render_html;
 
 #[derive(Debug, Serialize)]
 pub struct Uarticle {
@@ -139,6 +140,7 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
             updated_at: row.get(8),
             username: row.get(9),
         };
+        article_result.content = render_html(&article_result.content);
     }
     article_result
 }
@@ -147,7 +149,7 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
     let conn = get_conn();
     let mut result: Vec<Ucomment> = vec![];
     for row in &conn.query("SELECT comment.*, users.username FROM comment, users WHERE comment.uid = users.id and comment.aid = $1 order by comment.id", &[&aid]).unwrap() {
-        let comment_result = Ucomment {
+        let mut comment_result = Ucomment {
             id: row.get(0),
             aid: row.get(1),
             uid: row.get(2),
@@ -155,6 +157,7 @@ pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
             created_at: row.get(4),
             username: row.get(5),
         };
+        comment_result.content = render_html(&comment_result.content);
         result.push(comment_result);
     }
     result

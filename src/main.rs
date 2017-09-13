@@ -20,6 +20,8 @@ extern crate dotenv;
 extern crate chrono;
 extern crate regex;
 extern crate config;
+extern crate pulldown_cmark;
+extern crate ammonia;
 
 #[macro_use]
 mod controller;
@@ -30,7 +32,6 @@ mod model;
 mod utils;
 
 use rocket_contrib::Template;
-
 use controller::{home,user,article};
 
 const CFG_DEFAULT: &'static str = "Rocket";

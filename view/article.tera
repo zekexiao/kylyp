@@ -59,7 +59,7 @@
                             <span id="info">{{ article.username }}</span> • 
                             <span id="info">{{ article.created_at }}</span>
                         </div>
-                        <div id="content">{{ article.content }}</div>
+                        <div id="content">{{ article.content | safe }}</div>
                     </div>
                     <div id="comment">
                         <div id="title">Comment &nbsp;{{ article.comments_count }}</div>
@@ -69,7 +69,7 @@
                                     <span id="info">{{loop.index}}.</span>
                                     <span id="info">{{ comment.username }}</span> • <span id="info">{{ comment.created_at }}</span>
                                 </div>
-                                <div style="font-size:14px;">  {{ comment.content }} </div>
+                                <div style="font-size:14px;">  {{ comment.content | safe }} </div>
                             </div>
                         {% endfor %}
                     </div>
