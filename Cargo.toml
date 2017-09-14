@@ -18,5 +18,5 @@ dotenv_macros = "^0.10.0"
 regex = "^0.1.0"
 chrono = { version = "0.4", features = ["serde"] }
 config = "^0.7.0"
-pulldown-cmark = "0.0.8"
+pulldown-cmark = "^0.1.0"
 ammonia = "0.1"

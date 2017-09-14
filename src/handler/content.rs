@@ -266,11 +266,10 @@ pub fn get_uids(username: &str) -> Option<i32> {
     to_uid
 }
 
-pub fn get_user_info(user_id: &UserId) -> Option<User> {
+pub fn get_user_info(user_id: i32) -> Option<User> {
     use utils::schema::users::dsl::*;
-    // use utils::schema::{users,article,comment,message};
     let connection = establish_connection();
-    let uid = user_id.0;
+    let uid = user_id;
     let user_result =  users.filter(&id.eq(&uid)).load::<User>(&connection);
     let login_user = match user_result {
         Ok(user_s) => match user_s.first() {
@@ -282,9 +281,9 @@ pub fn get_user_info(user_id: &UserId) -> Option<User> {
     login_user
 }
 
-pub fn get_user_articles(user_id: &UserId) -> Vec<Article> {
+pub fn get_user_articles(user_id: i32) -> Vec<Article> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_articles: Vec<Article> = vec![];
     for row in &conn.query("SELECT article.* FROM article WHERE article.uid = $1 ",&[&u_id]).unwrap() {
         let article = Article {
@@ -303,9 +302,9 @@ pub fn get_user_articles(user_id: &UserId) -> Vec<Article> {
     user_articles
 }
 
-pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
+pub fn get_user_comments(user_id: i32) -> Vec<UserComment> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_comments: Vec<UserComment> = vec![];
     for row in &conn.query("SELECT comment.*, article.* FROM comment, article where comment.aid = article.id and comment.uid = $1 order by comment.id ",&[&u_id]).unwrap() {
         let comment = UserComment {
@@ -330,9 +329,9 @@ pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
     user_comments
 }
 
-pub fn get_user_messages(user_id: &UserId) -> Vec<UserMessage> {
+pub fn get_user_messages(user_id: i32) -> Vec<UserMessage> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_messages: Vec<UserMessage> = vec![];
     for row in &conn.query("SELECT m.status, m.created_at, c.content, u.id as user_id, u.username,
          u.email, a.id as article_id, a.title as article_title 

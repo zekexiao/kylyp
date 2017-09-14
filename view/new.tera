@@ -74,9 +74,7 @@
                                     </span>
                             </div>    
                             <div id="new">
-                                <textarea name="content" data-provide="markdown" rows="20"></textarea>
-                            </div>
-                            <div class="form-group hidden text-danger" id="error">
+                                 <textarea name="content" data-provide="markdown" rows="20"></textarea>
                             </div>
                             <div id="new">
                                 <button type="submit" id="submit"><span class="tip"> Publish </span></button>
