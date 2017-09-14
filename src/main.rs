@@ -21,8 +21,6 @@ extern crate chrono;
 extern crate regex;
 extern crate config;
 extern crate spongedown;
-extern crate pulldown_cmark;
-extern crate ammonia;
 
 #[macro_use]
 mod controller;

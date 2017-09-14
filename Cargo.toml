@@ -19,5 +19,3 @@ regex = "^0.1.0"
 chrono = { version = "0.4", features = ["serde"] }
 config = "^0.7.0"
 spongedown = { git = "https://github.com/ivanceras/spongedown.git" }
-pulldown-cmark = "^0.1.0"
-ammonia = "0.1"

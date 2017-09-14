@@ -11,7 +11,6 @@ use config::*;
 use CFG_DEFAULT;
 use chrono::{DateTime,Utc};
 use spongedown;
-use utils::render::render_html;
 
 #[derive(Debug, Serialize)]
 pub struct Uarticle {
