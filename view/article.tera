@@ -7,6 +7,7 @@
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -63,7 +64,7 @@
                             <span id="info"><a href="/user/{{article.uid}}">{{ article.username }}</a></span> • 
                             <span id="info">{{ article.created_at }}</span>
                         </div>
-                        <div id="content">{{ article.content | safe }}</div>
+                        <div id="content">{{ article.cooked | safe }}</div>
                     </div>
                     <div id="comment">
                         <div id="title">Comment &nbsp;{{ article.comments_count }}</div>
@@ -73,7 +74,7 @@
                                     <span id="info">{{loop.index}}.</span>
                                     <span id="info"><a href="/user/{{comment.uid}}">{{ comment.username }}</a></span> • <span id="info">{{ comment.created_at }}</span>
                                 </div>
-                                <div style="font-size:14px;">  {{ comment.content | safe }} </div>
+                                <div style="font-size:14px;">  {{ comment.cooked | safe }} </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -100,7 +101,7 @@
                                 $.ajax({
                                 async: false,
                                 url : '/article/addcomment',
-                                data : {aid:aid, content:ans_con},
+                                data : {aid:aid, raw:ans_con},
                                 dataType : 'json',
                                 type : 'get'
                                 }).done(function(){

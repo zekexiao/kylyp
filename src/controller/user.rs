@@ -3,8 +3,6 @@ use diesel::prelude::*;
 use rocket_contrib::Template;
 use rocket::request::{self,Form, FlashMessage,FromRequest,Request};
 use rocket::response::{Redirect,Flash};
-use model::db::establish_connection;
-use model::pg::get_conn;
 use model::user::{User,NewUser};
 use model::article::{Article,Comment};
 use rocket::http::{Cookie, Cookies};
@@ -14,6 +12,8 @@ use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
 use handler::content::{UserComment,UserMessage,get_user_info,get_user_articles,get_user_comments,get_user_messages};
 use chrono::{DateTime,Utc};
+use model::db::ConnDsl;
+use model::pg::ConnPg;
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -70,11 +70,11 @@ struct UserInfo {
 }
 
 #[get("/<u_id>")]
-pub fn user_page(u_id: i32) -> Template {
-        let user = get_user_info(u_id);
-        let articles = get_user_articles(u_id);
-        let comments = get_user_comments(u_id);
-        let messages = get_user_messages(u_id);
+pub fn user_page(conn_pg: ConnPg, conn_dsl: ConnDsl, u_id: i32) -> Template {
+        let user = get_user_info(&conn_dsl, u_id);
+        let articles = get_user_articles(&conn_pg, u_id);
+        let comments = get_user_comments(&conn_pg, u_id);
+        let messages = get_user_messages(&conn_pg, u_id);
         let context = UserInfo {
             this_user: user,
             user_articles: articles,
@@ -122,18 +122,17 @@ pub fn login_user(user: UserId) -> Redirect {
 }
   
 #[post("/register",data = "<user_form>")]
-fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
+fn register_post(conn_dsl: ConnDsl, user_form: Form< UserRegister>) -> Result<Redirect, String> {
     let post_user = user_form.get();
     use utils::schema::users;
     if &post_user.password == &post_user.password2 {
-            let connection = establish_connection();
             let new_user = NewUser {
                 email: &post_user.email,
                 username: &post_user.username,
                 password: &post_user.password,
                 created_at: Utc::now(),
             };
-            diesel::insert(&new_user).into(users::table).execute(&connection).expect("User is  Exist!");
+            diesel::insert(&new_user).into(users::table).execute(&*conn_dsl).expect("User is  Exist!");
             Ok(Redirect::to("/user/login"))
     }else {
         Err("password != password2".to_string())
@@ -141,11 +140,10 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
 }
 // -------------- method 1-------------
 #[post("/login", data = "<user_form>")]
-fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
+fn login_post(conn_pg: ConnPg, mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
     let post_user = user_form.get();
-    let conn = get_conn();
     let mut uid = Uid {id : 0};
-    for row in &conn.query("SELECT id FROM users WHERE username =$1  AND password = $2", &[&post_user.username,&post_user.password]).unwrap() {
+    for row in &conn_pg.query("SELECT id FROM users WHERE username =$1  AND password = $2", &[&post_user.username,&post_user.password]).unwrap() {
         uid = Uid {
             id : row.get(0),
         };
