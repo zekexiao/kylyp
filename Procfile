@@ -1,2 +1,2 @@
-web: ./target/release/kylyp
+web: ROCKET_ENV=production ./target/release/kylyp
 
