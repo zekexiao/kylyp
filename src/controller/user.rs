@@ -70,7 +70,7 @@ struct UserInfo {
 }
 
 #[get("/<u_id>")]
-pub fn user_page_login(u_id: i32) -> Template {
+pub fn user_page(u_id: i32) -> Template {
         let user = get_user_info(u_id);
         let articles = get_user_articles(u_id);
         let comments = get_user_comments(u_id);

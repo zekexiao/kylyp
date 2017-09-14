@@ -40,7 +40,7 @@ fn main() {
     rocket::ignite()
         .mount("/", routes![home::public,home::index_user,home::index,home::doc_user,home::doc,home::area_user,home::area,home::news_user,home::news])
         .mount("/user",routes![user::login_register,user::register,user::register_post,
-                               user::login_user,user::login,user::login_post,user::user_page_login,user::logout])
+                               user::login_user,user::login,user::login_post,user::user_page,user::logout])
         .mount("/article",routes![article::article,article::add_comment,article::article_nouser,article::new,article::add_article])
         .attach(Template::fairing())
         .catch(errors![home::not_found])
