@@ -12,7 +12,8 @@ use rocket::http::RawStr;
 use std::collections::HashMap;
 use rocket::outcome::IntoOutcome;
 use chrono::prelude::*;
-use handler::content::{UserComment,get_user_info,get_user_articles,get_user_comments};
+use handler::content::{UserComment,UserMessage,get_user_info,get_user_articles,get_user_comments,get_user_messages};
+use chrono::{DateTime,Utc};
 
 #[derive(Debug,Serialize)]
 pub struct Uid {
@@ -65,17 +66,9 @@ struct UserInfo {
     login_user: Option<User>,
     user_articles: Vec<Article>,
     user_comments: Vec<UserComment>,
+    user_messages: Vec<UserMessage>,
     username: String,
     user_id: i32,
-}
-
-#[get("/<name>",rank = 3)]
-pub fn user_page(name: &RawStr,flash: Option<FlashMessage>) -> Template {
-   let mut context = HashMap::new();
-    if let Some(ref msg) = flash {
-        context.insert("flash", msg.msg().to_string());
-    }
-    Template::render("login", &context)
 }
 
 #[get("/<name>")]
@@ -84,10 +77,12 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
         let this_user = get_user_info(&user_id);
         let articles = get_user_articles(&user_id);
         let comments = get_user_comments(&user_id);
+        let messages = get_user_messages(&user_id);
         let context = UserInfo {
             login_user: this_user,
             user_articles: articles,
             user_comments: comments,
+            user_messages: messages,
             username: user.0,
             user_id: user_id.0,
         };
@@ -95,7 +90,7 @@ pub fn user_page_login(name: &RawStr,user: UserOr,user_id: UserId,flash: Option<
     }else{
         let mut context = HashMap::new();
         if let Some(ref msg) = flash {
-            context.insert("flash","该用户不存在".to_string());
+            context.insert("flash","NO this user".to_string());
         }
         Template::render("login", &context)
     }
@@ -123,18 +118,21 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
     if let Some(ref msg) = flash {
         context.insert("flash", msg.msg().to_string());
     }
-    // println!("=====login =========",);
     Template::render("login", &context)
 }
-
+// ----------------method 1--------------
+// #[get("/login")]
+// pub fn login_user(user: UserOr) -> Template {
+//     let mut context = HashMap::new();
+//     context.insert("username", user.0);
+//     Template::render("index", &context)
+// }
+// ----------------method 2--------------
 #[get("/login")]
-pub fn login_user(user: UserOr) -> Template {
-    let mut context = HashMap::new();
-    context.insert("username", user.0);
-    // println!("=====login   user=========",);
-    Template::render("index", &context)
+pub fn login_user(user: UserId) -> Redirect {
+    Redirect::to(&*("/user/".to_string() + &*user.0.to_string()))
 }
-
+  
 #[post("/register",data = "<user_form>")]
 fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
     let post_user = user_form.get();
@@ -145,7 +143,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
                 email: &post_user.email,
                 username: &post_user.username,
                 password: &post_user.password,
-                regtime: &Local::now().to_string(),
+                created_at: Utc::now(),
             };
             diesel::insert(&new_user).into(users::table).execute(&connection).expect("User is  Exist!");
             Ok(Redirect::to("/user/login"))
@@ -153,7 +151,7 @@ fn register_post(user_form: Form< UserRegister>) -> Result<Redirect, String> {
         Err("password != password2".to_string())
     }
 }
-// -------------- 方法一 -------------
+// -------------- method 1-------------
 #[post("/login", data = "<user_form>")]
 fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
     let post_user = user_form.get();
@@ -174,7 +172,7 @@ fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirec
     } 
 }
 
-// -------------- 方法二 -------------
+// -------------- method 2 -------------
 // #[post("/login", data = "<user_form>")]
 // fn login_post(mut cookies: Cookies, user_form: Form<UserLogin>) -> Flash<Redirect> {
 //     use utils::schema::users::dsl::*;

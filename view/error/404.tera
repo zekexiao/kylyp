@@ -14,8 +14,86 @@
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
 </head>
-   <body>
-     <h1>404: Hey! There's nothing here.</h1>
-     The page at {{ path }} does not exist!
-   </body>
- </html>
+<body >
+    <div id="all">
+        <header >
+                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <label ><a id="menu" href="#" >Menu</a></label>
+        </header>
+        <nav id="mnav" >
+                <ul>
+                    <li >
+                        <a href="/doc">Doc</a>
+                    </li>
+                    <li >
+                        <a href="/news">News</a>
+                    </li >
+                    <li >
+                        <a href="/area">Area</a>
+                    </li >
+                    {% if username %}
+                    <li >
+                        <a href="/article/new">New</a>
+                    </li>
+                    <li >
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">Logout</a>
+                        </div>
+                    </li>
+                    {% else %}
+                    <li >
+                        <a href="/user/login">Login-Reg</a>
+                    </li>
+                    {% endif %}
+                    
+                </ul>
+        </nav>
+        <main id="main">
+            <div id="content" >
+                <div class="re-desk-75 re-table-100 ">
+                    <article >
+                        <div id="top">
+                            <h3>
+                                <h3>WARING!</h3> &emsp;404: Hey! There's nothing here. you must login first or the page at {{ path }} does not exist!
+                            </h3>
+                        </div>
+                    </article>
+                </div>
+
+
+                <footer class="re-desk-25 re-table-100" >
+                    <div id="aside">
+                        <div >
+                            <ul >
+                                <a class="Footer-link" href="" rel="noopener">About</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Help</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Copyright</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">ADs</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Mark</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Blog</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Application</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Job</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Developer</a>
+                                <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    
+        <span id="nav_left">
+                <li class="menu-item"><a href="/doc">Doc</a></li>
+                <li class="menu-item"><a href="/news">News</a></li>
+        </span>
+        
+        <span id="nav_right">
+                <li ><a href="/user/register">Register &emsp;</a></li>
+                <li ><a href="/user/login">Login</a></li>
+        </span>
+    </div>
+    <script src="../js/nav.js"></script>
+</body>
+</html>

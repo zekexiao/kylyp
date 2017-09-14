@@ -13,6 +13,7 @@
  
     <!-- Favicons-->
     <link rel="shortcut icon" href="../img/favicon.ico">
+    <script src="../js/tabs-index.js" async="async"></script>
 </head>
 <body >
     <div id="all">
@@ -23,63 +24,45 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <input type="checkbox" name="item" id="item1" />   
-                        <label for="item1"> Friends <span>134</span></label>
-                        <ul class="options">
-                            <li><a href="#"> Find New Friends<span>11</span></a></li>
-                            <li><a href="#"> Poke A Friend</a></li>
-                            <li><a href="#"> Incinerate Existing Friends</a></li>
-                        </ul>
+                        <a href="/doc">Doc</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item2" />   
-                        <label for="item2"> Videos <span>1,034</span></label>
-                        <ul class="options">
-                            <li><a href="#"> My Videos <span>7</span></a></li>
-                            <li><a href="#"> My Downloaded Videos <span>3</span></a></li>
-                            <li><a href="#"> My Well Dodgy Videos <span>1,024</span></a></li>
-                        </ul>
+                        <a href="/news">News</a>
+                    </li >
+                    <li >
+                        <a href="/area">Area</a>
+                    </li >
+                    {% if username %}
+                    <li >
+                        <a href="/article/new">New</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item3" />   
-                        <label for="item3"> Galleries <span>4</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> My Deviant Art</a></li>
-                            <li><a href="#" target="_blank"> Latest Dribbble Images</a></li>
-                            <li><a href="#" target="_blank"> Sample Flickr Stream</a></li>
-                            <li><a href="#" target="_blank"> Sample Picasa Stream</a></li>
-                        </ul>
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">Logout</a>
+                        </div>
                     </li>
+                    {% else %}
                     <li >
-                        <input type="checkbox" name="item" id="item4" />   
-                        <label for="item4"> Podcasts <span>1</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> CSS-Tricks</a></li>
-                        </ul>
+                        <a href="/user/login">Login-Reg</a>
                     </li>
-                    <li >
-                        <input type="checkbox" name="item" id="item5" />   
-                        <label for="item5"> Robots <span>3</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> Hal 9000</a></li>
-                            <li><a href="#" target="_blank"> Skynet</a></li>
-                            <li><a href="#" target="_blank"> Johnny 5</a></li>
-                        </ul>
-                    </li>
+                    {% endif %}
+                    
                 </ul>
         </nav>
         <main id="main">
             <div id="content" >
                 <div class="re-desk-75 re-table-100 ">
                     <article class="one">
-                        <div id="top">
+                        <div id="top" class="tab1">
                             <div id="title">
-                                <span><a href="">全部 &emsp;</a><span>
-                                <span><a href="">分享 &emsp;</a><span>
-                                <span><a href="">文章 &emsp;</a><span> 
-                                <span><a href="">问答 &emsp;</a><span> 
-                                <span><a href="">未评论 &emsp;</a><span>
-                                <span><a href="">招聘</a><span>
+                                <li id="one1" onclick="setTab('one',1)">All</li>&emsp;
+                                <li id="one2" onclick="setTab('one',2)">Share</li>&emsp;
+                                <li id="one3" onclick="setTab('one',3)">Article</li>&emsp; 
+                                <li id="one4" onclick="setTab('one',4)">FAQ</li>&emsp;
+                                <li id="one5" onclick="setTab('one',5)">NoComment</li>&emsp;
+                                <li id="one6" onclick="setTab('one',6)">Job</li>&emsp;
+                                <li id="one7" onclick="setTab('one',7)">Blog</li>
                             </div>
                             <div id="topic">
                                 <a href=""><h3>Rust new Forum in rust!</h3></a>
@@ -95,15 +78,116 @@
                             </div>
                         </div>
                     </article>
-
-                    {% for data in datas %}
-                    <article>
-                        <div id="blog">
-                            <div><a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a></div>
-                            <span id="info">分类:{{ data.category }}</span><span id="info">作者:{{ data.username }}</span> <span id="info">时间:{{ data.createtime }}</span><span id="info">评论数:{{ data.comments_count }}</span>
-                        </div>
-                    </article>
-                    {% endfor %}
+                    <div id="con_one_1">
+                        {% for data in datas %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_2" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.category == "Share" %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                         {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_3" style="display:none;">
+                        {% for data in datas %}         
+                         {% if data.category == "Article" %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_4" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.category == "FAQ" %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_5" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.comments_count == 0 %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_6" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.category == "Job" %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                    <div id="con_one_7" style="display:none;">
+                        {% for data in datas %}
+                        {% if data.category == "Blog" %}
+                        <article>
+                            <div id="blog">
+                                <div>
+                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <div id="right-info">{{ data.comments_count }}</div>
+                                </div>
+                                <span id="info">{{ data.category }}</span>  •  <span id="info">{{ data.username }}</span> •   
+                                <span id="info">{{ data.created_at }}</span>
+                            </div>
+                        </article>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
 
                 <div class="re-desk-25 re-table-100">
@@ -120,19 +204,16 @@
                     <div id="aside">
                         <div >
                             <ul >
-                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">About</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Help</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Copyright</a> &nbsp;
                                 <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
-                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <a class="Footer-link" href="" rel="noopener">ADs</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Mark</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Blog</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Application</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Job</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Developer</a>
                                 <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
                             </ul>
                         </div>
@@ -142,25 +223,26 @@
         </main>
     
         <span id="nav_left">
-                <li class="menu-item"><a>文档</a></li>
-                <li class="menu-item"><a>新闻</a></li>
+                <li class="menu-item"><a href="/doc">Doc</a></li>
+                <li class="menu-item"><a href="/news">News</a></li>
+                <li class="menu-item"><a href="/area">Area</a></li>
         </span>
         {% if username %}
         <span id="primary_nav">
                 <ul id="dmenu">
                     <span id="dright">
-                        <li class="menu-item"><a href="/article/new">新主题</a></li>
+                        <li class="menu-item"><a href="/article/new">New</a></li>
                     </span>
                 </ul>
         </span>
         <span id="nav_right">
                 <li ><a href="/user/{{ user_id }}">{{ username }} &emsp;</a></li>
-                <li ><a href="/user/logou">退出</a></li>
+                <li ><a href="/user/logou">Logout</a></li>
         </span>
         {% else %}
         <span id="nav_right">
-                <li ><a href="/user/register">注册 &emsp;</a></li>
-                <li ><a href="/user/login">登录</a></li>
+                <li ><a href="/user/register">Register &emsp;</a></li>
+                <li ><a href="/user/login">Login</a></li>
         </span>
         {% endif %}
     </div>

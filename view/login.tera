@@ -23,49 +23,30 @@
         <nav id="mnav" >
                 <ul>
                     <li >
-                        <input type="checkbox" name="item" id="item1" />   
-                        <label for="item1"> Friends <span>134</span></label>
-                        <ul class="options">
-                            <li><a href="#"> Find New Friends<span>11</span></a></li>
-                            <li><a href="#"> Poke A Friend</a></li>
-                            <li><a href="#"> Incinerate Existing Friends</a></li>
-                        </ul>
+                        <a href="/doc">Doc</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item2" />   
-                        <label for="item2"> Videos <span>1,034</span></label>
-                        <ul class="options">
-                            <li><a href="#"> My Videos <span>7</span></a></li>
-                            <li><a href="#"> My Downloaded Videos <span>3</span></a></li>
-                            <li><a href="#"> My Well Dodgy Videos <span>1,024</span></a></li>
-                        </ul>
+                        <a href="/news">News</a>
+                    </li >
+                    <li >
+                        <a href="/area">Area</a>
+                    </li >
+                    {% if username %}
+                    <li >
+                        <a href="/article/new">New</a>
                     </li>
                     <li >
-                        <input type="checkbox" name="item" id="item3" />   
-                        <label for="item3"> Galleries <span>4</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> My Deviant Art</a></li>
-                            <li><a href="#" target="_blank"> Latest Dribbble Images</a></li>
-                            <li><a href="#" target="_blank"> Sample Flickr Stream</a></li>
-                            <li><a href="#" target="_blank"> Sample Picasa Stream</a></li>
-                        </ul>
+                        <div id="last">
+                        <a  href="/user/{{ user_id }}">{{ username }}</a>
+                        <a  href="/user/logout">Logout</a>
+                        </div>
                     </li>
+                    {% else %}
                     <li >
-                        <input type="checkbox" name="item" id="item4" />   
-                        <label for="item4"> Podcasts <span>1</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> CSS-Tricks</a></li>
-                        </ul>
+                        <a href="/user/login">Login-Reg</a>
                     </li>
-                    <li >
-                        <input type="checkbox" name="item" id="item5" />   
-                        <label for="item5"> Robots <span>3</span></label>
-                        <ul class="options">
-                            <li><a href="#" target="_blank"> Hal 9000</a></li>
-                            <li><a href="#" target="_blank"> Skynet</a></li>
-                            <li><a href="#" target="_blank"> Johnny 5</a></li>
-                        </ul>
-                    </li>
+                    {% endif %}
+                    
                 </ul>
         </nav>
         <main id="main">
@@ -73,17 +54,17 @@
                 <div class="re-desk-75 re-table-100 ">
                     <article >
                         <div id="top">
-                            <div id="title">
-                                <a href="/user/login">登录 &emsp;</a>
-                                <a href="/user/register">注册 &emsp;</a> 
+                            <div id="user-reg">
+                                <a href="/user/login">Login &emsp;</a>
+                                <a href="/user/register">Register &emsp;</a> 
                             </div>
                             <form action="/user/login" method="post" accept-charset="utf-8">
                             <div id="login">
                                 {% if errmsg %} <p class="tip">*{{ errmsg }}</p> {% endif %}
-                                <h4>名字：&emsp;<input name="username" required="required" type="text"></h4><br>
-                                <h4>密码：&emsp;<input name="password" required="required" type="password" minlength=3></h4>
+                                <h4>Name：&nbsp;&nbsp;&emsp;<input name="username" required="required" type="text"></h4><br>
+                                <h4>Password：<input name="password" required="required" type="password" minlength=3></h4>
                             </div><br>
-			                <button type="submit" > 登录 </button>
+			                <button type="submit" > Login </button>
                             </form>
                         </div>
                     </article>
@@ -94,19 +75,16 @@
                     <div id="aside">
                         <div >
                             <ul >
-                                <a class="Footer-link" href="" rel="noopener">关于</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">帮助中心</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">条款</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">隐私政策</a> &nbsp; 
+                                <a class="Footer-link" href="" rel="noopener">About</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Help</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Copyright</a> &nbsp;
                                 <a class="Footer-link" href="" rel="noopener">Cookies</a> &nbsp; 
-                                <a class="Footer-link" href="" rel="noopener">广告信息</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">商标</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">博客</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">状态</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">应用</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">工作机会</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">企业</a> &nbsp;
-                                <a class="Footer-link" href="" rel="noopener">开发者</a>
+                                <a class="Footer-link" href="" rel="noopener">ADs</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Mark</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Blog</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Application</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Job</a> &nbsp;
+                                <a class="Footer-link" href="" rel="noopener">Developer</a>
                                 <li class="Footer-item Footer-copyright copyright">&copy; 2017 Rust</li>
                             </ul>
                         </div>
@@ -116,13 +94,14 @@
         </main>
     
         <span id="nav_left">
-                <li class="menu-item"><a>文档</a></li>
-                <li class="menu-item"><a>新闻</a></li>
+                <li class="menu-item"><a href="/doc">Doc</a></li>
+                <li class="menu-item"><a href="/news">News</a></li>
+                <li class="menu-item"><a href="/area">Area</a></li>
         </span>
         
         <span id="nav_right">
-                <li ><a href="/user/register">注册 &emsp;</a></li>
-                <li ><a href="/user/login">登录</a></li>
+                <li ><a href="/user/register">Register &emsp;</a></li>
+                <li ><a href="/user/login">Login</a></li>
         </span>
     </div>
     <script src="../js/nav.js"></script>

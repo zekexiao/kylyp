@@ -28,7 +28,7 @@ footer, header, hgroup, menu, nav, section {
 html,body {
     width:100%;height:100%;
     font: 16px/1.4em 'PT Sans', sans-serif;
-    background-color: #feefff;
+    background-color: #E5F7ED;
 }
 * {
     padding:0px; margin:0px;
@@ -60,11 +60,10 @@ ol, ul {
 header {
     position: fixed;
     width: 100%;
-    background-color: #fff;
     height: 50px;
     zoom:1;    /* For IE 6/7 (trigger hasLayout) */
     box-shadow: 0 1px 2px #999; 
-    background-color:#feefff;
+    background-color:#C5F5DC;
 }
 
 h1.logo a {
@@ -72,7 +71,7 @@ h1.logo a {
     font-size: 22px;
     float: left;
     letter-spacing: 0.2em;
-    padding: 13px 0 15px 33px;
+    padding: 13px 0 15px 24px;
 }
  
 header:before,header:after {
@@ -104,65 +103,18 @@ nav {
     display: block;
 	overflow: hidden;
 }
-         
-nav ul li label {
+nav ul li a {
     display:block;
-    padding:12px 25px ;
-	background: #333;
-	color: #fff;
-}
-
-nav ul li input[type='checkbox'] {
-	display: none;
-}
-
-nav ul li input[type='checkbox']:checked ~ .options {
-	height: auto;
-    display:block;
-	min-height:40px;
-	max-height:400px;
-}
-
-nav ul li span {
-    float:right;
-	background:#666; 
-	border:1px solid #3c434c;
-    border-bottom:1px solid #111;
-	font-size:10px;
-	border-radius: 12px;
-	box-shadow: inner 0 0 10px #111;
-}
-
-nav ul ul {
-    background:#555;
-    margin:0; padding:0;
-    border-bottom:1px solid #555;
-}
-
-nav ul ul li a {
-	display:block;
-	padding:12px 25px ;
-	color:#fff;
-	text-decoration:none;
-}
-
-nav ul ul li a:hover {
-	color:#44c6eb;
-}
-
-nav ul ul li {
-	border-bottom:1px solid #333;
-}
-
-
-nav .options {
-	height: 0;
-	display: block;
-	overflow: hidden;
+    background-color: #D8FAE8;
+    color: #000000;
+    font-size: 14px;
+    font-weight: bold; 
+    padding:11px 0 11px 0 ;
+    text-align: center;
+    border-bottom: 1px solid #d8d8d8;
 }
 
 /* ------------------------------mobile - main----------------------------- */
-
 
 main {
     flex: 1;  /* 1 代表盡可能最大，會自動填滿除了 header footer 以外的空間 */
@@ -187,29 +139,54 @@ article {
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
+#top {
+    background-color: #ffffff;
+    margin: 0 10px 10px 0;
+    padding: 0 0 4px 0;
+}
 article #top #title {
     margin: -9px -22px 0 -11px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
+    color: #671696;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
-article #top #title a {
+article #top #title li {
+    display: inline-block;
     margin: 10px 0 8px 8px;
     display: inline-block;
     font-size: 16px;
     font-weight: bold;
 }
+article #top #title li.off {
+    background:#B1F5D1;
+    font-weight:bold;
+}
 article #top #topic {
     margin: 15px 0 0 0 ;
-    border-bottom:1px solid #eeeeee;
+    border-bottom:1px solid #D8FAE8;
 }
 article #blog a {
     font-weight: bold;
 }
+article #blog #right-info {
+    float:right;
+    font-size:12px;
+    font-weight: bold;
+    color:#EC0DBC;
+}
 article #blog #info {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
+    background-color:#F3FCFA;
 }
-
+/*--------------------------------- login-register ------------------------------- */
+article #top #user-reg {
+    margin: -9px -22px 0 -11px;
+    padding: 10px 11px 11px 11px;
+    font-weight: bold;
+    background-color: #D8FAE8;
+    box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
 article #top #login {
     margin: 30px 0 0 30px;
 }
@@ -223,28 +200,51 @@ article #top button {
 
 #theme {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 10px 14px 0;
+    margin: 0 10px 11px 0;
+    background-color: #ffffff;
+}
+#theme #title {
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
+    margin: 2px 0 11px 0;
+    padding: 10px 10px 10px 10px;
+    background-color: #D8FAE8;
+}
+#theme #title #info {
+    display: inline-block;
+    font-size: 13px;
+}
+#theme #content {
+    margin: 11px 10px 11px 10px;
+}
+#comment {
+    border-bottom: 1px solid #d8d8d8;
+    margin: 0 10px 11px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
-
-#comment {
+#comment #title{
+    box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
+    font-weight: bold;
+    padding: 10px 10px 10px 10px;
+    background-color: #D8FAE8;
+}
+#comment #comment-content {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 15px 15px 15px;
-    margin: 0 10px 14px 0;
-    background-color: #ffffff;
-    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
+    padding: 6px 10px 6px 10px;
+}
+#comment #comment-content #info {
+    display: inline-block;
+    font-size: 13px;
 }
 #reply {
     border-bottom: 1px solid #d8d8d8;
-    padding: 10px 0 15px 0;
-    margin: 0 10px 14px 0;
+    padding: 6px 0 3px 0;
+    margin: 0 10px 4px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 #reply button {
-    width:55px; 
+    width:70px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
@@ -253,17 +253,20 @@ article #top button {
     width:100%; 
     height: 133px;
 }
-
+/*--------------------------------- doc ------------------------------- */
+/* #theme #title button {
+    margin-left: 30px;
+    width:55px; 
+    line-height:30px;
+    background-color:aqua;
+    border :1px solid #eeeeee;
+} */
 /*--------------------------------- new ------------------------------- */
-#top {
-    background-color: #ffffff;
-    margin: 0 10px 10px 0;
-    padding: 0 0 10px 0;
-}
+
 #new-theme {
     padding: 12px 0 10px 10px;
     margin-right: -0.01px;
-    background-color: #feefff;
+    background-color: #D8FAE8;
     box-shadow: 0 0 1px rgba(0,0,0,0.22), 0 1px 1px rgba(0,0,0,0.22);
 }
 form #topic-group {
@@ -280,10 +283,10 @@ form #topic-group #category #category-control {
     /*在选择框的最右侧中间显示小箭头图片*/
     background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-    padding: 0 14px 0 6px;
+    padding: 0 17px 0 9px;
 }
 form #topic-group input {
-    width: 78%;
+    width: 82%;
     height: 30px;
 }
 form #new textarea {
@@ -300,8 +303,38 @@ form #new button {
 #top #person {
     margin: 11px;
 }
-#top #new-theme #person-more {
+#tab1 {
+    margin: 0 10px 10px 0;
+}
+#tab1 #menu-title {
+    padding: 12px 0 10px 10px;
+    margin-bottom: 1px;
+    background-color: #D8FAE8;
+    box-shadow: 0 0 2px rgba(0,0,0,0.22), 0 2px 2px rgba(0,0,0,0.22);
+}
+#tab1 #menu-title li{
     display: inline-block;
+}
+#tab1 #menu-title li.off{
+    background:#FFFFFF;color:#336699;font-weight:bold;
+}
+#message-content {
+    border-bottom: 1px solid #d8d8d8;
+    padding: 10px 11px 11px 11px;
+    margin: 0 0 1px 0;
+    background-color: #ffffff;
+}
+#message-content #blog{
+    border-bottom: 1px solid #d8d8d8; 
+    margin-bottom: 5px;  
+    padding-bottom: 5px;
+}
+#message-content #blog a {
+    font-weight: bold;
+}
+#message-content #blog #info {
+    display: inline-block;
+    font-size: 12px;
 }
 
 #aside {
@@ -315,7 +348,7 @@ form #new button {
 #aside #new_theme {
     font-weight: bold;
     text-align: center;
-    background: #feefff;
+    background: #D8FAE8;
     line-height: 44px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 } 
@@ -350,7 +383,7 @@ form #new button {
         left: 122px;
         line-height: 50px;
         font-weight: 700;
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #nav_left li {
         display: inline-block;
@@ -360,11 +393,11 @@ form #new button {
         display: block; 
         position: fixed;
         height: auto;
-        right: 33px;
+        right: 30px;
         line-height: 50px;
         font-weight: 700;
         /* background-color:#039BE5; */
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #nav_right input {
         display: none;
@@ -378,10 +411,10 @@ form #new button {
         height: auto;
         right: 0;
         line-height: 50px;
-        background-color:#feefff;
+        background-color:#C5F5DC;
     }
     #primary_nav {
-        margin-right: 136px;
+        margin-right: 166px;
     }
     #primary_nav ul li {
         display: inline-block; 

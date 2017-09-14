@@ -8,7 +8,7 @@ menu.addEventListener('click', function() {
             manv.style.height = 'auto';
         }
 
-        // 3中方式相同
+        // they are same
         // manv.style.height = 'auto';
         // manv.setAttribute('style', 'height: auto !important');
         // manv.style.setProperty( 'height',' auto', 'important');
@@ -28,7 +28,7 @@ for (var i = 0; i < submenu.length; i++) {
                 subitem.style.height = 'auto';
             }
 
-            // 3中方式相同
+            // they are same
             // manv.style.height = 'auto';
             // manv.setAttribute('style', 'height: auto !important');
             // manv.style.setProperty( 'height',' auto', 'important');

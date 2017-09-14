@@ -1,6 +1,6 @@
 [package]
 name = "kylyp"
-version = "0.1.0"
+version = "0.7.0"
 authors = ["kriry <krircc@gmail.com>"]
 
 [dependencies]
@@ -10,9 +10,13 @@ rocket_contrib = { git = "https://github.com/SergioBenitez/Rocket.git", default-
 serde = "^1.0.0"
 serde_derive = "^1.0.0"
 serde_json = "^1.0.0"
-diesel = { version = "^0.16.0", features = ["postgres"] }
+diesel = { version = "^0.16.0", features = ["postgres","chrono"] }
 diesel_codegen = { version = "^0.16.0", features = ["postgres"] }
-postgres = "^0.14.0"
+postgres = {version= "^0.15.1", features = ["with-chrono"]}
 dotenv = "^0.10.0"
-regex = "^0.2.0"
+dotenv_macros = "^0.10.0"
+regex = "^0.1.0"
 chrono = { version = "0.4", features = ["serde"] }
+config = "^0.7.0"
+pulldown-cmark = "0.0.8"
+ammonia = "0.1"
