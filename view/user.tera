@@ -58,10 +58,10 @@
                                 <h4> User-Centre </h4> 
                             </div>
                             <div id="person">
-                                <span id="person-info">user-img</span><span id="person-info">{{ username }}</span>
+                                <span id="person-info">user-img</span><span id="person-info">{{ this_user.username }}</span>
                                 <div id="person-info">
-                                    <p>email:{{ login_user.email }}</p>
-                                    <p>Reg-time:{{ login_user.created_at }}</p>
+                                    <p>email:{{ this_user.email }}</p>
+                                    <p>Reg-time:{{ this_user.created_at }}</p>
                                     <p>Topic:  Comment:</p>
                                 </div>
                             </div>

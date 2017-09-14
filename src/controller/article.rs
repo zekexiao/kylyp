@@ -23,13 +23,13 @@ struct TemplateArticle {
 pub struct DataArticle {
     pub category: String,
     pub title: String,
-    pub content: String,
+    pub raw: String,
 }
 
 #[derive(FromForm,Debug)]
 pub struct DataComment {
     pub aid: Option<i32>,
-    pub content: String,
+    pub raw: String,
 }
 
 #[get("/<aid>", rank = 2)]
@@ -63,7 +63,7 @@ pub fn add_comment(user: UserOr, user_id: UserId, data_comment: DataComment)  {
     let uid = user_id.0;
     if let Some(aid) = data_comment.aid {
         let use_aid = aid;
-        let use_content = data_comment.content;
+        let use_content = data_comment.raw;
         add_comment_by_aid(use_aid, uid, &use_content);
     } else {
         "Something Wrong!".to_string();
@@ -84,8 +84,8 @@ fn add_article(user: UserOr, user_id: UserId, data_article: Form<DataArticle>)  
     let uid = user_id.0;
     let category = &data.category;
     let title = &data.title;
-    let content = &data.content;
-    add_article_by_uid(uid, &category, &title, &content);
+    let raw = &data.raw;
+    add_article_by_uid(uid, &category, &title, &raw);
     let datas = article_list();
     let context = TemplateArticle {
         datas: datas,

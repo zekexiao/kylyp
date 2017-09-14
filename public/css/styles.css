@@ -285,7 +285,7 @@ article #top button {
 }
 #comment #comment-content #info {
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
 }
 #reply {
     border-bottom: 1px solid #d8d8d8;
@@ -465,7 +465,7 @@ form #new button {
         background-color:#C5F5DC;
     }
     #primary_nav {
-        margin-right: 150px;
+        margin-right: 166px;
     }
     #primary_nav ul li {
         display: inline-block; 

@@ -11,6 +11,7 @@ use config::*;
 use CFG_DEFAULT;
 use chrono::{DateTime,Utc};
 use spongedown;
+use utils::render::render_html;
 
 #[derive(Debug, Serialize)]
 pub struct Uarticle {
@@ -20,7 +21,8 @@ pub struct Uarticle {
     pub status: i32,
     pub comments_count: i32,
     pub title: String,
-    pub content: String,
+    pub raw: String,
+    pub cooked: String,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
     pub username: String,
@@ -31,7 +33,8 @@ pub struct Ucomment {
     pub id: i32,
     pub aid: i32,
     pub uid: i32,
-    pub content: String,
+    pub raw: String,
+    pub cooked: String,
     pub created_at: DateTime<Utc>,
     pub username: String,
 }
@@ -43,7 +46,8 @@ pub struct UserComment {
     pub status: i32,
     pub comments_count: i32,
     pub title: String,
-    pub content: String,
+    pub raw: String,
+    pub cooked: String,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
     pub comment_id: i32,
@@ -56,7 +60,8 @@ pub struct UserComment {
 pub struct UserMessage {
     pub message_status: i32,
     pub message_createtime: DateTime<Utc>,
-    pub comment_content: String,
+    pub comment_raw: String,
+    pub comment_cooked: String,
     pub from_uid: i32,
     pub from_uid_name: String,
     pub from_uid_email: String,
@@ -94,7 +99,9 @@ impl Setting {
 pub fn article_list() -> Vec<Uarticle> {
     let conn = get_conn();
     let mut article_result: Vec<Uarticle> = vec![];
-    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id order by article.id desc", &[]).unwrap()
+    for row in &conn.query("SELECT article.id, article.uid, article.category, article.status, article.comments_count, article.title, article.raw,
+                           article.cooked, article.created_at, article.updated_at, users.username 
+                           FROM article, users WHERE article.uid = users.id ORDER BY article.id DESC", &[]).unwrap()
     {
         let result = Uarticle {
             id: row.get(0),
@@ -103,10 +110,11 @@ pub fn article_list() -> Vec<Uarticle> {
             status: row.get(3),
             comments_count: row.get(4),
             title: row.get(5),
-            content: row.get(6),
-            created_at: row.get(7),
-            updated_at: row.get(8),
-            username: row.get(9),
+            raw: row.get(6),
+            cooked: row.get(7),
+            created_at: row.get(8),
+            updated_at: row.get(9),
+            username: row.get(10),
         };
         article_result.push(result);
     }
@@ -122,12 +130,15 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
         status: 0,
         comments_count: 0,
         title: "".to_string(),
-        content: "".to_string(),
+        raw: "".to_string(),
+        cooked: "".to_string(),
         created_at: Utc::now(), 
         updated_at: Utc::now(), 
         username: "".to_string(),
     };
-    for row in &conn.query("SELECT article.*, users.username FROM article, users WHERE article.uid = users.id and article.id = $1", &[&aid]).unwrap() {
+    for row in &conn.query("SELECT article.id, article.uid, article.category, article.status,
+                            article.comments_count, article.title, article.raw, article.cooked, article.created_at, article.updated_at, users.username 
+                           FROM article, users WHERE article.uid = users.id AND article.id = $1", &[&aid]).unwrap() {
         article_result = Uarticle {
             id: row.get(0),
             uid: row.get(1),
@@ -135,13 +146,11 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
             status: row.get(3),
             comments_count: row.get(4),
             title: row.get(5),
-            content: {
-                let content: String = row.get(6); 
-                spongedown::parse(&content)
-            },
-            created_at: row.get(7),
-            updated_at: row.get(8),
-            username: row.get(9),
+            raw: row.get(6),
+            cooked: row.get(7),
+            created_at: row.get(8),
+            updated_at: row.get(9),
+            username: row.get(10),
         };
     }
     article_result
@@ -150,24 +159,23 @@ pub fn get_article_by_aid(aid: i32) -> Uarticle {
 pub fn get_comment_by_aid(aid: i32) -> Vec<Ucomment> {
     let conn = get_conn();
     let mut result: Vec<Ucomment> = vec![];
-    for row in &conn.query("SELECT comment.*, users.username FROM comment, users WHERE comment.uid = users.id and comment.aid = $1 order by comment.id", &[&aid]).unwrap() {
-        let comment_result = Ucomment {
+    for row in &conn.query("SELECT comment.id, comment.aid, comment.uid, comment.raw, comment.cooked, comment.created_at, users.username 
+                            FROM comment, users WHERE comment.uid = users.id AND comment.aid = $1 ORDER BY comment.id", &[&aid]).unwrap() {
+        let mut comment_result = Ucomment {
             id: row.get(0),
             aid: row.get(1),
             uid: row.get(2),
-            content: {
-                let content:String = row.get(3);
-                spongedown::parse(&content)
-            },
-            created_at: row.get(4),
-            username: row.get(5),
+            raw: row.get(3),
+            cooked: row.get(4),
+            created_at: row.get(5),
+            username: row.get(6),
         };
         result.push(comment_result);
     }
     result
 }
 
-pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, content: &'a str) {
+pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, raw: &'a str) {
     use utils::schema::article;
     let connection = establish_connection();
     let created_at = Utc::now();
@@ -176,14 +184,15 @@ pub fn add_article_by_uid<'a>(uid: i32, category: &'a str, title: &'a str, conte
         uid: uid,
         category: category,
         title: title,
-        content: content,
+        raw: raw,
+        cooked: &spongedown::parse(&raw),
         created_at: created_at,
         updated_at: updated_at,
     };
     diesel::insert(&new_article).into(article::table).execute(&connection).expect("Error saving new list");
 }
         
-pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
+pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, raw: &'a str,) {
     let env = Development {
         address: Some("".to_string()),
         port: Some("".to_string()),
@@ -208,7 +217,7 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
     let connection = establish_connection();
     let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
     let mut to_uids: Vec<i32> = Vec::new();
-    let new_content = re.replace_all(&content, |cap: &Captures| {
+    let new_content = re.replace_all(&raw, |cap: &Captures| {
         match get_uids(cap.at(1).unwrap()) {
             Some(user_id) => {
                 to_uids.push(user_id);
@@ -225,19 +234,20 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
     let new_comment = NewComment {
         aid : aid,
         uid : uid,
-        content : &new_content,
+        raw : &new_content,
+        cooked: &spongedown::parse(&new_content),
         created_at : created_at,
     };
     diesel::insert(&new_comment).into(comment::table).execute(&connection).expect("Error saving new comment");
     
     let mut comment_id: i32 = 0;
-    for row in &conn.query("SELECT comment.id FROM comment WHERE comment.content = $1",&[&content]).unwrap() {
+    for row in &conn.query("SELECT comment.id FROM comment WHERE comment.raw = $1",&[&raw]).unwrap() {
         let comment = CommentId {
             id: row.get(0),
         };
         comment_id = comment.id;
     }
-    conn.execute("UPDATE article SET comments_count = comments_count + 1 where id = $1", &[&aid]).unwrap();
+    conn.execute("UPDATE article SET comments_count = comments_count + 1 WHERE id = $1", &[&aid]).unwrap();
     let mut author_id: i32 = 0;
     for row in &conn.query("SELECT article.uid FROM article WHERE article.id = $1",&[&aid]).unwrap() {
         let t_uid = ToUid {
@@ -246,14 +256,14 @@ pub fn add_comment_by_aid<'a>(aid: i32, uid: i32, content: &'a str,) {
         author_id = t_uid.id;
     }
     if uid != author_id {
-        conn.execute("INSERT INTO message (aid, cid, from_uid, to_uid, content, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                 &[&aid, &comment_id, &uid, &author_id, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
+        conn.execute("INSERT INTO message (aid, cid, from_uid, to_uid, raw, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                 &[&aid, &comment_id, &uid, &author_id, &raw, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
     }
     to_uids.sort();
     to_uids.dedup();
     for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
-        conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, content, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                &[&aid, &comment_id, &uid, &to_uid, &content, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
+        conn.execute("INSERT INTO message(aid, cid, from_uid, to_uid, raw, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
+                &[&aid, &comment_id, &uid, &to_uid, &raw, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
     }
 }
 
@@ -261,7 +271,7 @@ pub fn get_uids(username: &str) -> Option<i32> {
 
     let conn = get_conn();
     let mut to_uid: Option<i32> = Some(0);
-    for row in &conn.query("SELECT id from user where username = $1",&[&username]).unwrap() {
+    for row in &conn.query("SELECT id FROM user WHERE username = $1",&[&username]).unwrap() {
         let uid = ToUid {
             id: row.get(0),
         };
@@ -270,11 +280,10 @@ pub fn get_uids(username: &str) -> Option<i32> {
     to_uid
 }
 
-pub fn get_user_info(user_id: &UserId) -> Option<User> {
+pub fn get_user_info(user_id: i32) -> Option<User> {
     use utils::schema::users::dsl::*;
-    // use utils::schema::{users,article,comment,message};
     let connection = establish_connection();
-    let uid = user_id.0;
+    let uid = user_id;
     let user_result =  users.filter(&id.eq(&uid)).load::<User>(&connection);
     let login_user = match user_result {
         Ok(user_s) => match user_s.first() {
@@ -286,11 +295,13 @@ pub fn get_user_info(user_id: &UserId) -> Option<User> {
     login_user
 }
 
-pub fn get_user_articles(user_id: &UserId) -> Vec<Article> {
+pub fn get_user_articles(user_id: i32) -> Vec<Article> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_articles: Vec<Article> = vec![];
-    for row in &conn.query("SELECT article.* FROM article WHERE article.uid = $1 ",&[&u_id]).unwrap() {
+    for row in &conn.query("SELECT article.id, article.uid, article.category, article.status, 
+                            article.comments_count, article.title, article.raw, article.cooked, article.created_at, article.updated_at 
+                           FROM article WHERE article.uid = $1 ",&[&u_id]).unwrap() {
         let article = Article {
             id: row.get(0),
             uid: row.get(1),
@@ -298,20 +309,26 @@ pub fn get_user_articles(user_id: &UserId) -> Vec<Article> {
             status: row.get(3),
             comments_count: row.get(4),
             title: row.get(5),
-            content: row.get(6),
-            created_at: row.get(7),
-            updated_at: row.get(8),
+            raw: row.get(6),
+            cooked: row.get(7),
+            created_at: row.get(8),
+            updated_at: row.get(9),
         };
         user_articles.push(article);
     }
     user_articles
 }
 
-pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
+pub fn get_user_comments(user_id: i32) -> Vec<UserComment> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_comments: Vec<UserComment> = vec![];
-    for row in &conn.query("SELECT comment.*, article.* FROM comment, article where comment.aid = article.id and comment.uid = $1 order by comment.id ",&[&u_id]).unwrap() {
+    for row in &conn.query("SELECT
+                            comment.aid, comment.uid, comment.content, comment.createtime, 
+                            article.id, article,uid, article.category, article.status,
+                            article.comments_count, article.title, article.raw, article.cooked, 
+                            article.created_at, article.updated_at
+                           FROM comment, article WHERE comment.aid = article.id AND comment.uid = $1 ORDER BY comment.id ",&[&u_id]).unwrap() {
         let comment = UserComment {
             id: row.get(5),
             uid: row.get(6),
@@ -319,9 +336,10 @@ pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
             status: row.get(8),
             comments_count: row.get(9),
             title: row.get(10),
-            content: row.get(11),
-            created_at: row.get(12),
-            updated_at: row.get(13),
+            raw: row.get(11),
+            cooked: row.get(12),
+            created_at: row.get(13),
+            updated_at: row.get(14),
             comment_id: row.get(0),
             comment_aid: row.get(1),
             comment_uid: row.get(2),
@@ -334,20 +352,22 @@ pub fn get_user_comments(user_id: &UserId) -> Vec<UserComment> {
     user_comments
 }
 
-pub fn get_user_messages(user_id: &UserId) -> Vec<UserMessage> {
+pub fn get_user_messages(user_id: i32) -> Vec<UserMessage> {
     let conn = get_conn();
-    let u_id = user_id.0;
+    let u_id = user_id;
     let mut user_messages: Vec<UserMessage> = vec![];
-    for row in &conn.query("SELECT m.status, m.created_at, c.content, u.id as user_id, u.username,
-         u.email, a.id as article_id, a.title as article_title 
-         from message as m join users as u on m.from_uid = u.id 
-         join article as a on a.id=m.aid 
-         join comment as c on c.id=m.cid 
-         where to_uid= $1 order by created_at desc;",&[&u_id]).unwrap() {
+    for row in &conn.query("SELECT m.status, m.created_at, c.raw, c.cooked, u.id as user_id, u.username,
+         u.email, a.id AS article_id, a.title AS article_title 
+         FROM message AS m 
+         JOIN users AS u ON m.from_uid = u.id 
+         JOIN article AS a ON a.id=m.aid 
+         JOIN comment AS c ON c.id=m.cid 
+         WHERE to_uid= $1 ORDER BY created_at DESC;",&[&u_id]).unwrap() {
         let message = UserMessage {
             message_status: row.get(0),
             message_createtime: row.get(1),
-            comment_content: row.get(2),
+            comment_raw: row.get(2),
+            comment_cooked: row.get(3),
             from_uid: row.get(3),
             from_uid_name: row.get(4),
             from_uid_email: row.get(5),
