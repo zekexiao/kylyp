@@ -5,6 +5,7 @@ use rocket::response::NamedFile;
 use rocket_contrib::Template;
 use controller::user::{UserId,UserOr};
 use handler::content::{Uarticle,article_list};
+use model::pg::ConnPg;
 
 #[derive(Serialize)]
 struct TemplateContext {
@@ -19,8 +20,8 @@ struct TemplateDoc {
 }
 
 #[get("/",rank = 2)]
-pub fn index() -> Template {
-    let datas = article_list();
+pub fn index(conn_pg: ConnPg) -> Template {
+    let datas = article_list(&conn_pg);
     let context = TemplateContext {
         datas: datas,
         username: "".to_string(),
@@ -30,8 +31,8 @@ pub fn index() -> Template {
 }
 
 #[get("/")]
-pub fn index_user(user: UserOr, user_id: UserId) -> Template {
-    let datas = article_list();
+pub fn index_user(conn_pg: ConnPg, user: UserOr, user_id: UserId) -> Template {
+    let datas = article_list(&conn_pg);
     let context = TemplateContext {
         datas: datas,
         username: user.0,

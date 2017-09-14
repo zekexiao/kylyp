@@ -21,6 +21,9 @@ extern crate chrono;
 extern crate regex;
 extern crate config;
 extern crate spongedown;
+extern crate r2d2;
+extern crate r2d2_diesel;
+extern crate r2d2_postgres;
 
 #[macro_use]
 mod controller;
@@ -36,7 +39,11 @@ use controller::{home,user,article};
 const CFG_DEFAULT: &'static str = "Rocket";
 
 fn main() {
+    let pool_dsl = model::db::init_pool();
+    let pool_pg = model::pg::init_pool();
     rocket::ignite()
+        .manage(pool_dsl)
+        .manage(pool_pg)
         .mount("/", routes![home::public,home::index_user,home::index,home::doc_user,home::doc,home::area_user,home::area,home::news_user,home::news])
         .mount("/user",routes![user::login_register,user::register,user::register_post,
                                user::login_user,user::login,user::login_post,user::user_page,user::logout])
