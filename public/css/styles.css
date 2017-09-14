@@ -29,28 +29,18 @@ footer, header, hgroup, menu, nav, section {
 
 html,body {
     width:100%;height:100%;
-    font: 16px/1.4em 'PT Sans', sans-serif;
+    font: 16px/1.4em 'PT Serif', serif;
     background-color: #E5F7ED;
+    
+}
+a {
+    text-decoration: none;
 }
 * {
     padding:0px; margin:0px;
     box-sizing: border-box;
 }
  
-h3 {
-    font-family: 'PT Serif', serif;
-    font-size: 20px;
-    line-height: 1.4em;
-    margin: 0 0 .1em;
-    font-weight: bold;
-}
-h4 {
-    font-family: 'PT Serif', serif;
-    font-size: 15px;
-    line-height: 1.4em;
-    margin: 0 0 .1em;
-    font-weight: bold;
-}
 ol, ul {
     list-style: none;
 }
@@ -68,37 +58,32 @@ header {
     background-color:#C5F5DC;
 }
 
-h1.logo a {
-    font-weight: bold;
-    font-size: 22px;
+header #logo {
     float: left;
-    letter-spacing: 0.2em;
-    padding: 13px 0 15px 24px;
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    margin: 12px 0 0 26px;
 }
  
 header:before,header:after {
     content:"";
     display:table;
 }
-         
 header:after {
     clear:both;
 }
 
-/* --------------------------------mobile-------------------------------- */
-
 header label {
     float: right;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
-    /* text-transform: uppercase; */
-    letter-spacing: 0.1em;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
     border-radius: 2px;
-    padding: 15px 22px 15px 0;
+    margin: 13px 26px 0 0;
 }
-
+/* --------------------------------mobile-------------------------------- */
 nav {
     padding-top: 50px; 
     height: 0;
@@ -123,14 +108,10 @@ main {
     margin: 0 9% 22px 9%;
 } 
 #content {
-    margin-top: 16px;
+    margin: 15px 10px 0 10px;
+    
 }
 
-#content{
-    padding-left: 20px;
-    padding-right: 20px;
-    font-family: arial;
-}
 #content h1{
     font-size: 1.5em;
 }
@@ -139,6 +120,7 @@ main {
 }
 #content h3{
     font-size: 1.3em;
+    font-weight: bold;
 }
 #content h4{
     font-size: 1.2em;
@@ -205,7 +187,7 @@ article #top #title li {
     display: inline-block;
     margin: 10px 0 8px 8px;
     display: inline-block;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
 }
 article #top #title li.off {
@@ -216,34 +198,36 @@ article #top #topic {
     margin: 15px 0 0 0 ;
     border-bottom:1px solid #D8FAE8;
 }
-article #blog a {
+article #blog #title {
     font-weight: bold;
+    font-size: 18px;
 }
 article #blog #right-info {
     float:right;
-    font-size:12px;
+    font-size:14px;
     font-weight: bold;
     color:#EC0DBC;
 }
 article #blog #info {
     display: inline-block;
-    font-size: 12px;
+    font-size: 14px;
     background-color:#F3FCFA;
 }
 /*--------------------------------- login-register ------------------------------- */
 article #top #user-reg {
     margin: -9px -22px 0 -11px;
     padding: 10px 11px 11px 11px;
+    font-size: 18px;
     font-weight: bold;
     background-color: #D8FAE8;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 article #top #login {
-    margin: 30px 0 0 30px;
+    margin: 30px 10px 0 0;
 }
 article #top button {
-    margin-left: 30px;
-    width:55px; 
+    width:63px; 
+    font-weight: bold;
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
@@ -262,10 +246,11 @@ article #top button {
 }
 #theme #title #info {
     display: inline-block;
-    font-size: 13px;
+    font-size: 14px;
 }
 #theme #content {
     margin: 11px 10px 11px 10px;
+    font-size: 18px;
 }
 #comment {
     border-bottom: 1px solid #d8d8d8;
@@ -292,10 +277,9 @@ article #top button {
     padding: 6px 0 3px 0;
     margin: 0 10px 4px 0;
     background-color: #ffffff;
-    /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 #reply button {
-    width:70px; 
+    width:80px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
@@ -305,13 +289,7 @@ article #top button {
     height: 133px;
 }
 /*--------------------------------- doc ------------------------------- */
-/* #theme #title button {
-    margin-left: 30px;
-    width:55px; 
-    line-height:30px;
-    background-color:aqua;
-    border :1px solid #eeeeee;
-} */
+
 /*--------------------------------- new ------------------------------- */
 
 #new-theme {
@@ -345,7 +323,7 @@ form #new textarea {
     height: 333px;
 }
 form #new button {
-    width:55px; 
+    width:63px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
@@ -404,7 +382,6 @@ form #new button {
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 } 
 
-/* ------------------------mobile - footer ----------------------- */
 
 /* ---------------------desk -------nav ---------------------- */ 
 
@@ -412,12 +389,6 @@ form #new button {
     display: none;
 }
 
-/*----------Media Query 多屏幕时 小屏幕放前面-----------  */
-
-/* @media only screen and (min-width: 550px) {
-    .re-table-100 {width: 100%;}
-
-}  */
 
 
 /*-------------------------------------Desktop------------------------  */
@@ -432,6 +403,7 @@ form #new button {
         position: fixed;
         height: auto;
         left: 122px;
+        font-size: 18px;
         line-height: 50px;
         font-weight: 700;
         background-color:#C5F5DC;
@@ -445,9 +417,9 @@ form #new button {
         position: fixed;
         height: auto;
         right: 30px;
+        font-size: 18px;
         line-height: 50px;
         font-weight: 700;
-        /* background-color:#039BE5; */
         background-color:#C5F5DC;
     }
     #nav_right input {
@@ -460,6 +432,7 @@ form #new button {
         display: block; 
         position: fixed;
         height: auto;
+        font-size: 18px;
         right: 0;
         line-height: 50px;
         background-color:#C5F5DC;

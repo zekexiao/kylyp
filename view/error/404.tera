@@ -7,6 +7,7 @@
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -17,7 +18,7 @@
 <body >
     <div id="all">
         <header >
-                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <a id="logo" href="/" >Rust</a>
                 <label ><a id="menu" href="#" >Menu</a></label>
         </header>
         <nav id="mnav" >

@@ -22,7 +22,7 @@
 <body >
     <div id="all">
         <header >
-                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <a id="logo" href="/" >Rust</a>
                 <label ><a id="menu" href="#" >Menu</a></label>
         </header>
         <nav id="mnav" >
@@ -74,13 +74,13 @@
                                     <span id="info">{{loop.index}}.</span>
                                     <span id="info"><a href="/user/{{comment.uid}}">{{ comment.username }}</a></span> • <span id="info">{{ comment.created_at }}</span>
                                 </div>
-                                <div style="font-size:14px;">  {{ comment.cooked | safe }} </div>
+                                <div style="font-size:17px;">  {{ comment.cooked | safe }} </div>
                             </div>
                         {% endfor %}
                     </div>
                     <div id="reply">
                         {% if username %}
-                            <textarea class="ans_con" id="marked"></textarea>
+                            <textarea class="ans_con" ></textarea>
                             <button type="submit" id="submit" data-aid="{{ article.id }}"><span class="tip"> Comment </span></button>
                             <script type="text/javascript" src="http://mat1.gtimg.com/libs/jquery/1.12.0/jquery.min.js"></script>
                             <script type="text/javascript" >
@@ -175,11 +175,7 @@
         {% endif %}
     </div>
     <script src="../js/nav.js"></script>
-    <script src="../js/marked.min.js"></script>
-    <script>
-        document.getElementById('marked').innerHTML =
-        marked('# write in markdownr, it's experimental and broken\n\n ');
-    </script>
+    
     
 </body>
 </html>

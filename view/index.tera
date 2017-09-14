@@ -19,7 +19,7 @@
 <body >
     <div id="all">
         <header >
-                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <a id="logo" href="/" >Rust</a>
                 <label ><a id="menu" href="#" >Menu</a></label>
         </header>
         <nav id="mnav" >
@@ -84,7 +84,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -99,7 +99,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -115,7 +115,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -131,7 +131,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -147,7 +147,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -163,7 +163,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
@@ -179,7 +179,7 @@
                         <article>
                             <div id="blog">
                                 <div>
-                                    <a href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
+                                    <a id="title" href="/article/{{ data.id }}" title="{{ data.title }}"> {{ data.title }} </a>
                                     <div id="right-info">{{ data.comments_count }}</div>
                                 </div>
                                 <span id="info">{{ data.category }}</span>  •  <span id="info"><a href="/user/{{data.uid}}">{{ data.username }}</a></span> •   
