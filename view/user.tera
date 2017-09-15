@@ -71,9 +71,12 @@
                         <ul id="menu-title">
                             <li id="one1" onclick="setTab('one',1)"><h4>MyPublish</h4></li>&emsp;
                             <li id="one2" onclick="setTab('one',2)"><h4>MyComment</h4></li>&emsp;
+                            {% if user_id == this_user.id %}
                             <li id="one3" onclick="setTab('one',3)"><h4>MyMessage</h4></li>
+                            {% endif %}
                         </ul>
                         <div id="message-content">
+                            
                             <div id="con_one_1" class="tab_content">
                                 {% for article in user_articles %}
                                     <div id="blog">
@@ -82,6 +85,8 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                           
+                            
                             <div id="con_one_2" style="display:none;" class="tab_content">
                                 {% for comment_article in user_comments %}
                                     <div id="blog">
@@ -96,9 +101,9 @@
                                     </div>
                                 {% endfor %}
                             </div>
-                            {% if username %}
                             <div id="con_one_3" style="display:none;" class="tab_content">
-                                {% for message in user_messages %}
+                            {% for message in user_messages %}
+                                {% if user_id == this_user.id %}
                                     <div id="blog">
                                         <div>
                                             <span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span> 
@@ -107,9 +112,9 @@
                                         </div>
                                         <span id="comment-info" >{{ message.comment_cooked }}</span>
                                     </div>
-                                {% endfor %}
+                                {% endif %}
+                            {% endfor %}
                             </div>
-                            {% endif %}
                         </div>    
                     </div>
                 </div> 

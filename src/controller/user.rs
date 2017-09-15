@@ -67,24 +67,45 @@ struct UserInfo {
     user_articles: Vec<Article>,
     user_comments: Vec<UserComment>,
     user_messages: Vec<UserMessage>,
+    username: String,
+    user_id: i32,
 }
 
-#[get("/<u_id>")]
+#[get("/<u_id>", rank = 2)]
 pub fn user_page(conn_pg: ConnPg, conn_dsl: ConnDsl, u_id: i32) -> Template {
-        let user = get_user_info(&conn_dsl, u_id);
+        let a_user = get_user_info(&conn_dsl, u_id);
         let articles = get_user_articles(&conn_pg, u_id);
         let comments = get_user_comments(&conn_pg, u_id);
         let messages = get_user_messages(&conn_pg, u_id);
         let context = UserInfo {
-            this_user: user,
+            this_user: a_user,
             user_articles: articles,
             user_comments: comments,
             user_messages: messages,
+            username: "".to_string(),
+            user_id: 0,
+        };
+        Template::render("user", &context)
+}
+#[get("/<u_id>")]
+pub fn user_page_login(conn_pg: ConnPg, conn_dsl: ConnDsl, u_id: i32,user: UserOr, user_id: UserId) -> Template {
+        let a_user = get_user_info(&conn_dsl, u_id);
+        let articles = get_user_articles(&conn_pg, u_id);
+        let comments = get_user_comments(&conn_pg, u_id);
+        let messages = get_user_messages(&conn_pg, u_id);
+        let context = UserInfo {
+            this_user: a_user,
+            user_articles: articles,
+            user_comments: comments,
+            user_messages: messages,
+            username: user.0,
+            user_id: user_id.0,
         };
         Template::render("user", &context)
 }
 
-#[get("/register", rank = 2)]
+
+#[get("/register", rank = 3)]
 pub fn register(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {
@@ -103,7 +124,7 @@ pub fn login_register(user: UserOr) -> Template {
 //     Redirect::to(&*("/index/".to_string() + &*user.0.to_string()))
 // }
 
-#[get("/login", rank = 2)]
+#[get("/login", rank = 4)]
 pub fn login(flash: Option<FlashMessage>) -> Template {
     let mut context = HashMap::new();
     if let Some(ref msg) = flash {

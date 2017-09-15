@@ -250,16 +250,17 @@ pub fn add_comment_by_aid<'a>(conn_pg: &Connection, conn_dsl: &PgConnection, aid
         };
         author_id = t_uid.id;
     }
+    let cooked = &spongedown::parse(&new_content);
     //send message to article author.
     if uid != author_id {
-        conn_pg.execute("INSERT INTO message (aid, cid, from_uid, to_uid, raw, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                 &[&aid, &comment_id, &uid, &author_id, &raw, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
+        conn_pg.execute("INSERT INTO message (aid, cid, from_uid, to_uid, raw, cooked, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)",
+                 &[&aid, &comment_id, &uid, &author_id, &raw, &cooked, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
     }
     to_uids.sort();
     to_uids.dedup();
     for to_uid in to_uids.iter().filter(|&x| *x != author_id && *x != uid) {
-        conn_pg.execute("INSERT INTO message(aid, cid, from_uid, to_uid, raw, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
-                &[&aid, &comment_id, &uid, &to_uid, &raw, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
+        conn_pg.execute("INSERT INTO message(aid, cid, from_uid, to_uid, raw, cooked, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8,$9)",
+                &[&aid, &comment_id, &uid, &to_uid, &raw, &cooked, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
     }
 }
 
