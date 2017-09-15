@@ -78,7 +78,7 @@
                                 {% for article in user_articles %}
                                     <div id="blog">
                                         <div><a href="/article/{{ article.id }}"> {{ article.title }} </a></div>
-                                        <span id="info">{{ article.category }}</span>  • <span id="info">{{ article.created_at }}</span><span id="info">Comment:{{ article.comments_count }}</span>
+                                        <span id="info">{{ article.category }}</span>  • <span id="info">{{ article.created_at }}</span> • <span id="info">Comment:{{ article.comments_count }}</span>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -92,7 +92,7 @@
                                                 <span id="info">Comment:{{ comment_article.article_comments_count }}</span>
                                             </span>
                                         </div>
-                                        <span id="info" style="font-size:14px;">{{ comment_article.cooked }}</span>
+                                        <span id="comment-info" >{{ comment_article.cooked }}</span>
                                     </div>
                                 {% endfor %}
                             </div>
@@ -104,7 +104,7 @@
                                             <span id="info"> at </span> <span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> <span id="info">comment you</span>  
                                             <span id="info" >{{ message.message_created_at }}</span>>
                                         </div>
-                                        <span id="info" style="font-size:14px;">{{ message.comment_cooked }}</span>
+                                        <span id="comment-info" >{{ message.comment_cooked }}</span>
                                     </div>
                                 {% endfor %}
                             </div>

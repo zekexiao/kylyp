@@ -315,8 +315,8 @@ pub fn get_user_articles(conn_pg: &Connection, user_id: i32) -> Vec<Article> {
 pub fn get_user_comments(conn_pg: &Connection, user_id: i32) -> Vec<UserComment> {
     let u_id = user_id;
     let mut user_comments: Vec<UserComment> = vec![];
-    for row in &conn_pg.query("SELECT comment.* , article.*
-                           FROM comment, article WHERE comment.uid = $1 ORDER BY comment.id ",&[&u_id]).unwrap() {
+    for row in &conn_pg.query("SELECT comment.*, article.* FROM comment, article 
+                        where comment.aid = article.id and comment.uid = $1 order by comment.id  ",&[&u_id]).unwrap() {
         let comment = UserComment {
                 id: row.get(0),
                 aid: row.get(1),

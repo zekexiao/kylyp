@@ -261,6 +261,7 @@ article #top button {
 #comment #title{
     box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
     font-weight: bold;
+    font-size: 18px;
     padding: 10px 10px 10px 10px;
     background-color: #D8FAE8;
 }
@@ -278,16 +279,21 @@ article #top button {
     margin: 0 10px 4px 0;
     background-color: #ffffff;
 }
+#reply #write {
+    font-weight: bold;
+    height: 22px;
+}
+#reply textarea {
+    width:100%; 
+    height: 133px;
+}
 #reply button {
     width:80px; 
     line-height:30px;
     background-color:aqua;
     border :1px solid #eeeeee;
 }
-#reply textarea {
-    width:100%; 
-    height: 133px;
-}
+
 /*--------------------------------- doc ------------------------------- */
 
 /*--------------------------------- new ------------------------------- */
@@ -360,12 +366,16 @@ form #new button {
 }
 #message-content #blog a {
     font-weight: bold;
+    font-size: 17px;
 }
 #message-content #blog #info {
     display: inline-block;
-    font-size: 12px;
+    font-size: 13px;
 }
-
+#message-content #blog #comment-info {
+    display: inline-block;
+    font-size: 16px;
+}
 #aside {
         background-color: #ffffff;
         padding: 15px 15px 15px 15px;
@@ -381,7 +391,6 @@ form #new button {
     line-height: 44px;
     box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 } 
-
 
 /* ---------------------desk -------nav ---------------------- */ 
 

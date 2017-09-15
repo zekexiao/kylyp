@@ -92,13 +92,16 @@ pub fn register(flash: Option<FlashMessage>) -> Template {
     }
     Template::render("register", &context)
 }
-
 #[get("/register")]
 pub fn login_register(user: UserOr) -> Template {
     let mut context = HashMap::new();
     context.insert("username", user.0);
     Template::render("index", &context)
 }
+// #[get("/register")]
+// pub fn login_register(user: UserOr) -> Redirect {
+//     Redirect::to(&*("/index/".to_string() + &*user.0.to_string()))
+// }
 
 #[get("/login", rank = 2)]
 pub fn login(flash: Option<FlashMessage>) -> Template {
@@ -109,17 +112,17 @@ pub fn login(flash: Option<FlashMessage>) -> Template {
     Template::render("login", &context)
 }
 // ----------------method 1--------------
-// #[get("/login")]
-// pub fn login_user(user: UserOr) -> Template {
-//     let mut context = HashMap::new();
-//     context.insert("username", user.0);
-//     Template::render("index", &context)
-// }
-// ----------------method 2--------------
 #[get("/login")]
-pub fn login_user(user: UserId) -> Redirect {
-    Redirect::to(&*("/user/".to_string() + &*user.0.to_string()))
+pub fn login_user(user: UserOr) -> Template {
+    let mut context = HashMap::new();
+    context.insert("username", user.0);
+    Template::render("index", &context)
 }
+// ----------------method 2--------------
+// #[get("/login")]
+// pub fn login_user(user: UserOr) -> Redirect {
+//     Redirect::to(&*("/user/".to_string() + &*user.0.to_string()))
+// }
   
 #[post("/register",data = "<user_form>")]
 fn register_post(conn_dsl: ConnDsl, user_form: Form< UserRegister>) -> Result<Redirect, String> {
