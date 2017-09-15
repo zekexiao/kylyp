@@ -26,7 +26,7 @@ welcome to contribute !
 
 <img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/screen1.png">
 
-<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/spongedown-rforum.png">
+<img alt="Home" height="500" src="https://raw.githubusercontent.com/mcux/kylyp/master/public/2017-09-15%2010-00-12%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE.png">
 
 **Mobile**
 
