@@ -23,6 +23,8 @@ pub struct Article {
 pub struct NewArticle<'a> {
     pub uid: i32,
     pub category: &'a str,
+    pub status: i32,
+    pub comments_count: i32,
     pub title: &'a str,
     pub raw: &'a str,
     pub cooked: &'a str,

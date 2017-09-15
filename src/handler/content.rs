@@ -40,25 +40,26 @@ pub struct Ucomment {
 #[derive(Debug,Serialize)]
 pub struct UserComment {
     pub id: i32,
+    pub aid: i32,
     pub uid: i32,
-    pub category: String,
-    pub status: i32,
-    pub comments_count: i32,
-    pub title: String,
     pub raw: String,
     pub cooked: String,
     pub created_at: DateTime<Utc>,
-    pub updated_at: DateTime<Utc>,
-    pub comment_id: i32,
-    pub comment_aid: i32,
-    pub comment_uid: i32,
-    pub comment_content: String,
-    pub comment_createtime: DateTime<Utc>,
+    pub article_id: i32,
+    pub article_uid: i32,
+    pub article_category: String,
+    pub article_status: i32,
+    pub article_comments_count: i32,
+    pub article_title: String,
+    pub article_raw: String,
+    pub article_cooked: String,
+    pub article_created_at: DateTime<Utc>,
+    pub article_updated_at: DateTime<Utc>,
 }
 #[derive(Debug,Serialize)]
 pub struct UserMessage {
     pub message_status: i32,
-    pub message_createtime: DateTime<Utc>,
+    pub message_created_at: DateTime<Utc>,
     pub comment_raw: String,
     pub comment_cooked: String,
     pub from_uid: i32,
@@ -178,6 +179,8 @@ pub fn add_article_by_uid<'a>(conn_dsl: &PgConnection, uid: i32, category: &'a s
     let new_article = NewArticle {
         uid: uid,
         category: category,
+        status:STATUS::NORMAL,
+        comments_count:0,
         title: title,
         raw: raw,
         cooked: &spongedown::parse(&raw),
@@ -312,32 +315,28 @@ pub fn get_user_articles(conn_pg: &Connection, user_id: i32) -> Vec<Article> {
 pub fn get_user_comments(conn_pg: &Connection, user_id: i32) -> Vec<UserComment> {
     let u_id = user_id;
     let mut user_comments: Vec<UserComment> = vec![];
-    for row in &conn_pg.query("SELECT
-                            comment.aid, comment.uid, comment.content, comment.createtime, 
-                            article.id, article,uid, article.category, article.status,
-                            article.comments_count, article.title, article.raw, article.cooked, 
-                            article.created_at, article.updated_at
-                           FROM comment, article WHERE comment.aid = article.id AND comment.uid = $1 ORDER BY comment.id ",&[&u_id]).unwrap() {
+    for row in &conn_pg.query("SELECT comment.* , article.*
+                           FROM comment, article WHERE comment.uid = $1 ORDER BY comment.id ",&[&u_id]).unwrap() {
         let comment = UserComment {
-            id: row.get(5),
-            uid: row.get(6),
-            category: row.get(7),
-            status: row.get(8),
-            comments_count: row.get(9),
-            title: row.get(10),
-            raw: row.get(11),
-            cooked: row.get(12),
-            created_at: row.get(13),
-            updated_at: row.get(14),
-            comment_id: row.get(0),
-            comment_aid: row.get(1),
-            comment_uid: row.get(2),
-            comment_content: row.get(3),
-            comment_createtime: row.get(4),
+                id: row.get(0),
+                aid: row.get(1),
+                uid: row.get(2),
+                raw: row.get(3),
+                cooked: row.get(4),
+                created_at: row.get(5),
+                article_id: row.get(6),
+                article_uid: row.get(7),
+                article_category: row.get(8),
+                article_status: row.get(9),
+                article_comments_count: row.get(10),
+                article_title: row.get(11),
+                article_raw: row.get(12),
+                article_cooked: row.get(13),
+                article_created_at: row.get(14),
+                article_updated_at: row.get(15),
         };
         user_comments.push(comment);
     }
-    
     user_comments
 }
 
@@ -350,17 +349,17 @@ pub fn get_user_messages(conn_pg: &Connection, user_id: i32) -> Vec<UserMessage>
          JOIN users AS u ON m.from_uid = u.id 
          JOIN article AS a ON a.id=m.aid 
          JOIN comment AS c ON c.id=m.cid 
-         WHERE to_uid= $1 ORDER BY created_at DESC;",&[&u_id]).unwrap() {
+         WHERE to_uid= $1 ORDER BY created_at DESC",&[&u_id]).unwrap() {
         let message = UserMessage {
-            message_status: row.get(0),
-            message_createtime: row.get(1),
-            comment_raw: row.get(2),
-            comment_cooked: row.get(3),
-            from_uid: row.get(3),
-            from_uid_name: row.get(4),
-            from_uid_email: row.get(5),
-            article_id: row.get(6),
-            article_title: row.get(7),
+                message_status: row.get(0),
+                message_created_at: row.get(1),
+                comment_raw: row.get(2),
+                comment_cooked: row.get(3),
+                from_uid: row.get(4),
+                from_uid_name: row.get(5),
+                from_uid_email: row.get(6),
+                article_id: row.get(7),
+                article_title: row.get(8),
         };
         user_messages.push(message);
     }
