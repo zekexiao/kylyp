@@ -209,7 +209,6 @@ pub fn add_comment_by_aid<'a>(conn_pg: &Connection, conn_dsl: &PgConnection, aid
             app_path +=  &port;
         };
     }
-
     use utils::schema::comment;
     let re = Regex::new(r"\B@([\da-zA-Z_]+)").unwrap();
     let mut to_uids: Vec<i32> = Vec::new();
@@ -251,6 +250,7 @@ pub fn add_comment_by_aid<'a>(conn_pg: &Connection, conn_dsl: &PgConnection, aid
         };
         author_id = t_uid.id;
     }
+    //send message to article author.
     if uid != author_id {
         conn_pg.execute("INSERT INTO message (aid, cid, from_uid, to_uid, raw, mode, status, created_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)",
                  &[&aid, &comment_id, &uid, &author_id, &raw, &message_mode::REPLY_ARTICLE, &message_status::INIT, &created_at]).unwrap();
@@ -343,13 +343,13 @@ pub fn get_user_comments(conn_pg: &Connection, user_id: i32) -> Vec<UserComment>
 pub fn get_user_messages(conn_pg: &Connection, user_id: i32) -> Vec<UserMessage> {
     let u_id = user_id;
     let mut user_messages: Vec<UserMessage> = vec![];
-    for row in &conn_pg.query("SELECT m.status, m.created_at, c.raw, c.cooked, u.id as user_id, u.username,
-         u.email, a.id AS article_id, a.title AS article_title 
-         FROM message AS m 
-         JOIN users AS u ON m.from_uid = u.id 
-         JOIN article AS a ON a.id=m.aid 
-         JOIN comment AS c ON c.id=m.cid 
-         WHERE to_uid= $1 ORDER BY created_at DESC",&[&u_id]).unwrap() {
+    for row in &conn_pg.query("SELECT message.status, message.created_at, comment.raw, comment.cooked, users.id, users.username,
+         users.email, article.id, article.title 
+         FROM message
+         JOIN users ON message.from_uid = users.id
+         JOIN article ON article.id = message.aid
+         JOIN comment ON comment.id = message.cid
+         WHERE to_uid = $1 ORDER BY created_at DESC",&[&u_id]).unwrap() {
         let message = UserMessage {
                 message_status: row.get(0),
                 message_created_at: row.get(1),
