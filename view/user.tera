@@ -54,7 +54,7 @@
         <main id="main">
             <div id="content" >
                 <div class="re-desk-75 re-table-100 ">
-                    <div id="top">
+                    <div id="user-top">
                             <div id="new-theme">
                                 <h4> User-Centre </h4> 
                             </div>
@@ -108,7 +108,7 @@
                                         <div>
                                             <span><a href="/user/{{ message.from_uid }}"> {{ message.from_uid_name }} </a></span> 
                                             <span id="info"> at </span> <span><a href="/article/{{ message.article_id }}"> {{ message.article_title }} </a></span> <span id="info">comment you</span>  
-                                            <span id="info" >{{ message.message_created_at }}</span>>
+                                            <span id="info" >{{ message.message_created_at }}</span>
                                         </div>
                                         <span id="comment-info" >{{ message.comment_cooked }}</span>
                                     </div>

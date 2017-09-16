@@ -71,10 +71,10 @@
                         {% for comment in comments %}
                             <div id="comment-content">
                                 <div>
-                                    <span id="info">{{loop.index}}.</span>
+                                    <span id="info" style="font-weight: bold; color: #D10303;">{{loop.index}}.</span>
                                     <span id="info"><a href="/user/{{comment.uid}}">{{ comment.username }}</a></span> • <span id="info">{{ comment.created_at }}</span>
                                 </div>
-                                <div style="font-size:17px;">  {{ comment.cooked | safe }} </div>
+                                <div id="comment-main">  {{ comment.cooked | safe }} </div>
                             </div>
                         {% endfor %}
                     </div>

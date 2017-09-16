@@ -30,8 +30,7 @@ footer, header, hgroup, menu, nav, section {
 html,body {
     width:100%;height:100%;
     font: 16px/1.4em 'PT Serif', serif;
-    background-color: #E5F7ED;
-    
+    /* background-color: #E5F7ED; */
 }
 a {
     text-decoration: none;
@@ -109,7 +108,6 @@ main {
 } 
 #content {
     margin: 15px 10px 0 10px;
-    
 }
 
 #content h1{
@@ -166,14 +164,14 @@ main {
     width: 100%;
 }
 article {
-    border-bottom: 1px solid #d8d8d8;
+    /* border: 1px solid #92EEB5; */
+    box-shadow: 0 1px 2px #999;
     padding: 10px 11px 11px 11px;
     margin: 0 10px 1px 0;
     background-color: #ffffff;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 #top {
-    background-color: #ffffff;
     margin: 0 10px 10px 0;
     padding: 0 0 4px 0;
 }
@@ -234,13 +232,13 @@ article #top button {
 }
 
 #theme {
-    border-bottom: 1px solid #d8d8d8;
-    margin: 0 10px 11px 0;
-    background-color: #ffffff;
+    /* border: 1px solid #92EEB5; */
+    box-shadow: 0 1px 2px #999;
+    margin: 0 10px 15px 0;
 }
 #theme #title {
     box-shadow: 0 -1px 1px rgba(0,0,0,0.12), 0 -1px 1px rgba(0,0,0,0.24);
-    margin: 2px 0 11px 0;
+    margin: 2px 0 0 0;
     padding: 10px 10px 10px 10px;
     background-color: #D8FAE8;
 }
@@ -250,12 +248,13 @@ article #top button {
 }
 #theme #content {
     margin: 11px 10px 11px 10px;
-    font-size: 18px;
+    padding: 5px 5px 15px 5px;
+    font-size: 16px;
 }
 #comment {
-    border-bottom: 1px solid #d8d8d8;
-    margin: 0 10px 11px 0;
-    background-color: #ffffff;
+    /* border: 1px solid #92EEB5; */
+    box-shadow: 0 1px 2px #999;
+    margin: 0 10px 15px 0;
     /* box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
 }
 #comment #title{
@@ -267,17 +266,21 @@ article #top button {
 }
 #comment #comment-content {
     border-bottom: 1px solid #d8d8d8;
-    padding: 6px 10px 6px 10px;
+    padding: 11px 10px 11px 15px;
+}
+#comment #comment-content #comment-main {
+    font-size: 15px;
 }
 #comment #comment-content #info {
     display: inline-block;
     font-size: 14px;
 }
 #reply {
-    border-bottom: 1px solid #d8d8d8;
+    /* border: 1px solid #92EEB5; */
+    border-bottom: 1px solid #999;
     padding: 6px 0 3px 0;
     margin: 0 10px 4px 0;
-    background-color: #ffffff;
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.24), 0 -1px 2px rgba(0,0,0,0.24);
 }
 #reply #write {
     font-weight: bold;
@@ -285,7 +288,7 @@ article #top button {
 }
 #reply textarea {
     width:100%; 
-    height: 133px;
+    height: 188px;
 }
 #reply button {
     width:80px; 
@@ -297,7 +300,12 @@ article #top button {
 /*--------------------------------- doc ------------------------------- */
 
 /*--------------------------------- new ------------------------------- */
-
+#new-top {
+    margin: 0 10px 10px 0;
+    padding: 0 0 4px 0;
+    /* border: 1px solid #92EEB5; */
+    box-shadow: 0 1px 2px #999;
+}
 #new-theme {
     padding: 12px 0 10px 10px;
     margin-right: -0.01px;
@@ -326,7 +334,7 @@ form #topic-group input {
 }
 form #new textarea {
     width:100%; 
-    height: 333px;
+    height: 444px;
 }
 form #new button {
     width:63px; 
@@ -335,11 +343,19 @@ form #new button {
     border :1px solid #eeeeee;
 }
 /*--------------------------------- user ------------------------------- */
-#top #person {
+#user-top {
+    margin: 0 10px 10px 0;
+    padding: 0 0 4px 0;
+    /* border: 1px solid #92EEB5; */
+    box-shadow: 0 1px 2px #999; 
+}
+#user-top #person {
     margin: 11px;
 }
 #tab1 {
     margin: 0 10px 10px 0;
+    /* border: 1px solid #E5F7ED; */
+    box-shadow: 0 1px 2px #999; 
 }
 #tab1 #menu-title {
     padding: 12px 0 10px 10px;
@@ -377,19 +393,12 @@ form #new button {
     font-size: 16px;
 }
 #aside {
-        background-color: #ffffff;
+        border-bottom: 1px solid #999;
         padding: 15px 15px 15px 15px;
         margin: 0 10px 15px 0;
         text-align: center;
         font-size: 15px;
-        box-shadow: 0 1px 1px rgba(0,0,0,0.12), 0 1px 1px rgba(0,0,0,0.12);
-} 
-#aside #new_theme {
-    font-weight: bold;
-    text-align: center;
-    background: #D8FAE8;
-    line-height: 44px;
-    box-shadow: 0 3px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        box-shadow: 0 -1px 2px rgba(0,0,0,0.24), 0 -1px 2px rgba(0,0,0,0.24);
 } 
 
 /* ---------------------desk -------nav ---------------------- */ 
