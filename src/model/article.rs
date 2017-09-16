@@ -11,7 +11,8 @@ pub struct Article {
     pub status: i32,
     pub comments_count: i32,
     pub title: String,
-    pub content: String,
+    pub raw: String,
+    pub cooked: String,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
@@ -22,8 +23,11 @@ pub struct Article {
 pub struct NewArticle<'a> {
     pub uid: i32,
     pub category: &'a str,
+    pub status: i32,
+    pub comments_count: i32,
     pub title: &'a str,
-    pub content: &'a str,
+    pub raw: &'a str,
+    pub cooked: &'a str,
     pub created_at: DateTime<Utc>,
     pub updated_at: DateTime<Utc>,
 }
@@ -34,7 +38,8 @@ pub struct Comment {
     pub id: i32,
     pub aid: i32,
     pub uid: i32,
-    pub content: String,
+    pub raw: String,
+    pub cooked: String,
     pub created_at: DateTime<Utc>,
 }
 
@@ -43,7 +48,8 @@ pub struct Comment {
 pub struct NewComment<'a> {
     pub aid: i32,
     pub uid: i32,
-    pub content: &'a str,
+    pub raw: &'a str,
+    pub cooked: &'a str,
     pub created_at: DateTime<Utc>,
 }
 

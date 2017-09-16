@@ -7,6 +7,7 @@
     <meta name="author" content="Ian Yates">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,shrink-to-fit=no">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/normalize.css">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -17,7 +18,7 @@
 <body >
     <div id="all">
         <header >
-                <h1 class="logo"><a href="/" >Rust</a></h1>
+                <a id="logo" href="/" >Rust</a>
                 <label ><a id="menu" href="#" >Menu</a></label>
         </header>
         <nav id="mnav" >
@@ -61,8 +62,8 @@
                             <form action="/user/login" method="post" accept-charset="utf-8">
                             <div id="login">
                                 {% if errmsg %} <p class="tip">*{{ errmsg }}</p> {% endif %}
-                                <h4>Name：&nbsp;&nbsp;&emsp;<input name="username" required="required" type="text"></h4><br>
-                                <h4>Password：<input name="password" required="required" type="password" minlength=3></h4>
+                                <h5>Name：&nbsp;&nbsp;&emsp;<input name="username" required="required" type="text"></h5><br>
+                                <h5>Password：<input name="password" required="required" type="password" minlength=3></h5>
                             </div><br>
 			                <button type="submit" > Login </button>
                             </form>
